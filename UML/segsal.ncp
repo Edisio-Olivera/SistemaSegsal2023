@@ -1,0 +1,678 @@
+<Project>
+  <Name>segsal</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Administrativo</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>EmpresaDTO</Name>
+        <Access>Public</Access>
+        <Location left="21" top="50" />
+        <Size width="162" height="451" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _razaoSocial</Member>
+        <Member type="Field">private string _nomeFantasia</Member>
+        <Member type="Field">private Int32 _porte</Member>
+        <Member type="Field">private DateTime _dataAbertura</Member>
+        <Member type="Field">private string _cnpj</Member>
+        <Member type="Field">private string _inscricaoEstadual</Member>
+        <Member type="Field">private string _naturezaJuridica</Member>
+        <Member type="Field">private string _endereco</Member>
+        <Member type="Field">private string _complemento</Member>
+        <Member type="Field">private string _bairro</Member>
+        <Member type="Field">private string _cidade</Member>
+        <Member type="Field">private string _uf</Member>
+        <Member type="Field">private string _cep</Member>
+        <Member type="Field">private string _email</Member>
+        <Member type="Field">private string _senha</Member>
+        <Member type="Field">private string _telefone</Member>
+        <Member type="Field">private string _celular</Member>
+        <Member type="Field">private string _atividadePrincipal</Member>
+        <Member type="Field">private string _logomarca</Member>
+        <Member type="Method">public void EditarEmpresa()</Member>
+        <Member type="Method">public List SelecionarEmpresa()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CidadeDTO</Name>
+        <Access>Public</Access>
+        <Location left="206" top="50" />
+        <Size width="204" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _uf</Member>
+        <Member type="Field">private string _cidade</Member>
+        <Member type="Method">public List PopularComboboxCidade()</Member>
+        <Member type="Method">public Int32 SelecionarIdCidade()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UfDTO</Name>
+        <Access>Public</Access>
+        <Location left="206" top="238" />
+        <Size width="204" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _estado</Member>
+        <Member type="Field">private string _sigla</Member>
+        <Member type="Method">public List PopularComboboxUf()</Member>
+        <Member type="Method">public Int32 SelecionarIdUf()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ClienteDTO</Name>
+        <Access>Public</Access>
+        <Location left="432" top="50" />
+        <Size width="193" height="366" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private string _razaoSocial</Member>
+        <Member type="Field">private string _nomeFantasia</Member>
+        <Member type="Field">private string _atividadePrincipal</Member>
+        <Member type="Field">private string _logomarca</Member>
+        <Member type="Field">private DateTime _clienteDesde</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoCliente()</Member>
+        <Member type="Method">public Int32 ContarClientes()</Member>
+        <Member type="Method">public void SalvarCliente()</Member>
+        <Member type="Method">public void EditarCliente()</Member>
+        <Member type="Method">public void ExcluirCliente()</Member>
+        <Member type="Method">public List SelecionarCliente()</Member>
+        <Member type="Method">public string SelecionarCodigoCliente()</Member>
+        <Member type="Method">public List PopularComboboxCliente()</Member>
+        <Member type="Method">public List ListarClientesStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AtividadePrincipalDTO</Name>
+        <Access>Public</Access>
+        <Location left="206" top="431" />
+        <Size width="204" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _atividade</Member>
+        <Member type="Method">public List PopularComboboxAtividade()</Member>
+        <Member type="Method">public Int32 SelecionarIdAtividade()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ClienteBaseDTO</Name>
+        <Access>Public</Access>
+        <Location left="647" top="50" />
+        <Size width="222" height="434" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private string _cliente</Member>
+        <Member type="Field">private string _cnpj</Member>
+        <Member type="Field">private string _endereco</Member>
+        <Member type="Field">private string _complemento</Member>
+        <Member type="Field">private string _bairro</Member>
+        <Member type="Field">private string _cidade</Member>
+        <Member type="Field">private string _uf</Member>
+        <Member type="Field">private string _cep</Member>
+        <Member type="Field">private string _email</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoBaseCliente()</Member>
+        <Member type="Method">public Int32 ContarBasesCliente()</Member>
+        <Member type="Method">public void SalvarBaseCliente()</Member>
+        <Member type="Method">public void EditarBaseCliente()</Member>
+        <Member type="Method">public void ExcluirBaseCliente()</Member>
+        <Member type="Method">public void SelecionarBaseCliente()</Member>
+        <Member type="Method">public void SelecionarCodigoBaseCliente()</Member>
+        <Member type="Method">public void PopularComboboxBaseCliente()</Member>
+        <Member type="Method">public List ListarBasesClienteStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ClienteStatusDTO</Name>
+        <Access>Public</Access>
+        <Location left="432" top="431" />
+        <Size width="204" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public Int32 SelecionarIdStatusCliente()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FornecedorDTO</Name>
+        <Access>Public</Access>
+        <Location left="892" top="50" />
+        <Size width="193" height="366" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private string _razaoSocial</Member>
+        <Member type="Field">private string _nomeFantasia</Member>
+        <Member type="Field">private string _atividadePrincipal</Member>
+        <Member type="Field">private string _logomarca</Member>
+        <Member type="Field">private DateTime _fornecedorDesde</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoFornecedor()</Member>
+        <Member type="Method">public Int32 ContarFornecedores()</Member>
+        <Member type="Method">public void SalvarFornecedor()</Member>
+        <Member type="Method">public void EditarFornecedor()</Member>
+        <Member type="Method">public void ExcluirFornecedor()</Member>
+        <Member type="Method">public List SelecionarFornecedor()</Member>
+        <Member type="Method">public string SelecionarCodigoFornecedor()</Member>
+        <Member type="Method">public List PopularComboboxFornecedor()</Member>
+        <Member type="Method">public List ListarFornecedoresStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FornecedorVendedorDTO</Name>
+        <Access>Public</Access>
+        <Location left="1115" top="50" />
+        <Size width="204" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _nome</Member>
+        <Member type="Field">private DateTime _vendedorDesde</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoVendedor()</Member>
+        <Member type="Method">public Int32 ContarVendedores()</Member>
+        <Member type="Method">public void SalvarVendedor()</Member>
+        <Member type="Method">public void EditarVendedor()</Member>
+        <Member type="Method">public void ExcluirVendedor()</Member>
+        <Member type="Method">public List SelecionarVendedor()</Member>
+        <Member type="Method">public string SelecionarCodigoVendedor()</Member>
+        <Member type="Method">public List PopularComboboxVendedor()</Member>
+        <Member type="Method">public List ListarVendedoresStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>RecursosHumanos</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>FuncionarioDTO</Name>
+        <Access>Public</Access>
+        <Location left="49" top="35" />
+        <Size width="220" height="502" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _nome</Member>
+        <Member type="Field">private DateTime _dataNascimento</Member>
+        <Member type="Field">private string _rg</Member>
+        <Member type="Field">private string _cpf</Member>
+        <Member type="Field">private string _endereco</Member>
+        <Member type="Field">private string _complemento</Member>
+        <Member type="Field">private string _bairro</Member>
+        <Member type="Field">private string _cidade</Member>
+        <Member type="Field">private string _uf</Member>
+        <Member type="Field">private string _cep</Member>
+        <Member type="Field">private string _telefone</Member>
+        <Member type="Field">private string _celular</Member>
+        <Member type="Field">private string _email</Member>
+        <Member type="Field">private string _foto</Member>
+        <Member type="Field">private string _funcao</Member>
+        <Member type="Method">public void CriarNovoFuncionario()</Member>
+        <Member type="Method">public Int32 ContarFuncionarios()</Member>
+        <Member type="Method">public void SalvarFuncionario()</Member>
+        <Member type="Method">public void EditarFuncionario()</Member>
+        <Member type="Method">public void ExcluirFuncionario()</Member>
+        <Member type="Method">public List SelecionarFuncionario()</Member>
+        <Member type="Method">public Int32 SelecionarIdFuncionario()</Member>
+        <Member type="Method">public List PopularComboboxFuncionario()</Member>
+        <Member type="Method">public List ListarFuncionarios()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FuncaoDTO</Name>
+        <Access>Public</Access>
+        <Location left="302" top="35" />
+        <Size width="220" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _funcao</Member>
+        <Member type="Method">public Int32 SelecionarIdFuncao()</Member>
+        <Member type="Method">public List PopularComboboxFuncao()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Financeiro</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>PropostaComercialDTO</Name>
+        <Access>Public</Access>
+        <Location left="27" top="46" />
+        <Size width="252" height="451" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private DateTime _dataProposta</Member>
+        <Member type="Field">private string _titulo</Member>
+        <Member type="Field">private string _descricao</Member>
+        <Member type="Field">private string _observacao</Member>
+        <Member type="Field">private string _cliente</Member>
+        <Member type="Field">private string _baseCliente</Member>
+        <Member type="Field">private string _condicaoPgto</Member>
+        <Member type="Field">private string _formaPgto</Member>
+        <Member type="Field">private Int32 _valor</Member>
+        <Member type="Field">private string _notaFiscal</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoPropostaComercial()</Member>
+        <Member type="Method">public Int32 ContarPropostasComerciais()</Member>
+        <Member type="Method">public void SalvarPropostaComercial()</Member>
+        <Member type="Method">public void EditarPropostaComercial()</Member>
+        <Member type="Method">public void ExcluirPropostaComercial()</Member>
+        <Member type="Method">public string SelecionarCodigoPropostaComercial()</Member>
+        <Member type="Method">public List PopularComboboxPropostaComercial()</Member>
+        <Member type="Method">public List ListarPropostaComercialStatus()</Member>
+        <Member type="Method">public void ModificarStatusPropostaComercial()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PropostaComercialServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="296" top="46" />
+        <Size width="212" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _propostaComercial</Member>
+        <Member type="Field">private string _tipoServico</Member>
+        <Member type="Field">private Int32 _qtd</Member>
+        <Member type="Field">private string _descricao</Member>
+        <Member type="Field">private Int32 _valorUnitario</Member>
+        <Member type="Field">private Int32 _valorTotal</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoServico()</Member>
+        <Member type="Method">public Int32 ContarServicos()</Member>
+        <Member type="Method">public void SalvarServico()</Member>
+        <Member type="Method">public void EditarServico()</Member>
+        <Member type="Method">public void ExcluirServico()</Member>
+        <Member type="Method">public List ListarServicosProposta()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TipoServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="296" top="379" />
+        <Size width="212" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoServico</Member>
+        <Member type="Field">private string _sigla</Member>
+        <Member type="Method">public List PopularComboboxTipoServico()</Member>
+        <Member type="Method">public Int32 SelecionarIdTipoServico()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PropostaComercialStatusDTO</Name>
+        <Access>Public</Access>
+        <Location left="529" top="46" />
+        <Size width="257" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public Int32 SelecionarIdStatusPropostaComercial()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NotaFiscalDTO</Name>
+        <Access>Public</Access>
+        <Location left="805" top="46" />
+        <Size width="188" height="434" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private DateTime _dataEmissao</Member>
+        <Member type="Field">private DateTime _dataVencimento</Member>
+        <Member type="Field">private string _tipoNotaFiscal</Member>
+        <Member type="Field">private string _competencia</Member>
+        <Member type="Field">private string _codigoVerificacao</Member>
+        <Member type="Field">private string _cliente</Member>
+        <Member type="Field">private string _baseCliente</Member>
+        <Member type="Field">private string _servico</Member>
+        <Member type="Field">private string _numeroPedido</Member>
+        <Member type="Field">private Int32 _valor</Member>
+        <Member type="Field">private string _arquivo</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoNotaFiscal()</Member>
+        <Member type="Method">public Int32 ContarNotasFiscais()</Member>
+        <Member type="Method">public void SalvarNotaFiscal()</Member>
+        <Member type="Method">public void EditarNotaFiscal()</Member>
+        <Member type="Method">public void ExcluirNotaFiscal()</Member>
+        <Member type="Method">public List SelecionarNotaFiscal()</Member>
+        <Member type="Method">public List ListarNotasFiscais()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ContasPagarDTO</Name>
+        <Access>Public</Access>
+        <Location left="1016" top="49" />
+        <Size width="194" height="417" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private DateTime _dataMovimento</Member>
+        <Member type="Field">private string _tipoMovimento</Member>
+        <Member type="Field">private string _fornecedor</Member>
+        <Member type="Field">private string _tipoDocumento</Member>
+        <Member type="Field">private string _descricao</Member>
+        <Member type="Field">private string _condicaoPgto</Member>
+        <Member type="Field">private string _formaPgto</Member>
+        <Member type="Field">private Int32 _valor</Member>
+        <Member type="Field">private Int32 _juros</Member>
+        <Member type="Field">private Int32 _valorTotal</Member>
+        <Member type="Field">private DateTime _dataVencimento</Member>
+        <Member type="Field">private DateTime _dataPgto</Member>
+        <Member type="Method">public void CriarNovoContaPagar()</Member>
+        <Member type="Method">public void ContarContasPagar()</Member>
+        <Member type="Method">public void SalvarContaPagar()</Member>
+        <Member type="Method">public void EditarContaPagar()</Member>
+        <Member type="Method">public void ExcluirContaPagar()</Member>
+        <Member type="Method">public List SelecionarContaPagar()</Member>
+        <Member type="Method">public List ListarContasPagar()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ContasReceberDTO</Name>
+        <Access>Public</Access>
+        <Location left="1240" top="46" />
+        <Size width="194" height="417" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private DateTime _dataMovimento</Member>
+        <Member type="Field">private string _tipoMovimento</Member>
+        <Member type="Field">private string _fornecedor</Member>
+        <Member type="Field">private string _tipoDocumento</Member>
+        <Member type="Field">private string _descricao</Member>
+        <Member type="Field">private string _condicaoPgto</Member>
+        <Member type="Field">private string _formaPgto</Member>
+        <Member type="Field">private Int32 _valor</Member>
+        <Member type="Field">private Int32 _juros</Member>
+        <Member type="Field">private Int32 _valorTotal</Member>
+        <Member type="Field">private DateTime _dataVencimento</Member>
+        <Member type="Field">private DateTime _dataPgto</Member>
+        <Member type="Method">public void CriarNovoContaReceber()</Member>
+        <Member type="Method">public void ContarContasReceber()</Member>
+        <Member type="Method">public void SalvarContaReceber()</Member>
+        <Member type="Method">public void EditarContaReceber()</Member>
+        <Member type="Method">public void ExcluirContaReceber()</Member>
+        <Member type="Method">public List SelecionarContaReceber()</Member>
+        <Member type="Method">public List ListarContasReceber()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TipoNotaFiscalDTO</Name>
+        <Access>Public</Access>
+        <Location left="529" top="197" />
+        <Size width="257" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoNotaFiscal</Member>
+        <Member type="Method">public List PopularComboboxTipoNotaFiscal()</Member>
+        <Member type="Method">public Int32 SelecionarIdTipoNotaFiscal()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CondicaoPgtoDTO</Name>
+        <Access>Public</Access>
+        <Location left="1470" top="46" />
+        <Size width="228" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _condicaoPgto</Member>
+        <Member type="Method">public List PopularComboboxCondicaoPgto()</Member>
+        <Member type="Method">public Int32 SelecionarIdCondicaoPgto()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FormaPgtoDTO</Name>
+        <Access>Public</Access>
+        <Location left="1470" top="208" />
+        <Size width="228" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _condicaoPgto</Member>
+        <Member type="Field">private string _formaPgto</Member>
+        <Member type="Method">public List PopularComboboxFormaPgto()</Member>
+        <Member type="Method">public Int32 SelecionarIdFormaPgto()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Operacional</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>ChamadoDTO</Name>
+        <Access>Public</Access>
+        <Location left="63" top="56" />
+        <Size width="182" height="434" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _codigo</Member>
+        <Member type="Field">private DateTime _dataChamado</Member>
+        <Member type="Field">private string _cliente</Member>
+        <Member type="Field">private string _baseCliente</Member>
+        <Member type="Field">private string _solicitante</Member>
+        <Member type="Field">private string _informacaoPreliminar</Member>
+        <Member type="Field">private string _diagnostico</Member>
+        <Member type="Field">private string _observacao</Member>
+        <Member type="Field">private string _assunto</Member>
+        <Member type="Field">private string _urgencia</Member>
+        <Member type="Field">private string _situacao</Member>
+        <Member type="Field">private DateTime _dataFinalChamado</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoChamado()</Member>
+        <Member type="Method">public Int32 ContarChamados()</Member>
+        <Member type="Method">public void SalvarChamado()</Member>
+        <Member type="Method">public void EditarChamado()</Member>
+        <Member type="Method">public void ExcluirChamado()</Member>
+        <Member type="Method">public List SelecionarChamado()</Member>
+        <Member type="Method">public List ListarChamados()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AtendimentoChamadoDTO</Name>
+        <Access>Public</Access>
+        <Location left="265" top="56" />
+        <Size width="235" height="332" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _chamado</Member>
+        <Member type="Field">private DateTime _dataAtendimento</Member>
+        <Member type="Field">private DateTime _horaInicio</Member>
+        <Member type="Field">private DateTime _horaFinal</Member>
+        <Member type="Field">private string _tecnico</Member>
+        <Member type="Field">private string _descritivo</Member>
+        <Member type="Field">private string _status</Member>
+        <Member type="Method">public void CriarNovoAtendimentoChamado()</Member>
+        <Member type="Method">public Int32 ContarAtendimentoChamado()</Member>
+        <Member type="Method">public void SalvarAtendimentoChamado()</Member>
+        <Member type="Method">public void EditarAtendimentoChamado()</Member>
+        <Member type="Method">public void ExcluirAtendimentoChamado()</Member>
+        <Member type="Method">public List SelecionarAtendimentoChamado()</Member>
+        <Member type="Method">public List ListarAtendimentoChamado()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MaterialAtendimentoChamadoDTO</Name>
+        <Access>Public</Access>
+        <Location left="527" top="58" />
+        <Size width="248" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private Int32 _atendimento</Member>
+        <Member type="Field">private Int32 _qtd</Member>
+        <Member type="Field">private string _unidade</Member>
+        <Member type="Field">private string _descricao</Member>
+        <Member type="Field">private Int32 _valorUnitario</Member>
+        <Member type="Field">private Int32 _valorTotal</Member>
+        <Member type="Method">public void CriarNovoMaterialAtendimentoChamado()</Member>
+        <Member type="Method">public Int32 ContarMaterialAtendimentoChamado()</Member>
+        <Member type="Method">public void SalvarMaterialAtendimentoChamado()</Member>
+        <Member type="Method">public void EditarMaterialAtendimentoChamado()</Member>
+        <Member type="Method">public void ExcluirMaterialAtendimentoChamado()</Member>
+        <Member type="Method">public List ListarMaterialAtendimentoChamado()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SubCategoriaServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="1311" top="56" />
+        <Size width="266" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Field">private string _subCategoria</Member>
+        <Member type="Method">public void CriarNovoSubCategoriaServico()</Member>
+        <Member type="Method">public Int32 ContarSubCategoriaServico()</Member>
+        <Member type="Method">public void SalvarSubCategoriaServico()</Member>
+        <Member type="Method">public void EditarSubCategoriaServico()</Member>
+        <Member type="Method">public void ExcluirSubCategoriaServico()</Member>
+        <Member type="Method">public List SelecionarSubCategoriaServico()</Member>
+        <Member type="Method">public List PopularComboboxSubCategoriaServico()</Member>
+        <Member type="Method">public Int32 SelecionarIdSubCategoriaServico()</Member>
+        <Member type="Method">public List ListarSubCategoriaServico()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CategoriaServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="1031" top="228" />
+        <Size width="242" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoServico</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Method">public void CriarNovoCategoriaServico()</Member>
+        <Member type="Method">public Int32 ContarCategoriasServico()</Member>
+        <Member type="Method">public void SalvarCategoriaServico()</Member>
+        <Member type="Method">public void EditarCategoriaServico()</Member>
+        <Member type="Method">public void ExcluirCategoriaServico()</Member>
+        <Member type="Method">public List PopularComboboxCategoriaServico()</Member>
+        <Member type="Method">public Int32 SelecionarIdCategoriaServico()</Member>
+        <Member type="Method">public List SelecionarCategoriaServico()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TipoServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="1031" top="54" />
+        <Size width="241" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoServico</Member>
+        <Member type="Method">public List PopularComboboxTipoServico()</Member>
+        <Member type="Method">public Int32 SelecionarIdTipoServico()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ServicoDTO</Name>
+        <Access>Public</Access>
+        <Location left="804" top="56" />
+        <Size width="198" height="383" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoServico</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Field">private string _subCategoria</Member>
+        <Member type="Field">private string _descicao</Member>
+        <Member type="Field">private string _unidade</Member>
+        <Member type="Field">private Int32 _valorUnitario</Member>
+        <Member type="Method">public void CriarNovoServico()</Member>
+        <Member type="Method">public Int32 ContarServicos()</Member>
+        <Member type="Method">public void SalvarServico()</Member>
+        <Member type="Method">public void EditarServico()</Member>
+        <Member type="Method">public void ExcluirServico()</Member>
+        <Member type="Method">public List SelecionarServico()</Member>
+        <Member type="Method">public List PopularComboboxServico()</Member>
+        <Member type="Method">public List SelecionarIdServico()</Member>
+        <Member type="Method">public List ListarServico()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SubCategoriaMaterialDTO</Name>
+        <Access>Public</Access>
+        <Location left="2102" top="56" />
+        <Size width="266" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Field">private string _subCategoria</Member>
+        <Member type="Method">public void CriarNovoSubCategoriaMaterial()</Member>
+        <Member type="Method">public Int32 ContarSubCategoriaMaterial()</Member>
+        <Member type="Method">public void SalvarSubCategoriaMaterial()</Member>
+        <Member type="Method">public void EditarSubCategoriaMaterial()</Member>
+        <Member type="Method">public void ExcluirSubCategoriaMaterial()</Member>
+        <Member type="Method">public List SelecionarSubCategoriaMaterial()</Member>
+        <Member type="Method">public List PopularComboboxSubCategoriaMaterial()</Member>
+        <Member type="Method">public Int32 SelecionarIdSubCategoriaMaterial()</Member>
+        <Member type="Method">public List ListarSubCategoriaMaterial()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CategoriaMaterialDTO</Name>
+        <Access>Public</Access>
+        <Location left="1835" top="223" />
+        <Size width="242" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoMaterial</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Method">public void CriarNovoCategoriaMaterial()</Member>
+        <Member type="Method">public Int32 ContarCategoriasMaterial()</Member>
+        <Member type="Method">public void SalvarCategoriaMaterial()</Member>
+        <Member type="Method">public void EditarCategoriaMaterial()</Member>
+        <Member type="Method">public void ExcluirCategoriaMaterial()</Member>
+        <Member type="Method">public List PopularComboboxCategoriaMaterial()</Member>
+        <Member type="Method">public Int32 SelecionarIdCategoriaMaterial()</Member>
+        <Member type="Method">public List SelecionarCategoriaMaterial()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TipoMaterialDTO</Name>
+        <Access>Public</Access>
+        <Location left="1836" top="58" />
+        <Size width="241" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoMaterial</Member>
+        <Member type="Method">public List PopularComboboxTipoMaterial()</Member>
+        <Member type="Method">public Int32 SelecionarIdTipoMaterial()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MaterialDTO</Name>
+        <Access>Public</Access>
+        <Location left="1606" top="56" />
+        <Size width="198" height="383" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Int32 _id</Member>
+        <Member type="Field">private string _tipoMaterial</Member>
+        <Member type="Field">private string _categoria</Member>
+        <Member type="Field">private string _subCategoria</Member>
+        <Member type="Field">private string _descicao</Member>
+        <Member type="Field">private string _unidade</Member>
+        <Member type="Field">private Int32 _valorUnitario</Member>
+        <Member type="Field">private Int32 _qtdEstoque</Member>
+        <Member type="Field">private string _imagem</Member>
+        <Member type="Method">public void CriarNovoMaterial()</Member>
+        <Member type="Method">public Int32 ContarMateriais()</Member>
+        <Member type="Method">public void SalvarMaterial()</Member>
+        <Member type="Method">public void EditarMaterial()</Member>
+        <Member type="Method">public void ExcluirMaterial()</Member>
+        <Member type="Method">public List SelecionarMaterial()</Member>
+        <Member type="Method">public List PopularComboboxMaterial()</Member>
+        <Member type="Method">public List SelecionarIdMaterial()</Member>
+        <Member type="Method">public List ListarMateriais()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>
