@@ -88,6 +88,7 @@ namespace SistemaSegsal.BLL
 				"codigo, " +
 				"dataCadastro, " +
 				"nome, " +
+				"nomeCurto, " +
 				"rg, " +
 				"cpf, " + 
 				"dataNascimento, " + 
@@ -106,6 +107,7 @@ namespace SistemaSegsal.BLL
 				t.Codigo + "', '" +
 				t.DataCadastro + "', '" +
 				t.Nome + "', '" +
+				t.NomeCurto + "', '" +
 				t.Rg + "', '" +
 				t.Cpf + "', '" +
 				t.DataNascimento + "', '" +
@@ -190,26 +192,60 @@ namespace SistemaSegsal.BLL
 			}
 		}
 
-		/*
-		public List<TecnicoDTO> SelecionarTecnico(TecnicoDTO t)
-		{
-			
+
+        //public List<TecnicoDTO> SelecionarTecnico(TecnicoDTO t)
+        //{
+
+        //}
+
+        public string SelecionarCodigoTecnico(TecnicoDTO t)
+        {
+			cmd.CommandText = "SELECT codigo FROM tb_tecnico " +
+				"WHERE nomeCurto = '" + t.NomeCurto + "'";
+
+			try
+			{
+				cmd.Connection = conexao.conectar();
+				MySqlDataReader leitor = cmd.ExecuteReader();
+
+				leitor.Read();
+				t.Codigo = leitor.GetString(0);
+
+				conexao.desconectar();
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			return t.Codigo;
 		}
 
-		public string SelecionarCodigoTecnico(TecnicoDTO t)
-		{
-			
+        public List<TecnicoDTO> PopularComboboxTecnico()
+        {
+			cmd.CommandText = "SELECT nomeCurto FROM tb_tecnico";
+
+			cmd.Connection = conexao.conectar();
+			MySqlDataReader leitor = cmd.ExecuteReader();
+			List<TecnicoDTO> tecnico = new List<TecnicoDTO>();
+
+			while (leitor.Read())
+			{
+				TecnicoDTO t = new TecnicoDTO();
+				t.NomeCurto = leitor.GetString(0);
+				tecnico.Add(t);
+			}
+
+			conexao.desconectar();
+			cmd.Dispose();
+
+			return tecnico;
 		}
 
-		public List<TecnicoDTO> PopularComboboxTecnico()
-		{
-			
-		}
+        //public List<TecnicoDTO> ListarTecnico()
+        //{
 
-		public List<TecnicoDTO> ListarTecnico()
-		{
-			
-		}
-		*/
-	}
+        //}
+
+    }
 }

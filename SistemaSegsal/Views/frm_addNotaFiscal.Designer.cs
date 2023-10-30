@@ -50,6 +50,7 @@ namespace SistemaSegsal.Views
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_title = new System.Windows.Forms.Label();
             this.cmb_cliente = new System.Windows.Forms.ComboBox();
             this.cmb_baseCliente = new System.Windows.Forms.ComboBox();
@@ -68,6 +69,7 @@ namespace SistemaSegsal.Views
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_sair
@@ -321,6 +323,7 @@ namespace SistemaSegsal.Views
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.lbl_title);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.Color.Navy;
@@ -329,12 +332,21 @@ namespace SistemaSegsal.Views
             this.panel1.Size = new System.Drawing.Size(784, 60);
             this.panel1.TabIndex = 51;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SistemaSegsal.Properties.Resources.financeiro2;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 60);
+            this.pictureBox1.TabIndex = 67;
+            this.pictureBox1.TabStop = false;
+            // 
             // lbl_title
             // 
             this.lbl_title.AutoSize = true;
             this.lbl_title.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_title.Location = new System.Drawing.Point(208, 11);
+            this.lbl_title.Location = new System.Drawing.Point(90, 11);
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(369, 33);
             this.lbl_title.TabIndex = 7;
@@ -501,7 +513,7 @@ namespace SistemaSegsal.Views
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(784, 701);
+            this.ClientSize = new System.Drawing.Size(784, 724);
             this.ControlBox = false;
             this.Controls.Add(this.btn_sair);
             this.Controls.Add(this.btn_novo);
@@ -547,6 +559,7 @@ namespace SistemaSegsal.Views
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -591,5 +604,6 @@ namespace SistemaSegsal.Views
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.TextBox txt_valor;
         private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

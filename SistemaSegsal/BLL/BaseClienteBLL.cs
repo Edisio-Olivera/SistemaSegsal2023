@@ -148,8 +148,6 @@ namespace SistemaSegsal.BLL
 			staBll.SelecionarIdStatus(staDto);
 
 			cmd.CommandText = "UPDATE tb_cliente_base SET " +
-				"dataRegistro = '" + bc.DataRegistro + "', " +
-				"codCliente = '" + cliDto.Codigo + "', " +
 				"nomeBase = '" + bc.NomeBase + "', " +
 				"endereco = '" + bc.Endereco + "', " +
 				"complemento = '" + bc.Complemento + "', " +

@@ -12,6 +12,7 @@ using SistemaSegsal.View;
 using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SistemaSegsal.Views
 {
@@ -49,8 +50,11 @@ namespace SistemaSegsal.Views
 
             this.lvw_listaNotaFiscal.Enabled = true;
 
-            this.btn_sair.Location = new Point(1277, 66);
-            this.btn_novo.Location = new Point(1211, 66);                 
+            this.btn_sair.Location = new Point(1277, 5);
+            this.btn_novo.Location = new Point(1211, 5);
+
+
+
         }
 
         private void NovoNotaFiscal()
@@ -58,20 +62,20 @@ namespace SistemaSegsal.Views
             ntaBll.CriarNovoNotaFiscal(ntaDto);
 
             Int32 id = ntaDto.Id + 1;
-            string codigo = "NF-" + id.ToString("0000#");            
+            string codigo = "NF-" + id.ToString("0000#");
 
             frm_addNotaFiscal nota = new frm_addNotaFiscal(id, codigo);
             nota.Visible = true;
-        }        
+        }
 
         private void EditarNotaFiscal()
         {
-            
+
         }
 
         private void AtualizarNotaFiscal()
         {
-            
+
         }
 
         private void ExcluirNotaFiscal()
@@ -87,7 +91,7 @@ namespace SistemaSegsal.Views
             this.ListarNotasFiscais();
         }
 
-        
+
 
         private void ReceberNotaFiscal()
         {
@@ -98,16 +102,16 @@ namespace SistemaSegsal.Views
 
             MessageBox.Show("Nota Fiscal Recebida com sucesso!", "Receber Nota Fiscal!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.EstadoInicial();            
+            this.EstadoInicial();
 
             this.ListarNotasFiscais();
         }
 
-        
 
-        
 
-        
+
+
+
 
         private void PopularComboboxStatusNotaFiscal()
         {
@@ -127,7 +131,7 @@ namespace SistemaSegsal.Views
             Int32 anoItem = anoAbertura;
             Int32 anoAtual = DateTime.Now.Year;
 
-            for(Int32 i = anoItem; i <= anoAtual; i++)
+            for (Int32 i = anoItem; i <= anoAtual; i++)
             {
                 this.cmb_ano.Items.Add(i);
             }
@@ -149,26 +153,22 @@ namespace SistemaSegsal.Views
                 item[0] = nta.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = nta.Codigo;
-                item[3] = nta.TipoNotaFiscal;
-                item[4] = nta.DataEmissao;
-                item[5] = nta.Cliente + "-" + nta.BaseCliente;
-                item[6] = nta.Servico;
-                item[7] = nta.DataRecebimento;
-                item[8] = nta.Valor.ToString("R$ #,##0.00");
+                item[3] = nta.DataEmissao;
+                item[4] = nta.Servico;
+                item[5] = nta.DataRecebimento;
+                item[6] = nta.Valor.ToString("R$ #,##0.00");
 
                 DateTime dataVencer = DateTime.Parse(nta.DataRecebimento);
                 Int32 dias = ((DateTime.Now.Subtract(dataVencer)).Days * -1) + 1;
 
-                if(dias < 0)
+                if (dias < 0)
                 {
-                    item[9] = "-";
+                    item[7] = "-";
                 }
                 else
                 {
-                    item[9] = dias.ToString();
+                    item[7] = dias.ToString();
                 }
-                
-                item[10] = nta.Status;
 
                 lvw_listaNotaFiscal.Items.Add(new ListViewItem(item));
                 prox++;
@@ -198,26 +198,22 @@ namespace SistemaSegsal.Views
                 item[0] = nta.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = nta.Codigo;
-                item[3] = nta.TipoNotaFiscal;
-                item[4] = nta.DataEmissao;
-                item[5] = nta.Cliente + "-" + nta.BaseCliente;
-                item[6] = nta.Servico;
-                item[7] = nta.DataRecebimento;
-                item[8] = nta.Valor.ToString("R$ #,##0.00");
+                item[3] = nta.DataEmissao;
+                item[4] = nta.Servico;
+                item[5] = nta.DataRecebimento;
+                item[6] = nta.Valor.ToString("R$ #,##0.00");
 
                 DateTime dataVencer = DateTime.Parse(nta.DataRecebimento);
                 Int32 dias = ((DateTime.Now.Subtract(dataVencer)).Days * -1) + 1;
 
                 if (dias < 0)
                 {
-                    item[9] = "-";
+                    item[7] = "-";
                 }
                 else
                 {
-                    item[9] = dias.ToString();
+                    item[7] = dias.ToString();
                 }
-
-                item[10] = nta.Status;
 
                 lvw_listaNotaFiscal.Items.Add(new ListViewItem(item));
                 prox++;
@@ -247,26 +243,22 @@ namespace SistemaSegsal.Views
                 item[0] = nta.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = nta.Codigo;
-                item[3] = nta.TipoNotaFiscal;
-                item[4] = nta.DataEmissao;
-                item[5] = nta.Cliente + "-" + nta.BaseCliente;
-                item[6] = nta.Servico;
-                item[7] = nta.DataRecebimento;
-                item[8] = nta.Valor.ToString("R$ #,##0.00");
+                item[3] = nta.DataEmissao;
+                item[4] = nta.Servico;
+                item[5] = nta.DataRecebimento;
+                item[6] = nta.Valor.ToString("R$ #,##0.00");
 
                 DateTime dataVencer = DateTime.Parse(nta.DataRecebimento);
                 Int32 dias = ((DateTime.Now.Subtract(dataVencer)).Days * -1) + 1;
 
                 if (dias < 0)
                 {
-                    item[9] = "-";
+                    item[7] = "-";
                 }
                 else
                 {
-                    item[9] = dias.ToString();
+                    item[7] = dias.ToString();
                 }
-
-                item[10] = nta.Status;
 
                 lvw_listaNotaFiscal.Items.Add(new ListViewItem(item));
                 prox++;
@@ -297,26 +289,22 @@ namespace SistemaSegsal.Views
                 item[0] = nta.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = nta.Codigo;
-                item[3] = nta.TipoNotaFiscal;
-                item[4] = nta.DataEmissao;
-                item[5] = nta.Cliente + "-" + nta.BaseCliente;
-                item[6] = nta.Servico;
-                item[7] = nta.DataRecebimento;
-                item[8] = nta.Valor.ToString("R$ #,##0.00");
+                item[3] = nta.DataEmissao;
+                item[4] = nta.Servico;
+                item[5] = nta.DataRecebimento;
+                item[6] = nta.Valor.ToString("R$ #,##0.00");
 
                 DateTime dataVencer = DateTime.Parse(nta.DataRecebimento);
                 Int32 dias = ((DateTime.Now.Subtract(dataVencer)).Days * -1) + 1;
 
                 if (dias < 0)
                 {
-                    item[9] = "-";
+                    item[7] = "-";
                 }
                 else
                 {
-                    item[9] = dias.ToString();
+                    item[7] = dias.ToString();
                 }
-
-                item[10] = nta.Status;
 
                 lvw_listaNotaFiscal.Items.Add(new ListViewItem(item));
                 prox++;
@@ -346,7 +334,7 @@ namespace SistemaSegsal.Views
             Int32 valor = 0;
             string tag = "";
 
-            ntaBll.CriarNovoNotaFiscal(ntaDto);                   
+            ntaBll.CriarNovoNotaFiscal(ntaDto);
 
             Int32 qtdNF = ntaBll.SelecionarUltimoIdNotaFiscal() + 1;
 
@@ -389,7 +377,7 @@ namespace SistemaSegsal.Views
                         dataEmissao = DateTime.Parse(dataEmissaoOrganizada);
                         dataReceber = dataEmissao.AddDays(diasReceber);
                     }
-                                        
+
 
                     //Competência
                     if (xmlNota.NodeType == XmlNodeType.Element && xmlNota.Name == "Competencia")
@@ -414,13 +402,13 @@ namespace SistemaSegsal.Views
 
                         //Descrição do Serviço
                         descricao = discriminacao[3];
-                    }                   
+                    }
 
                     //Valor
                     if (xmlNota.NodeType == XmlNodeType.Element && xmlNota.Name == "ValorServicos")
                         valor = Int32.Parse(xmlNota.ReadElementString());
-                }   
-            }            
+                }
+            }
 
             List<BaseClienteDTO> bc = basBll.SelecionarBaseClienteCnpj(basDto);
 
@@ -434,6 +422,92 @@ namespace SistemaSegsal.Views
 
             nota.Visible = true;
         }
+
+        private void MesPorExtendo(Int32 mes)
+        {
+
+        }
+
+        private void Faturamento()
+        {
+            string[] meses = new string[12] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
+            DateTime dataAtual = DateTime.Now;
+            var anoAtual = dataAtual.Year;
+            var mesAtual = meses[dataAtual.Month - 1];
+            var mesAnterior = meses[dataAtual.Month - 2];
+            var mesAnteAnterior = meses[dataAtual.Month - 3];
+
+            this.lbl_mes3.Text = mesAtual.ToString();
+            this.lbl_mes2.Text = mesAnterior.ToString();
+            this.lbl_mes1.Text = mesAnteAnterior.ToString();
+            this.lbl_anoAtual.Text = anoAtual.ToString();
+
+            //Faturamento Anual
+            ntaDto.Ano = anoAtual;            
+            Int32 faturamentoAnual = ntaBll.SomarNotasFiscaisAnoStatus(ntaDto);   
+            this.lbl_faturamentoAnual.Text = "R$ " + faturamentoAnual.ToString("#,###.00");
+
+            //Faturamento Mês 1
+            ntaDto.Ano = DateTime.Now.Year;
+            ntaDto.Mes = DateTime.Now.Month;
+            Int32 faturamentoMes1 = ntaBll.SomarNotasFiscaisMesAno(ntaDto);
+
+            this.lbl_faturamentoMes1.Text = "R$ " + faturamentoMes1.ToString("#,###.00");
+
+            //Faturamento Mês 1
+            ntaDto.Ano = DateTime.Now.Year;
+            ntaDto.Mes = DateTime.Now.Month - 1;
+            Int32 faturamentoMes2 = ntaBll.SomarNotasFiscaisMesAno(ntaDto);
+
+            this.lbl_faturamentoMes2.Text = "R$ " + faturamentoMes2.ToString("#,###.00");
+
+            //Faturamento Mês 1
+            ntaDto.Ano = DateTime.Now.Year;
+            ntaDto.Mes = DateTime.Now.Month - 2;
+            Int32 faturamentoMes3 = ntaBll.SomarNotasFiscaisMesAno(ntaDto);
+
+            this.lbl_faturamentoMes3.Text = "R$ " + faturamentoMes3.ToString("#,###.00");
+        }
+
+        private void GraficoFaturamento()
+        {
+            this.chart1.Series.Clear();
+            this.chart1.Titles.Clear();
+            this.chart1.Legends.Clear();
+
+            this.chart1.Legends.Add("Faturamento Mensal");
+            this.chart1.Legends[0].LegendStyle = LegendStyle.Row;
+            this.chart1.Legends[0].Docking = Docking.Bottom;
+            this.chart1.Legends[0].Alignment = StringAlignment.Center;
+            this.chart1.Legends[0].BorderColor = Color.Black;
+            this.chart1.Legends[0].Title = "Faturamento Mensal";
+
+            this.chart1.Palette = ChartColorPalette.Excel;
+
+            Int32[] valor = new int[12];
+            Int32 ano = DateTime.Now.Year;
+
+            for (int i = 0; i < 12; i++)
+            {
+                ntaDto.Mes = i + 1;
+                ntaDto.Ano = DateTime.Now.Year;                
+                
+
+                valor[i] = ntaBll.SomarNotasFiscaisMesAno(ntaDto);
+            }
+
+            this.chart1.Titles.Add("Faturamento Mensal - " + ano.ToString());
+
+            string[] meses = new string[12] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
+
+            for (int i = 0; i < 12; i++)
+            {
+                this.chart1.Series.Add(meses[i]);
+                this.chart1.Series[0].Points.Add(valor[i]);
+            }
+
+        }
+
 
         private void AtualizarComboboxClienteFormProposta()
         {
@@ -452,8 +526,7 @@ namespace SistemaSegsal.Views
         private void frm_listaNotaFiscal_Load(object sender, EventArgs e)
         {
             //Designer do form
-            this.Text = "Sistema de Gestão - SEGSAL Segurança Eletrônica - v 1.0";
-            this.BackColor = Color.FromArgb(255, 255, 255);
+            
 
             this.EstadoInicial();
 
@@ -463,23 +536,23 @@ namespace SistemaSegsal.Views
             //1063
 
             this.lvw_listaNotaFiscal.Columns.Add("Id", 0).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaNotaFiscal.Columns.Add("Item", 60).TextAlign = HorizontalAlignment.Center;
+            this.lvw_listaNotaFiscal.Columns.Add("Item", 40).TextAlign = HorizontalAlignment.Center;
             this.lvw_listaNotaFiscal.Columns.Add("Código", 80).TextAlign = HorizontalAlignment.Center;       
-            this.lvw_listaNotaFiscal.Columns.Add("Tipo Nota Fiscal", 110).TextAlign = HorizontalAlignment.Left;
             this.lvw_listaNotaFiscal.Columns.Add("Data Emissão", 90).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaNotaFiscal.Columns.Add("Cliente-Base", 300).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaNotaFiscal.Columns.Add("Serviço", 260).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaNotaFiscal.Columns.Add("Data Receb.", 100).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaNotaFiscal.Columns.Add("Serviço", 200).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaNotaFiscal.Columns.Add("Data Receb.", 90).TextAlign = HorizontalAlignment.Center;
             this.lvw_listaNotaFiscal.Columns.Add("Valor", 100).TextAlign = HorizontalAlignment.Right;
-            this.lvw_listaNotaFiscal.Columns.Add("Dias a Receber", 100).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaNotaFiscal.Columns.Add("Status", 80).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaNotaFiscal.Columns.Add("Dias a Receber",100).TextAlign = HorizontalAlignment.Center;
 
             Int32 anoNf = DateTime.Now.Year;
             string statusNf = "A Receber";
 
-            this.ListarNotasFiscaisAnoStatus(statusNf, anoNf);
+            this.ListarNotasFiscaisAno(anoNf);
             this.PopularComboboxStatusNotaFiscal();
             this.PopularComboboxAnoNotaFiscal();
+            this.Faturamento();
+            this.GraficoFaturamento();
+            
         }
 
         private void btn_novo_Click(object sender, EventArgs e)
@@ -613,6 +686,18 @@ namespace SistemaSegsal.Views
 
         private void lvw_listaNotaFiscal_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_proximo_Click(object sender, EventArgs e)
+        {
+            Int32 mesAtual = DateTime.Now.Month;
+
 
         }
     }

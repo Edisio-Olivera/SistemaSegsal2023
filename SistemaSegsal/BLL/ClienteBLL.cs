@@ -127,7 +127,6 @@ namespace SistemaSegsal.BLL
 
 			cmd.CommandText = "UPDATE tb_cliente SET " +
 				"idTipoCliente = " + tipDto.Id + ", " +
-				"dataRegistro = '" + c.DataRegistro + "', " +
 				"razaoSocial = '" + c.RazaoSocial + "', " +
 				"nomeFantasia = '" + c.NomeFantasia + "', " +
 				"idStatus = " + staDto.Id + " " +

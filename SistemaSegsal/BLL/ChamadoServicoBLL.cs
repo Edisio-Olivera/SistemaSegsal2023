@@ -78,7 +78,7 @@ namespace SistemaSegsal.BLL
         public void SalvarNovoServicoChamado(ChamadoServicoDTO s)
         {
             tecDto.Nome = s.Tecnico;
-            //tecBll.SelecionarCodigoTecnico(tecDto);
+            tecBll.SelecionarCodigoTecnico(tecDto);
 
             cmd.CommandText = "INSERT INTO tb_chamado_servico (" +
                 "id, " +
@@ -88,7 +88,8 @@ namespace SistemaSegsal.BLL
                 "horaInicio, " +
                 "atividadeRealizada, " +
                 "dataFinal, " +
-                "horaFinal) " +
+                "horaFinal, " +
+                "valor) " +
                 "VALUES (" +
                 s.Id + ", '" +
                 s.Chamado + "', '" +
@@ -97,7 +98,8 @@ namespace SistemaSegsal.BLL
                 s.HoraInicio + "', '" +
                 s.AtividadeRealizada + "', '" +
                 s.DataFinal + "', '" +
-                s.HoraFinal + "')";
+                s.HoraFinal + "', " +
+                s.Valor * 100 + ")";
 
             try
             {
@@ -116,7 +118,7 @@ namespace SistemaSegsal.BLL
         public void EditarServicoChamado(ChamadoServicoDTO s)
         {
             tecDto.Nome = s.Tecnico;
-            //tecBll.SelecionarCodigoTecnico(tecDto);
+            tecBll.SelecionarCodigoTecnico(tecDto);
 
             cmd.CommandText = "UPDATE tb_chamado_servico SET " +
                 "codChamado = '" + s.Chamado + "', " +
@@ -125,7 +127,8 @@ namespace SistemaSegsal.BLL
                 "horaInicio = '" + s.HoraInicio + "', " +
                 "atividadeRealizada = '" + s.AtividadeRealizada + "', " +
                 "dataFinal = '" + s.DataFinal + "', " +
-                "horaFinal = '" + s.HoraFinal + "' " +
+                "horaFinal = '" + s.HoraFinal + "', " +
+                "valor = " + s.Valor * 100 + " " +
                 "WHERE id = " + s.Id;
 
             try
@@ -165,12 +168,13 @@ namespace SistemaSegsal.BLL
             cmd.CommandText = "SELECT " +
                 "s.id, " +
                 "s.codChamado, " +
-                "t.nome, " +
+                "t.nomeCurto, " +
                 "s.dataInicio, " +
                 "s.horaInicio, " +
                 "s.atividadeRealizada, " +
                 "s.dataFinal, " +
-                "s.horaFinal " +
+                "s.horaFinal, " +
+                "s.valor " +
                 "FROM tb_chamado_servico s " +
                 "INNER JOIN tb_tecnico t ON s.codTecnico = t.codigo " +
                 "WHERE s.codChamado = '" + s.Chamado + "' " +
@@ -197,6 +201,7 @@ namespace SistemaSegsal.BLL
                 serv.DataFinal = dataFinal.ToString("dd/MM/yyyy");
                 DateTime horaFinal = DateTime.Parse(leitor.GetString(7));
                 serv.HoraFinal = horaFinal.ToString("HH:mm:ss");
+                serv.Valor = leitor.GetInt32(8) / 100;
 
                 servico.Add(serv);
             }
@@ -212,15 +217,16 @@ namespace SistemaSegsal.BLL
             cmd.CommandText = "SELECT " +
                 "s.id, " +
                 "s.codChamado, " +
-                "t.nome, " +
+                "t.nomeCurto, " +
                 "s.dataInicio, " +
                 "s.horaInicio, " +
                 "s.atividadeRealizada, " +
                 "s.dataFinal, " +
-                "s.horaFinal " +
+                "s.horaFinal, " +
+                "s.valor " +
                 "FROM tb_chamado_servico s " +
                 "INNER JOIN tb_tecnico t ON s.codTecnico = t.codigo " +
-                "WHERE s.id = " + s.Id;
+                "WHERE s.codChamado = '" + s.Chamado + "'";
 
             cmd.Connection = conexao.conectar();
             MySqlDataReader leitor = cmd.ExecuteReader();
@@ -242,7 +248,8 @@ namespace SistemaSegsal.BLL
             DateTime dataFinal = DateTime.Parse(leitor.GetString(6));
             servico[0].DataFinal = dataFinal.ToString("dd/MM/yyyy");
             DateTime horaFinal = DateTime.Parse(leitor.GetString(7));
-            servico[0].HoraFinal = horaFinal.ToString("HH:mm:ss");           
+            servico[0].HoraFinal = horaFinal.ToString("HH:mm:ss");
+            servico[0].Valor = leitor.GetInt32(8) / 100;
 
             conexao.desconectar();
             cmd.Dispose();

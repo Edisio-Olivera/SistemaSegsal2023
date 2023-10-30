@@ -10,14 +10,20 @@ namespace SistemaSegsal.DTO
     {
         private Int32 _id;
         private string _codigo;
+        private string _chamadoCliente;
         private string _dataChamado;
         private string _cliente;
         private string _baseCliente;
         private string _localSetor;
+        private string _equipamento;
         private string _contatoCliente;
+        private string _situacao;
         private string _assunto;
         private string _urgencia;
         private string _informacaoCliente;
+        private string _dataVisita;
+        private string _horaVisita;
+        private string _tecnico;
         private string _diagnostico;
         private string _solucao;
         private string _dataFinal;
@@ -39,5 +45,11 @@ namespace SistemaSegsal.DTO
         public string Status { get => _status; set => _status = value; }
         public string LocalSetor { get => _localSetor; set => _localSetor = value; }
         public int ValorTotal { get => _valorTotal; set => _valorTotal = value; }
+        public string Situacao { get => _situacao; set => _situacao = value; }
+        public string DataVisita { get => _dataVisita; set => _dataVisita = value; }
+        public string HoraVisita { get => _horaVisita; set => _horaVisita = value; }
+        public string Tecnico { get => _tecnico; set => _tecnico = value; }
+        public string Equipamento { get => _equipamento; set => _equipamento = value; }
+        public string ChamadoCliente { get => _chamadoCliente; set => _chamadoCliente = value; }
     }
 }

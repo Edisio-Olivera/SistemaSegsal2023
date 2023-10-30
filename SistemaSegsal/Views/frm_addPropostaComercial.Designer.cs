@@ -59,13 +59,13 @@ namespace SistemaSegsal.Views
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.txt_valor = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.txt_status = new System.Windows.Forms.TextBox();
+            this.btn_atualizar = new System.Windows.Forms.Button();
+            this.btn_editar = new System.Windows.Forms.Button();
             this.btn_salvar = new System.Windows.Forms.Button();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_sair = new System.Windows.Forms.Button();
             this.btn_novo = new System.Windows.Forms.Button();
-            this.btn_editar = new System.Windows.Forms.Button();
-            this.btn_atualizar = new System.Windows.Forms.Button();
-            this.txt_status = new System.Windows.Forms.TextBox();
             this.img_logoEmpresa = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -427,6 +427,49 @@ namespace SistemaSegsal.Views
             this.textBox14.TabIndex = 21;
             this.textBox14.Text = " Status";
             // 
+            // txt_status
+            // 
+            this.txt_status.BackColor = System.Drawing.Color.White;
+            this.txt_status.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txt_status.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_status.ForeColor = System.Drawing.Color.Black;
+            this.txt_status.Location = new System.Drawing.Point(136, 576);
+            this.txt_status.Name = "txt_status";
+            this.txt_status.Size = new System.Drawing.Size(123, 23);
+            this.txt_status.TabIndex = 30;
+            // 
+            // btn_atualizar
+            // 
+            this.btn_atualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_atualizar.FlatAppearance.BorderSize = 0;
+            this.btn_atualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_atualizar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atualizar.ForeColor = System.Drawing.Color.White;
+            this.btn_atualizar.Image = global::SistemaSegsal.Properties.Resources.atualizar2;
+            this.btn_atualizar.Location = new System.Drawing.Point(514, 68);
+            this.btn_atualizar.Name = "btn_atualizar";
+            this.btn_atualizar.Size = new System.Drawing.Size(60, 55);
+            this.btn_atualizar.TabIndex = 34;
+            this.btn_atualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_atualizar.UseVisualStyleBackColor = false;
+            this.btn_atualizar.Click += new System.EventHandler(this.btn_atualizar_Click);
+            // 
+            // btn_editar
+            // 
+            this.btn_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_editar.FlatAppearance.BorderSize = 0;
+            this.btn_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editar.ForeColor = System.Drawing.Color.White;
+            this.btn_editar.Image = global::SistemaSegsal.Properties.Resources.editar;
+            this.btn_editar.Location = new System.Drawing.Point(580, 68);
+            this.btn_editar.Name = "btn_editar";
+            this.btn_editar.Size = new System.Drawing.Size(60, 55);
+            this.btn_editar.TabIndex = 1;
+            this.btn_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_editar.UseVisualStyleBackColor = false;
+            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
+            // 
             // btn_salvar
             // 
             this.btn_salvar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
@@ -491,49 +534,6 @@ namespace SistemaSegsal.Views
             this.btn_novo.UseVisualStyleBackColor = false;
             this.btn_novo.Click += new System.EventHandler(this.btn_novo_Click);
             // 
-            // btn_editar
-            // 
-            this.btn_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_editar.FlatAppearance.BorderSize = 0;
-            this.btn_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editar.ForeColor = System.Drawing.Color.White;
-            this.btn_editar.Image = global::SistemaSegsal.Properties.Resources.editar;
-            this.btn_editar.Location = new System.Drawing.Point(580, 68);
-            this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(60, 55);
-            this.btn_editar.TabIndex = 1;
-            this.btn_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_editar.UseVisualStyleBackColor = false;
-            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
-            // 
-            // btn_atualizar
-            // 
-            this.btn_atualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_atualizar.FlatAppearance.BorderSize = 0;
-            this.btn_atualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_atualizar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_atualizar.ForeColor = System.Drawing.Color.White;
-            this.btn_atualizar.Image = global::SistemaSegsal.Properties.Resources.atualizar2;
-            this.btn_atualizar.Location = new System.Drawing.Point(514, 68);
-            this.btn_atualizar.Name = "btn_atualizar";
-            this.btn_atualizar.Size = new System.Drawing.Size(60, 55);
-            this.btn_atualizar.TabIndex = 34;
-            this.btn_atualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_atualizar.UseVisualStyleBackColor = false;
-            this.btn_atualizar.Click += new System.EventHandler(this.btn_atualizar_Click);
-            // 
-            // txt_status
-            // 
-            this.txt_status.BackColor = System.Drawing.Color.White;
-            this.txt_status.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txt_status.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_status.ForeColor = System.Drawing.Color.Black;
-            this.txt_status.Location = new System.Drawing.Point(136, 576);
-            this.txt_status.Name = "txt_status";
-            this.txt_status.Size = new System.Drawing.Size(123, 23);
-            this.txt_status.TabIndex = 30;
-            // 
             // img_logoEmpresa
             // 
             this.img_logoEmpresa.Location = new System.Drawing.Point(0, 0);
@@ -584,12 +584,12 @@ namespace SistemaSegsal.Views
             this.Controls.Add(this.btn_sair);
             this.Controls.Add(this.btn_novo);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_addPropostaComercial";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Proposta Comercial";
             this.Load += new System.EventHandler(this.frm_addPropostaComercial_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -28,6 +28,7 @@ namespace SistemaSegsal.BLL
 		PropostaComercialStatusBLL staBll = new PropostaComercialStatusBLL();
 		
 		Int32 qtdIdPropostaComercial;
+		Int32 qtdPropostaComercialCliente;
 
 		public void CriarNovoPropostaComercial(PropostaComercialDTO pc)
 		{
@@ -380,6 +381,53 @@ namespace SistemaSegsal.BLL
 		{
 			cmd.CommandText = "UPDATE tb_proposta_comercial SET " +
 				"valorTotal = valorTotal + (" + pc.Valor + " * 100) " +
+				"WHERE codigo = '" + pc.Codigo + "'";
+
+			try
+			{
+				cmd.Connection = conexao.conectar();
+				cmd.ExecuteNonQuery();
+
+				conexao.desconectar();
+				cmd.Dispose();
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		public Int32 ContarPropostasComerciaisCliente(PropostaComercialDTO p)
+		{
+			cliDto.NomeFantasia = p.Cliente;
+			cliBll.SelecionarCodigoCliente(cliDto);
+
+			cmd.CommandText = "SELECT COUNT(id) FROM tb_proposta_comercial " +
+				"WHERE codCliente = '" + p.Cliente + "'";
+
+			try
+			{
+				cmd.Connection = conexao.conectar();
+				MySqlDataReader leitor = cmd.ExecuteReader();
+
+				leitor.Read();
+				qtdPropostaComercialCliente = leitor.GetInt32(0);
+
+				conexao.desconectar();
+				cmd.Dispose();
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			return qtdPropostaComercialCliente;
+		}
+
+		public void CriarOrdemServicoPropostaComercial(PropostaComercialDTO pc)
+		{
+			cmd.CommandText = "UPDATE tb_proposta_comercial SET " +
+				"codOrdemServico = '" + pc.OrdemServico + "' " +
 				"WHERE codigo = '" + pc.Codigo + "'";
 
 			try

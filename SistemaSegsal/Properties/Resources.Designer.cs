@@ -63,6 +63,16 @@ namespace SistemaSegsal.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1683212708845 {
+            get {
+                object obj = ResourceManager.GetObject("1683212708845", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _base {
             get {
                 object obj = ResourceManager.GetObject("base", resourceCulture);
@@ -183,6 +193,26 @@ namespace SistemaSegsal.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap como_montar_o_sistema_de_cftv_via_fibra_optica_1080x627 {
+            get {
+                object obj = ResourceManager.GetObject("como-montar-o-sistema-de-cftv-via-fibra-optica-1080x627", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap concrete_wall_pipe_cctv {
+            get {
+                object obj = ResourceManager.GetObject("concrete-wall-pipe-cctv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap contato {
             get {
                 object obj = ResourceManager.GetObject("contato", resourceCulture);
@@ -236,6 +266,16 @@ namespace SistemaSegsal.Properties {
         internal static System.Drawing.Bitmap essenciais {
             get {
                 object obj = ResourceManager.GetObject("essenciais", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FF {
+            get {
+                object obj = ResourceManager.GetObject("FF", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,6 +433,16 @@ namespace SistemaSegsal.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap REW {
+            get {
+                object obj = ResourceManager.GetObject("REW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rh {
             get {
                 object obj = ResourceManager.GetObject("rh", resourceCulture);
@@ -436,6 +486,16 @@ namespace SistemaSegsal.Properties {
         internal static System.Drawing.Bitmap salvar2 {
             get {
                 object obj = ResourceManager.GetObject("salvar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sem_imagem {
+            get {
+                object obj = ResourceManager.GetObject("sem_imagem", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

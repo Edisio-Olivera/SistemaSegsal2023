@@ -52,8 +52,13 @@ namespace SistemaSegsal.Views
             this.txt_localSetor = new System.Windows.Forms.TextBox();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_sair = new System.Windows.Forms.Button();
+            this.btn_atualizar = new System.Windows.Forms.Button();
+            this.btn_salvar = new System.Windows.Forms.Button();
+            this.btn_cancelar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_title = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.cmb_assunto = new System.Windows.Forms.ComboBox();
@@ -66,22 +71,21 @@ namespace SistemaSegsal.Views
             this.txt_solucao = new System.Windows.Forms.TextBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btn_sair = new System.Windows.Forms.Button();
-            this.btn_novo = new System.Windows.Forms.Button();
-            this.btn_editar = new System.Windows.Forms.Button();
-            this.btn_cancelar = new System.Windows.Forms.Button();
-            this.btn_salvarFormProposta = new System.Windows.Forms.Button();
-            this.btn_salvar = new System.Windows.Forms.Button();
-            this.btn_atualizar = new System.Windows.Forms.Button();
+            this.btn_addSolicitante = new System.Windows.Forms.Button();
+            this.txt_equipamento = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.txt_chamadoCliente = new System.Windows.Forms.TextBox();
+            this.textBox18 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_dataFinal
             // 
             this.txt_dataFinal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_dataFinal.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dataFinal.Location = new System.Drawing.Point(136, 595);
+            this.txt_dataFinal.Location = new System.Drawing.Point(136, 553);
             this.txt_dataFinal.Mask = "00/00/0000";
             this.txt_dataFinal.Name = "txt_dataFinal";
             this.txt_dataFinal.Size = new System.Drawing.Size(123, 23);
@@ -92,7 +96,7 @@ namespace SistemaSegsal.Views
             // 
             this.txt_dataChamado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_dataChamado.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dataChamado.Location = new System.Drawing.Point(136, 234);
+            this.txt_dataChamado.Location = new System.Drawing.Point(389, 205);
             this.txt_dataChamado.Mask = "00/00/0000";
             this.txt_dataChamado.Name = "txt_dataChamado";
             this.txt_dataChamado.Size = new System.Drawing.Size(123, 23);
@@ -105,7 +109,7 @@ namespace SistemaSegsal.Views
             this.textBox17.Enabled = false;
             this.textBox17.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox17.ForeColor = System.Drawing.Color.Black;
-            this.textBox17.Location = new System.Drawing.Point(12, 566);
+            this.textBox17.Location = new System.Drawing.Point(12, 524);
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(118, 23);
             this.textBox17.TabIndex = 87;
@@ -117,7 +121,7 @@ namespace SistemaSegsal.Views
             this.textBox12.Enabled = false;
             this.textBox12.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox12.ForeColor = System.Drawing.Color.Black;
-            this.textBox12.Location = new System.Drawing.Point(265, 595);
+            this.textBox12.Location = new System.Drawing.Point(265, 553);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(118, 23);
             this.textBox12.TabIndex = 89;
@@ -129,12 +133,12 @@ namespace SistemaSegsal.Views
             this.textBox10.Enabled = false;
             this.textBox10.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox10.ForeColor = System.Drawing.Color.Black;
-            this.textBox10.Location = new System.Drawing.Point(12, 437);
+            this.textBox10.Location = new System.Drawing.Point(12, 379);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(118, 65);
+            this.textBox10.Size = new System.Drawing.Size(118, 81);
             this.textBox10.TabIndex = 84;
-            this.textBox10.Text = " Inf. Preliminares";
+            this.textBox10.Text = "Informações";
             // 
             // textBox7
             // 
@@ -142,7 +146,7 @@ namespace SistemaSegsal.Views
             this.textBox7.Enabled = false;
             this.textBox7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox7.ForeColor = System.Drawing.Color.Black;
-            this.textBox7.Location = new System.Drawing.Point(12, 350);
+            this.textBox7.Location = new System.Drawing.Point(12, 321);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(118, 23);
             this.textBox7.TabIndex = 85;
@@ -154,7 +158,7 @@ namespace SistemaSegsal.Views
             this.textBox6.Enabled = false;
             this.textBox6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.ForeColor = System.Drawing.Color.Black;
-            this.textBox6.Location = new System.Drawing.Point(12, 292);
+            this.textBox6.Location = new System.Drawing.Point(12, 263);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(118, 23);
             this.textBox6.TabIndex = 86;
@@ -166,7 +170,7 @@ namespace SistemaSegsal.Views
             this.textBox5.Enabled = false;
             this.textBox5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.Color.Black;
-            this.textBox5.Location = new System.Drawing.Point(12, 263);
+            this.textBox5.Location = new System.Drawing.Point(12, 234);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(118, 23);
             this.textBox5.TabIndex = 90;
@@ -178,7 +182,7 @@ namespace SistemaSegsal.Views
             this.textBox4.Enabled = false;
             this.textBox4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.Color.Black;
-            this.textBox4.Location = new System.Drawing.Point(12, 321);
+            this.textBox4.Location = new System.Drawing.Point(12, 292);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(118, 23);
             this.textBox4.TabIndex = 91;
@@ -190,7 +194,7 @@ namespace SistemaSegsal.Views
             this.textBox13.Enabled = false;
             this.textBox13.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox13.ForeColor = System.Drawing.Color.Black;
-            this.textBox13.Location = new System.Drawing.Point(12, 595);
+            this.textBox13.Location = new System.Drawing.Point(12, 553);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(118, 23);
             this.textBox13.TabIndex = 93;
@@ -202,11 +206,11 @@ namespace SistemaSegsal.Views
             this.textBox3.Enabled = false;
             this.textBox3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(12, 234);
+            this.textBox3.Location = new System.Drawing.Point(265, 205);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(118, 23);
             this.textBox3.TabIndex = 92;
-            this.textBox3.Text = " Data Chamado";
+            this.textBox3.Text = " Data Abertura";
             // 
             // textBox2
             // 
@@ -214,7 +218,7 @@ namespace SistemaSegsal.Views
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.Red;
-            this.textBox2.Location = new System.Drawing.Point(12, 205);
+            this.textBox2.Location = new System.Drawing.Point(265, 176);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(118, 23);
             this.textBox2.TabIndex = 95;
@@ -237,7 +241,7 @@ namespace SistemaSegsal.Views
             this.cmb_baseCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_baseCliente.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_baseCliente.FormattingEnabled = true;
-            this.cmb_baseCliente.Location = new System.Drawing.Point(136, 292);
+            this.cmb_baseCliente.Location = new System.Drawing.Point(136, 263);
             this.cmb_baseCliente.Name = "cmb_baseCliente";
             this.cmb_baseCliente.Size = new System.Drawing.Size(465, 23);
             this.cmb_baseCliente.TabIndex = 77;
@@ -246,7 +250,7 @@ namespace SistemaSegsal.Views
             // 
             this.txt_valor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_valor.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_valor.Location = new System.Drawing.Point(136, 566);
+            this.txt_valor.Location = new System.Drawing.Point(136, 524);
             this.txt_valor.Name = "txt_valor";
             this.txt_valor.Size = new System.Drawing.Size(123, 23);
             this.txt_valor.TabIndex = 79;
@@ -257,7 +261,7 @@ namespace SistemaSegsal.Views
             this.cmb_cliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_cliente.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_cliente.FormattingEnabled = true;
-            this.cmb_cliente.Location = new System.Drawing.Point(136, 263);
+            this.cmb_cliente.Location = new System.Drawing.Point(136, 234);
             this.cmb_cliente.Name = "cmb_cliente";
             this.cmb_cliente.Size = new System.Drawing.Size(465, 23);
             this.cmb_cliente.TabIndex = 75;
@@ -268,7 +272,7 @@ namespace SistemaSegsal.Views
             this.cmb_solicitante.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_solicitante.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_solicitante.FormattingEnabled = true;
-            this.cmb_solicitante.Location = new System.Drawing.Point(136, 321);
+            this.cmb_solicitante.Location = new System.Drawing.Point(136, 292);
             this.cmb_solicitante.Name = "cmb_solicitante";
             this.cmb_solicitante.Size = new System.Drawing.Size(465, 23);
             this.cmb_solicitante.TabIndex = 76;
@@ -276,7 +280,7 @@ namespace SistemaSegsal.Views
             // txt_status
             // 
             this.txt_status.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_status.Location = new System.Drawing.Point(389, 595);
+            this.txt_status.Location = new System.Drawing.Point(389, 553);
             this.txt_status.Name = "txt_status";
             this.txt_status.Size = new System.Drawing.Size(212, 23);
             this.txt_status.TabIndex = 80;
@@ -285,7 +289,7 @@ namespace SistemaSegsal.Views
             // 
             this.txt_codigo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txt_codigo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_codigo.Location = new System.Drawing.Point(136, 205);
+            this.txt_codigo.Location = new System.Drawing.Point(389, 176);
             this.txt_codigo.Name = "txt_codigo";
             this.txt_codigo.Size = new System.Drawing.Size(123, 23);
             this.txt_codigo.TabIndex = 73;
@@ -293,18 +297,20 @@ namespace SistemaSegsal.Views
             // txt_informacao
             // 
             this.txt_informacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_informacao.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_informacao.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_informacao.Location = new System.Drawing.Point(136, 437);
+            this.txt_informacao.Location = new System.Drawing.Point(136, 379);
             this.txt_informacao.Multiline = true;
             this.txt_informacao.Name = "txt_informacao";
-            this.txt_informacao.Size = new System.Drawing.Size(636, 65);
+            this.txt_informacao.Size = new System.Drawing.Size(341, 81);
             this.txt_informacao.TabIndex = 81;
             // 
             // txt_localSetor
             // 
             this.txt_localSetor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_localSetor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_localSetor.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_localSetor.Location = new System.Drawing.Point(136, 350);
+            this.txt_localSetor.Location = new System.Drawing.Point(136, 321);
             this.txt_localSetor.Name = "txt_localSetor";
             this.txt_localSetor.Size = new System.Drawing.Size(465, 23);
             this.txt_localSetor.TabIndex = 83;
@@ -321,26 +327,95 @@ namespace SistemaSegsal.Views
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 134);
+            this.panel2.Controls.Add(this.btn_sair);
+            this.panel2.Controls.Add(this.btn_atualizar);
+            this.panel2.Controls.Add(this.btn_salvar);
+            this.panel2.Controls.Add(this.btn_cancelar);
+            this.panel2.Location = new System.Drawing.Point(0, 58);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 36);
+            this.panel2.Size = new System.Drawing.Size(784, 80);
             this.panel2.TabIndex = 78;
+            // 
+            // btn_sair
+            // 
+            this.btn_sair.BackColor = System.Drawing.Color.Red;
+            this.btn_sair.FlatAppearance.BorderSize = 0;
+            this.btn_sair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sair.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sair.ForeColor = System.Drawing.Color.White;
+            this.btn_sair.Image = global::SistemaSegsal.Properties.Resources.sair;
+            this.btn_sair.Location = new System.Drawing.Point(712, 10);
+            this.btn_sair.Name = "btn_sair";
+            this.btn_sair.Size = new System.Drawing.Size(60, 55);
+            this.btn_sair.TabIndex = 101;
+            this.btn_sair.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_sair.UseVisualStyleBackColor = false;
+            // 
+            // btn_atualizar
+            // 
+            this.btn_atualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_atualizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_atualizar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_atualizar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_atualizar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btn_atualizar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_atualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_atualizar.Image = global::SistemaSegsal.Properties.Resources.atualizar2;
+            this.btn_atualizar.Location = new System.Drawing.Point(366, 10);
+            this.btn_atualizar.Name = "btn_atualizar";
+            this.btn_atualizar.Size = new System.Drawing.Size(60, 55);
+            this.btn_atualizar.TabIndex = 69;
+            this.btn_atualizar.UseVisualStyleBackColor = false;
+            this.btn_atualizar.Click += new System.EventHandler(this.btn_atualizar_Click);
+            // 
+            // btn_salvar
+            // 
+            this.btn_salvar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_salvar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_salvar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_salvar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_salvar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btn_salvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_salvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_salvar.Image = global::SistemaSegsal.Properties.Resources.salvar;
+            this.btn_salvar.Location = new System.Drawing.Point(580, 10);
+            this.btn_salvar.Name = "btn_salvar";
+            this.btn_salvar.Size = new System.Drawing.Size(60, 55);
+            this.btn_salvar.TabIndex = 67;
+            this.btn_salvar.UseVisualStyleBackColor = false;
+            this.btn_salvar.Click += new System.EventHandler(this.btn_salvar_Click);
+            // 
+            // btn_cancelar
+            // 
+            this.btn_cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_cancelar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_cancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btn_cancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancelar.Image = global::SistemaSegsal.Properties.Resources.cancelar;
+            this.btn_cancelar.Location = new System.Drawing.Point(646, 10);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(60, 55);
+            this.btn_cancelar.TabIndex = 70;
+            this.btn_cancelar.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(244, 7);
+            this.label2.Location = new System.Drawing.Point(132, 144);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(274, 23);
+            this.label2.Size = new System.Drawing.Size(271, 23);
             this.label2.TabIndex = 43;
             this.label2.Text = "Entre com as Informações abaixo:";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.lbl_title);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.Color.Navy;
@@ -349,12 +424,21 @@ namespace SistemaSegsal.Views
             this.panel1.Size = new System.Drawing.Size(784, 60);
             this.panel1.TabIndex = 74;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SistemaSegsal.Properties.Resources.operacional2;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 60);
+            this.pictureBox1.TabIndex = 103;
+            this.pictureBox1.TabStop = false;
+            // 
             // lbl_title
             // 
             this.lbl_title.AutoSize = true;
             this.lbl_title.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_title.Location = new System.Drawing.Point(208, 11);
+            this.lbl_title.Location = new System.Drawing.Point(90, 11);
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(352, 33);
             this.lbl_title.TabIndex = 7;
@@ -367,7 +451,7 @@ namespace SistemaSegsal.Views
             this.textBox9.Enabled = false;
             this.textBox9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox9.ForeColor = System.Drawing.Color.Black;
-            this.textBox9.Location = new System.Drawing.Point(12, 379);
+            this.textBox9.Location = new System.Drawing.Point(483, 379);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(118, 23);
             this.textBox9.TabIndex = 85;
@@ -378,9 +462,9 @@ namespace SistemaSegsal.Views
             this.cmb_assunto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_assunto.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_assunto.FormattingEnabled = true;
-            this.cmb_assunto.Location = new System.Drawing.Point(136, 379);
+            this.cmb_assunto.Location = new System.Drawing.Point(607, 379);
             this.cmb_assunto.Name = "cmb_assunto";
-            this.cmb_assunto.Size = new System.Drawing.Size(465, 23);
+            this.cmb_assunto.Size = new System.Drawing.Size(165, 23);
             this.cmb_assunto.TabIndex = 76;
             // 
             // cmb_situacao
@@ -388,9 +472,9 @@ namespace SistemaSegsal.Views
             this.cmb_situacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_situacao.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_situacao.FormattingEnabled = true;
-            this.cmb_situacao.Location = new System.Drawing.Point(136, 408);
+            this.cmb_situacao.Location = new System.Drawing.Point(607, 408);
             this.cmb_situacao.Name = "cmb_situacao";
-            this.cmb_situacao.Size = new System.Drawing.Size(341, 23);
+            this.cmb_situacao.Size = new System.Drawing.Size(165, 23);
             this.cmb_situacao.TabIndex = 76;
             // 
             // textBox8
@@ -399,7 +483,7 @@ namespace SistemaSegsal.Views
             this.textBox8.Enabled = false;
             this.textBox8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox8.ForeColor = System.Drawing.Color.Black;
-            this.textBox8.Location = new System.Drawing.Point(12, 408);
+            this.textBox8.Location = new System.Drawing.Point(483, 408);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(118, 23);
             this.textBox8.TabIndex = 85;
@@ -411,7 +495,7 @@ namespace SistemaSegsal.Views
             this.textBox11.Enabled = false;
             this.textBox11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox11.ForeColor = System.Drawing.Color.Black;
-            this.textBox11.Location = new System.Drawing.Point(483, 408);
+            this.textBox11.Location = new System.Drawing.Point(483, 437);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(118, 23);
             this.textBox11.TabIndex = 85;
@@ -422,7 +506,7 @@ namespace SistemaSegsal.Views
             this.cmb_urgencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmb_urgencia.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_urgencia.FormattingEnabled = true;
-            this.cmb_urgencia.Location = new System.Drawing.Point(607, 408);
+            this.cmb_urgencia.Location = new System.Drawing.Point(607, 437);
             this.cmb_urgencia.Name = "cmb_urgencia";
             this.cmb_urgencia.Size = new System.Drawing.Size(165, 23);
             this.cmb_urgencia.TabIndex = 76;
@@ -430,8 +514,9 @@ namespace SistemaSegsal.Views
             // txt_diagnostico
             // 
             this.txt_diagnostico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_diagnostico.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_diagnostico.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_diagnostico.Location = new System.Drawing.Point(136, 508);
+            this.txt_diagnostico.Location = new System.Drawing.Point(136, 466);
             this.txt_diagnostico.Name = "txt_diagnostico";
             this.txt_diagnostico.Size = new System.Drawing.Size(636, 23);
             this.txt_diagnostico.TabIndex = 83;
@@ -442,7 +527,7 @@ namespace SistemaSegsal.Views
             this.textBox16.Enabled = false;
             this.textBox16.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox16.ForeColor = System.Drawing.Color.Black;
-            this.textBox16.Location = new System.Drawing.Point(12, 508);
+            this.textBox16.Location = new System.Drawing.Point(12, 466);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(118, 23);
             this.textBox16.TabIndex = 85;
@@ -451,8 +536,9 @@ namespace SistemaSegsal.Views
             // txt_solucao
             // 
             this.txt_solucao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_solucao.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_solucao.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_solucao.Location = new System.Drawing.Point(136, 537);
+            this.txt_solucao.Location = new System.Drawing.Point(136, 495);
             this.txt_solucao.Name = "txt_solucao";
             this.txt_solucao.Size = new System.Drawing.Size(636, 23);
             this.txt_solucao.TabIndex = 83;
@@ -463,7 +549,7 @@ namespace SistemaSegsal.Views
             this.textBox19.Enabled = false;
             this.textBox19.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox19.ForeColor = System.Drawing.Color.Black;
-            this.textBox19.Location = new System.Drawing.Point(12, 537);
+            this.textBox19.Location = new System.Drawing.Point(12, 495);
             this.textBox19.Name = "textBox19";
             this.textBox19.Size = new System.Drawing.Size(118, 23);
             this.textBox19.TabIndex = 85;
@@ -476,140 +562,84 @@ namespace SistemaSegsal.Views
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(265, 234);
+            this.button1.Location = new System.Drawing.Point(518, 205);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 102;
             this.button1.Text = "Data";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btn_sair
+            // btn_addSolicitante
             // 
-            this.btn_sair.BackColor = System.Drawing.Color.Red;
-            this.btn_sair.FlatAppearance.BorderSize = 0;
-            this.btn_sair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_sair.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_sair.ForeColor = System.Drawing.Color.White;
-            this.btn_sair.Image = global::SistemaSegsal.Properties.Resources.sair;
-            this.btn_sair.Location = new System.Drawing.Point(712, 69);
-            this.btn_sair.Name = "btn_sair";
-            this.btn_sair.Size = new System.Drawing.Size(60, 55);
-            this.btn_sair.TabIndex = 101;
-            this.btn_sair.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_sair.UseVisualStyleBackColor = false;
+            this.btn_addSolicitante.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btn_addSolicitante.FlatAppearance.BorderSize = 0;
+            this.btn_addSolicitante.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addSolicitante.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addSolicitante.ForeColor = System.Drawing.Color.White;
+            this.btn_addSolicitante.Location = new System.Drawing.Point(607, 292);
+            this.btn_addSolicitante.Name = "btn_addSolicitante";
+            this.btn_addSolicitante.Size = new System.Drawing.Size(165, 23);
+            this.btn_addSolicitante.TabIndex = 102;
+            this.btn_addSolicitante.Text = "Novo Solicitante";
+            this.btn_addSolicitante.UseVisualStyleBackColor = false;
+            this.btn_addSolicitante.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btn_novo
+            // txt_equipamento
             // 
-            this.btn_novo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_novo.FlatAppearance.BorderSize = 0;
-            this.btn_novo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_novo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_novo.ForeColor = System.Drawing.Color.White;
-            this.btn_novo.Image = global::SistemaSegsal.Properties.Resources.novo;
-            this.btn_novo.Location = new System.Drawing.Point(382, 69);
-            this.btn_novo.Name = "btn_novo";
-            this.btn_novo.Size = new System.Drawing.Size(60, 55);
-            this.btn_novo.TabIndex = 100;
-            this.btn_novo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_novo.UseVisualStyleBackColor = false;
+            this.txt_equipamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_equipamento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txt_equipamento.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_equipamento.Location = new System.Drawing.Point(136, 350);
+            this.txt_equipamento.Name = "txt_equipamento";
+            this.txt_equipamento.Size = new System.Drawing.Size(465, 23);
+            this.txt_equipamento.TabIndex = 83;
             // 
-            // btn_editar
+            // textBox15
             // 
-            this.btn_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_editar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_editar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_editar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_editar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btn_editar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editar.Image = global::SistemaSegsal.Properties.Resources.editar;
-            this.btn_editar.Location = new System.Drawing.Point(514, 69);
-            this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(60, 55);
-            this.btn_editar.TabIndex = 71;
-            this.btn_editar.UseVisualStyleBackColor = false;
+            this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBox15.Enabled = false;
+            this.textBox15.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox15.ForeColor = System.Drawing.Color.Black;
+            this.textBox15.Location = new System.Drawing.Point(12, 350);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(118, 23);
+            this.textBox15.TabIndex = 85;
+            this.textBox15.Text = " Equipamento";
             // 
-            // btn_cancelar
+            // txt_chamadoCliente
             // 
-            this.btn_cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_cancelar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_cancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btn_cancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cancelar.Image = global::SistemaSegsal.Properties.Resources.cancelar;
-            this.btn_cancelar.Location = new System.Drawing.Point(646, 69);
-            this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(60, 55);
-            this.btn_cancelar.TabIndex = 70;
-            this.btn_cancelar.UseVisualStyleBackColor = false;
+            this.txt_chamadoCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_chamadoCliente.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_chamadoCliente.Location = new System.Drawing.Point(136, 205);
+            this.txt_chamadoCliente.Name = "txt_chamadoCliente";
+            this.txt_chamadoCliente.Size = new System.Drawing.Size(123, 23);
+            this.txt_chamadoCliente.TabIndex = 72;
             // 
-            // btn_salvarFormProposta
+            // textBox18
             // 
-            this.btn_salvarFormProposta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_salvarFormProposta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_salvarFormProposta.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_salvarFormProposta.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_salvarFormProposta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btn_salvarFormProposta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_salvarFormProposta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_salvarFormProposta.Image = global::SistemaSegsal.Properties.Resources.salvar;
-            this.btn_salvarFormProposta.Location = new System.Drawing.Point(136, 69);
-            this.btn_salvarFormProposta.Name = "btn_salvarFormProposta";
-            this.btn_salvarFormProposta.Size = new System.Drawing.Size(60, 55);
-            this.btn_salvarFormProposta.TabIndex = 68;
-            this.btn_salvarFormProposta.UseVisualStyleBackColor = false;
-            // 
-            // btn_salvar
-            // 
-            this.btn_salvar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_salvar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_salvar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_salvar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_salvar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btn_salvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_salvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_salvar.Image = global::SistemaSegsal.Properties.Resources.salvar;
-            this.btn_salvar.Location = new System.Drawing.Point(448, 69);
-            this.btn_salvar.Name = "btn_salvar";
-            this.btn_salvar.Size = new System.Drawing.Size(60, 55);
-            this.btn_salvar.TabIndex = 67;
-            this.btn_salvar.UseVisualStyleBackColor = false;
-            // 
-            // btn_atualizar
-            // 
-            this.btn_atualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_atualizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_atualizar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_atualizar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_atualizar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btn_atualizar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_atualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_atualizar.Image = global::SistemaSegsal.Properties.Resources.atualizar2;
-            this.btn_atualizar.Location = new System.Drawing.Point(580, 69);
-            this.btn_atualizar.Name = "btn_atualizar";
-            this.btn_atualizar.Size = new System.Drawing.Size(60, 55);
-            this.btn_atualizar.TabIndex = 69;
-            this.btn_atualizar.UseVisualStyleBackColor = false;
+            this.textBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBox18.Enabled = false;
+            this.textBox18.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox18.ForeColor = System.Drawing.Color.Black;
+            this.textBox18.Location = new System.Drawing.Point(12, 205);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(118, 23);
+            this.textBox18.TabIndex = 96;
+            this.textBox18.Text = " Chamado Cliente";
             // 
             // frm_addChamado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(784, 701);
+            this.ClientSize = new System.Drawing.Size(784, 684);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btn_addSolicitante);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btn_sair);
-            this.Controls.Add(this.btn_novo);
-            this.Controls.Add(this.btn_editar);
             this.Controls.Add(this.txt_dataFinal);
             this.Controls.Add(this.txt_dataChamado);
-            this.Controls.Add(this.btn_cancelar);
-            this.Controls.Add(this.btn_salvarFormProposta);
-            this.Controls.Add(this.btn_salvar);
             this.Controls.Add(this.textBox17);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox10);
@@ -618,14 +648,15 @@ namespace SistemaSegsal.Views
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.textBox19);
             this.Controls.Add(this.textBox16);
+            this.Controls.Add(this.textBox15);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.btn_atualizar);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox18);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cmb_baseCliente);
             this.Controls.Add(this.txt_valor);
@@ -638,7 +669,9 @@ namespace SistemaSegsal.Views
             this.Controls.Add(this.txt_solucao);
             this.Controls.Add(this.txt_codigo);
             this.Controls.Add(this.txt_diagnostico);
+            this.Controls.Add(this.txt_equipamento);
             this.Controls.Add(this.txt_informacao);
+            this.Controls.Add(this.txt_chamadoCliente);
             this.Controls.Add(this.txt_localSetor);
             this.Controls.Add(this.txt_id);
             this.Controls.Add(this.panel2);
@@ -649,9 +682,9 @@ namespace SistemaSegsal.Views
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frm_addChamado_Load);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -660,12 +693,9 @@ namespace SistemaSegsal.Views
         #endregion
 
         private System.Windows.Forms.Button btn_sair;
-        private System.Windows.Forms.Button btn_novo;
-        private System.Windows.Forms.Button btn_editar;
         private System.Windows.Forms.MaskedTextBox txt_dataFinal;
         private System.Windows.Forms.MaskedTextBox txt_dataChamado;
         private System.Windows.Forms.Button btn_cancelar;
-        private System.Windows.Forms.Button btn_salvarFormProposta;
         private System.Windows.Forms.Button btn_salvar;
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.TextBox textBox12;
@@ -703,5 +733,11 @@ namespace SistemaSegsal.Views
         private System.Windows.Forms.TextBox txt_solucao;
         private System.Windows.Forms.TextBox textBox19;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btn_addSolicitante;
+        private System.Windows.Forms.TextBox txt_equipamento;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox txt_chamadoCliente;
+        private System.Windows.Forms.TextBox textBox18;
     }
 }

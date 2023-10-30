@@ -25,6 +25,12 @@ namespace SistemaSegsal.Views
         BaseClienteDTO basDto = new BaseClienteDTO();
         BaseClienteBLL basBll = new BaseClienteBLL();
 
+        ClienteStatusDTO staDto = new ClienteStatusDTO();
+        ClienteStatusBLL staBll = new ClienteStatusBLL();
+
+        PropostaComercialDTO proDto = new PropostaComercialDTO();
+        PropostaComercialBLL proBll = new PropostaComercialBLL();
+
         EmpresaDTO empDto = new EmpresaDTO();
         EmpresaBLL empBll = new EmpresaBLL();
 
@@ -33,8 +39,6 @@ namespace SistemaSegsal.Views
         private void EstadoInicial()
         {
             this.btn_novo.Visible = true;
-            this.btn_salvar.Visible = false;
-            this.btn_atualizar.Visible = false;
             this.btn_cancelar.Visible = false;
             this.btn_editar.Visible = false;
             this.btn_deletar.Visible = false;
@@ -44,27 +48,12 @@ namespace SistemaSegsal.Views
 
             this.lvw_listaClientes.Enabled = true;
 
-            this.btn_sair.Location = new Point(1258, 5);
-            this.btn_novo.Location = new Point(1177, 5);
+            this.btn_sair.Location = new Point(1277, 5);
+            this.btn_novo.Location = new Point(1212, 5);            
 
-            
-
-            this.img_logomarca.Image = Image.FromFile(Application.StartupPath + @"\Imagens\Clientes\sem_imagem.jpg");
+            //this.img_logomarca.Image = Image.FromFile(Application.StartupPath + @"\Imagens\Clientes\sem_imagem.jpg");
         }
-
-        public void CarregarDadosEmpresa()
-        {
-            List<EmpresaDTO> emp = empBll.SelecionarEmpresa();
-
-            string logoEmpresa = emp[0].Logo;
-            string nomeFantasia = emp[0].NomeFantasia;
-
-            this.img_logoEmpresa.Image = Image.FromFile(Application.StartupPath + logoEmpresa);
-            this.img_logoEmpresa.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            this.Text = "Sistema de Gestão - " + nomeFantasia + " - v 1.0";
-        }
-
+        
         private void NovoCliente()
         {
             cliBll.CriarNovoCliente(cliDto);
@@ -73,44 +62,18 @@ namespace SistemaSegsal.Views
             string codigo = "CLI-" + id.ToString("000#");
             DateTime dataRegistro = DateTime.Now.Date;
 
-            
-
-            this.lvw_listaClientes.Enabled = false;
-
-            
-
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_salvar.Location = new Point(1177, 5);
-
-            
-
-            
+            frm_addCliente cli = new frm_addCliente(id, codigo, dataRegistro);
+            cli.Visible = true;            
         }
 
         private void EditarCliente()
         {
-            this.btn_novo.Visible = false;
-            this.btn_salvar.Visible = false;
-            this.btn_atualizar.Visible = true;
-            this.btn_cancelar.Visible = true;
-            this.btn_editar.Visible = false;
-            this.btn_deletar.Visible = false;
-            this.btn_base.Visible = false;
-            this.btn_contato.Visible = false;
-            this.btn_sair.Visible = false;
+            string codigo = this.lvw_listaClientes.SelectedItems[0].SubItems[2].Text;
 
-            this.lvw_listaClientes.Enabled = false;
-
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_atualizar.Location = new Point(1177, 5);
-
-            
+            frm_addCliente cliente = new frm_addCliente(codigo);
+            cliente.Visible = true;
         }
-
-       
-
         
-
         private void DeletarCliente()
         {
             DialogResult result = MessageBox.Show("Deseja realmente DELETAR este Cliente?", "DELETAR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -151,7 +114,7 @@ namespace SistemaSegsal.Views
             this.Close();
         }
 
-        private void ListarClientes()
+        public void ListarClientes()
         {
             string[] item = new string[7];
             int prox = 1;
@@ -169,9 +132,37 @@ namespace SistemaSegsal.Views
                 item[5] = pro.NomeFantasia;
 
                 basDto.Cliente = pro.NomeFantasia;
-                Int32 qtd = basBll.ContarBasesPorCliente(basDto);
+                Int32 qtdBase = basBll.ContarBasesPorCliente(basDto);
 
-                item[6] = qtd.ToString();                
+                item[6] = qtdBase.ToString();
+
+                lvw_listaClientes.Items.Add(new ListViewItem(item));
+                prox = prox + 1;
+            }
+        }
+
+        public void ListarClientesStatus(string statusCliente)
+        {
+            cliDto.Status = statusCliente;
+            string[] item = new string[8];
+            int prox = 1;
+            var listaCliente = cliBll.ListarClientesStatus(cliDto);
+
+            this.lvw_listaClientes.Items.Clear();
+
+            foreach (ClienteDTO pro in listaCliente)
+            {
+                item[0] = pro.Id.ToString();
+                item[1] = prox.ToString();
+                item[2] = pro.Codigo;
+                item[3] = pro.TipoCliente;
+                item[4] = pro.RazaoSocial;
+                item[5] = pro.NomeFantasia;
+
+                basDto.Cliente = pro.NomeFantasia;
+                Int32 qtdBase = basBll.ContarBasesPorCliente(basDto);
+
+                item[6] = qtdBase.ToString();
 
                 lvw_listaClientes.Items.Add(new ListViewItem(item));
                 prox = prox + 1;
@@ -184,11 +175,11 @@ namespace SistemaSegsal.Views
 
             List<ClienteDTO> cli = cliBll.SelecionarCliente(cliDto);
 
-            
+            string logoCli = cli[0].Logomarca;
+
+            this.img_logomarca.Image = Image.FromFile(Application.StartupPath + logoCli);
 
             this.btn_novo.Visible = false;
-            this.btn_salvar.Visible = false;
-            this.btn_atualizar.Visible = false;
             this.btn_cancelar.Visible = true;
             this.btn_editar.Visible = true;
             this.btn_deletar.Visible = true;
@@ -198,41 +189,66 @@ namespace SistemaSegsal.Views
 
             this.lvw_listaClientes.Enabled = true;
 
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_contato.Location = new Point(1177, 5);
-            this.btn_base.Location = new Point(1096, 5);
-            this.btn_deletar.Location = new Point(1015, 5);
-            this.btn_editar.Location = new Point(934, 5);
+            this.btn_cancelar.Location = new Point(1277, 5);
+            this.btn_contato.Location = new Point(1212, 5);
+            this.btn_base.Location = new Point(1147, 5);
+            this.btn_deletar.Location = new Point(1082, 5);
+            this.btn_editar.Location = new Point(1017, 5);            
+        }
 
-            
+        private void PopularComboboxStatusCliente()
+        {
+            List<ClienteStatusDTO> sta = staBll.PopularComboboxCliente();
+
+            this.cmb_status.DataSource = sta;
+            this.cmb_status.DisplayMember = "status";
+            this.cmb_status.Text = "";
+        }
+
+        private void SairFormulario()
+        {
+            DialogResult result = MessageBox.Show("Deseja realmente SAIR deste formulário?", "SAIR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                frm_principal pri = new frm_principal();
+                pri.Visible = true;
+
+                this.Close();
+            }
+        }
+
+        private void CancelarRegistro()
+        {
+            DialogResult result = MessageBox.Show("Deseja realmente CANCELAR este registro?", "CANCELAR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.EstadoInicial();
+            }
         }
 
         public frm_listaCliente()
         {
             InitializeComponent();
+
+            clienteInstancia = this;
         }
 
         private void frm_listaCliente_Load(object sender, EventArgs e)
-        {
-            //Designer do form
-            this.Text = "Sistema de Gestão - SEGSAL Segurança Eletrônica - v 1.0";
-            this.BackColor = Color.FromArgb(255, 255, 255);
-            
+        {            
             this.EstadoInicial();
 
-            //Designer do listview
-            this.lvw_listaClientes.BackColor = Color.FromArgb(255, 255, 192);
-
+            //1309
             this.lvw_listaClientes.Columns.Add("Id", 0).TextAlign = HorizontalAlignment.Center;
             this.lvw_listaClientes.Columns.Add("Item", 60).TextAlign = HorizontalAlignment.Center;
             this.lvw_listaClientes.Columns.Add("Código", 80).TextAlign = HorizontalAlignment.Center;
             this.lvw_listaClientes.Columns.Add("Tipo", 150).TextAlign = HorizontalAlignment.Left;
             this.lvw_listaClientes.Columns.Add("Razao Social", 400).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaClientes.Columns.Add("Nome Fantasia", 500).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaClientes.Columns.Add("Nome Fantasia", 519).TextAlign = HorizontalAlignment.Left;
             this.lvw_listaClientes.Columns.Add("Qtd Bases", 80).TextAlign = HorizontalAlignment.Center;
 
-            this.ListarClientes();
-            this.CarregarDadosEmpresa();
+            string statusCli = "Ativo";
+            this.ListarClientesStatus(statusCli);
+            this.PopularComboboxStatusCliente();
         }
 
         private void btn_novo_Click(object sender, EventArgs e)
@@ -255,14 +271,7 @@ namespace SistemaSegsal.Views
 
         private void btn_sair_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Deseja realmente SAIR deste formulário?", "SAIR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                frm_principal pri = new frm_principal();
-                pri.Visible = true;
-
-                this.Close();
-            }
+            this.SairFormulario();
         }
 
         private void lvw_listaClientes_SelectedIndexChanged(object sender, EventArgs e)
@@ -282,11 +291,7 @@ namespace SistemaSegsal.Views
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Deseja realmente CANCELAR este registro?", "CANCELAR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.EstadoInicial();
-            }
+            this.CancelarRegistro();
         }
 
         private void btn_salvar_Click(object sender, EventArgs e)
@@ -308,6 +313,25 @@ namespace SistemaSegsal.Views
             cont.Visible = true;
 
             this.Close();
+        }
+
+        private void lbl_title_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_status_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.cmb_status.Text == "SistemaSegsal.DTO.ClienteStatusDTO")
+            {
+                return;
+            }
+            else
+            {
+                string status = this.cmb_status.Text;
+
+                this.ListarClientesStatus(status);
+            }
         }
     }
 }

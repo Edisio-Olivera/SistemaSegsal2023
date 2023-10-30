@@ -119,7 +119,7 @@ namespace SistemaSegsal.BLL
                 "e.senhaEmail, " +
                 "e.telefone, " +
                 "e.celular, " +
-                "e.atividadePrincipal, " +
+                "a.atividade, " +
                 "e.site, " +
                 "e.instagram, " +
                 "e.facebook, " +
@@ -129,6 +129,7 @@ namespace SistemaSegsal.BLL
                 "FROM tb_empresa e " +
                 "INNER JOIN tb_cidade c ON e.idCidade = c.id " +
                 "INNER JOIN tb_uf u ON c.idUf = u.id " +
+                "INNER JOIN tb_atividade a ON e.idAtividadePrincipal = a.id " +
                 "WHERE e.id = 1";
 
             cmd.Connection = conexao.conectar();

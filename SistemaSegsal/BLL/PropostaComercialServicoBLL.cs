@@ -161,7 +161,7 @@ namespace SistemaSegsal.BLL
             cmd.CommandText = "SELECT " +
                 "p.id, " +
                 "p.codProposta, " +
-                "t.tipoServico, " +
+                "t.sigla, " +
                 "p.qtd, " +
                 "p.descricao, " +
                 "p.valorUnitario, " +

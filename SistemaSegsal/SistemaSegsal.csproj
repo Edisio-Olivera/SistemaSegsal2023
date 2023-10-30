@@ -34,11 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
@@ -113,10 +116,13 @@
     <Compile Include="BLL\BaseClienteBLL.cs" />
     <Compile Include="BLL\BaseClienteStatusBLL.cs" />
     <Compile Include="BLL\ChamadoAssuntoBLL.cs" />
+    <Compile Include="BLL\ChamadoAtendimentoBLL.cs" />
+    <Compile Include="BLL\ChamadoAtendimentoTipoBLL.cs" />
     <Compile Include="BLL\ChamadoBLL.cs" />
     <Compile Include="BLL\ChamadoFotoBLL.cs" />
     <Compile Include="BLL\ChamadoMaterialBLL.cs" />
     <Compile Include="BLL\ChamadoServicoBLL.cs" />
+    <Compile Include="BLL\ChamadoSituacaoBLL.cs" />
     <Compile Include="BLL\ChamadoStatusBLL.cs" />
     <Compile Include="BLL\ChamadoUrgenciaBLL.cs" />
     <Compile Include="BLL\CidadeBLL.cs" />
@@ -129,6 +135,8 @@
     <Compile Include="BLL\DepartamentoBLL.cs" />
     <Compile Include="BLL\EmpresaBLL.cs" />
     <Compile Include="BLL\FormaPgtoBLL.cs" />
+    <Compile Include="BLL\OrdemServicoBLL.cs" />
+    <Compile Include="BLL\OrdemServicoStatusBLL.cs" />
     <Compile Include="BLL\PropostaComercialServicoBLL.cs" />
     <Compile Include="BLL\NotaFiscalBLL.cs" />
     <Compile Include="BLL\NotaFiscalStatusBLL.cs" />
@@ -145,10 +153,13 @@
     <Compile Include="DTO\BaseClienteDTO.cs" />
     <Compile Include="DTO\BaseClienteStatusDTO.cs" />
     <Compile Include="DTO\ChamadoAssuntoDTO.cs" />
+    <Compile Include="DTO\ChamadoAtendimentoDTO.cs" />
+    <Compile Include="DTO\ChamadoAtendimentoTipoDTO.cs" />
     <Compile Include="DTO\ChamadoDTO.cs" />
     <Compile Include="DTO\ChamadoFotoDTO.cs" />
     <Compile Include="DTO\ChamadoMaterialDTO.cs" />
     <Compile Include="DTO\ChamadoServicoDTO.cs" />
+    <Compile Include="DTO\ChamadoSituacaoDTO.cs" />
     <Compile Include="DTO\ChamadoStatusDTO.cs" />
     <Compile Include="DTO\ChamadoUrgenciaDTO.cs" />
     <Compile Include="DTO\CidadeDTO.cs" />
@@ -163,6 +174,8 @@
     <Compile Include="DTO\FormaPgtoDTO.cs" />
     <Compile Include="DTO\NotaFiscalDTO.cs" />
     <Compile Include="DTO\NotaFiscalStatusDTO.cs" />
+    <Compile Include="DTO\OrdemServicoDTO.cs" />
+    <Compile Include="DTO\OrdemServicoStatusDTO.cs" />
     <Compile Include="DTO\PropostaComercialDTO.cs" />
     <Compile Include="DTO\PropostaComercialServicoDTO.cs" />
     <Compile Include="DTO\PropostaComercialServicoStatusDTO.cs" />
@@ -186,11 +199,29 @@
     <Compile Include="Views\calendarioChamadoInicio.Designer.cs">
       <DependentUpon>calendarioChamadoInicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_addBaseCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addBaseCliente.Designer.cs">
+      <DependentUpon>frm_addBaseCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_addChamado.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\frm_addChamado.Designer.cs">
       <DependentUpon>frm_addChamado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addChamadoAtendimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addChamadoAtendimento.Designer.cs">
+      <DependentUpon>frm_addChamadoAtendimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addClienteContato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addClienteContato.Designer.cs">
+      <DependentUpon>frm_addClienteContato.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_addMovimentacaoFinanceira.cs">
       <SubType>Form</SubType>
@@ -209,6 +240,12 @@
     </Compile>
     <Compile Include="Views\frm_addPropostaComercial.Designer.cs">
       <DependentUpon>frm_addPropostaComercial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addPropostaComercialServico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addPropostaComercialServico.Designer.cs">
+      <DependentUpon>frm_addPropostaComercialServico.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_listaChamadoAtendimento.cs">
       <SubType>Form</SubType>
@@ -282,6 +319,12 @@
     <Compile Include="Views\frm_listaNotaFiscal.Designer.cs">
       <DependentUpon>frm_listaNotaFiscal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_listaOrdemServico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaOrdemServico.Designer.cs">
+      <DependentUpon>frm_listaOrdemServico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_listaPropostaComercialServico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,8 +370,17 @@
     <EmbeddedResource Include="Views\calendarioChamadoInicio.resx">
       <DependentUpon>calendarioChamadoInicio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addBaseCliente.resx">
+      <DependentUpon>frm_addBaseCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addChamado.resx">
       <DependentUpon>frm_addChamado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addChamadoAtendimento.resx">
+      <DependentUpon>frm_addChamadoAtendimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addClienteContato.resx">
+      <DependentUpon>frm_addClienteContato.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addMovimentacaoFinanceira.resx">
       <DependentUpon>frm_addMovimentacaoFinanceira.cs</DependentUpon>
@@ -338,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addPropostaComercial.resx">
       <DependentUpon>frm_addPropostaComercial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addPropostaComercialServico.resx">
+      <DependentUpon>frm_addPropostaComercialServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_listaChamadoAtendimento.resx">
       <DependentUpon>frm_listaChamadoAtendimento.cs</DependentUpon>
@@ -371,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_listaNotaFiscal.resx">
       <DependentUpon>frm_listaNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaOrdemServico.resx">
+      <DependentUpon>frm_listaOrdemServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_listaPropostaComercialServico.resx">
       <DependentUpon>frm_listaPropostaComercialServico.cs</DependentUpon>
@@ -503,6 +561,12 @@
     <None Include="bin\Debug\Imagens\Sistema\rh.png" />
     <None Include="bin\Debug\Imagens\Sistema\opr.png" />
     <None Include="bin\Debug\Imagens\Sistema\ess.png" />
+    <None Include="bin\Debug\Imagens\Clientes\sem_imagem.jpg" />
+    <None Include="bin\Debug\Imagens\Sistema\FF.png" />
+    <None Include="bin\Debug\Imagens\Sistema\REW.png" />
+    <None Include="Resources\concrete-wall-pipe-cctv.jpg" />
+    <None Include="Resources\1683212708845.jfif" />
+    <None Include="Resources\como-montar-o-sistema-de-cftv-via-fibra-optica-1080x627.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

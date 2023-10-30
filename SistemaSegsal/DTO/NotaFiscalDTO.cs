@@ -23,6 +23,8 @@ namespace SistemaSegsal.DTO
         private Int32 _valor;
         private string _status;
         private Int32 _ano;
+        private Int32 _emissao;
+        private Int32 _mes;
 
         public int Id { get => _id; set => _id = value; }
         public string Codigo { get => _codigo; set => _codigo = value; }
@@ -39,5 +41,7 @@ namespace SistemaSegsal.DTO
         public string Cliente { get => _cliente; set => _cliente = value; }
         public string BaseCliente { get => _baseCliente; set => _baseCliente = value; }
         public int DiasReceber { get => _diasReceber; set => _diasReceber = value; }
+        public int Emissao { get => _emissao; set => _emissao = value; }
+        public int Mes { get => _mes; set => _mes = value; }
     }
 }

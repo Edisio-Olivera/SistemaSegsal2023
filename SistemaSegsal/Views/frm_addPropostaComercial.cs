@@ -40,7 +40,7 @@ namespace SistemaSegsal.Views
         FormaPgtoDTO fpDto = new FormaPgtoDTO();
         FormaPgtoBLL fpBll = new FormaPgtoBLL();
 
-        public static frm_addPropostaComercial clienteInstancia;
+        public static frm_addPropostaComercial clientePropostaInstancia;
 
         private void EstadoInicial()
         {
@@ -262,7 +262,7 @@ namespace SistemaSegsal.Views
             MessageBox.Show("Proposta Comercial Cadastrada com com sucesso!", "Salvar!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.EstadoInicial();
-            this.ListarPropostaViaAddProposta();
+            //frm_listaPropostaComercial.propostaInstancia.ListaPropostaComercial();
         }
 
         private void EditarProposta()
@@ -409,7 +409,7 @@ namespace SistemaSegsal.Views
             MessageBox.Show("Proposta Comercial Atualizada com com sucesso!", "Atualizar!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             this.EstadoInicial();
-            this.ListarPropostaViaAddProposta();
+            //frm_listaPropostaComercial.propostaInstancia.ListaPropostaComercial();
         }
 
         public void PopularComboboxCliente()
@@ -422,7 +422,7 @@ namespace SistemaSegsal.Views
             this.cmb_cliente.Text = "";
         }
 
-        private void PopularComboboxBaseCliente(string cliente)
+        public void PopularComboboxBaseCliente(string cliente)
         {
             basDto.Cliente = cliente;
 
@@ -475,23 +475,18 @@ namespace SistemaSegsal.Views
 
                 this.Close();
             }
-        }
+        }         
 
-        private void ListarPropostaViaAddProposta()
+        private void CriarNovoCliente()
         {
-            frm_listaPropostaComercial.propostaInstancia.ListaPropostaComercial();
-        }
+            cliBll.CriarNovoCliente(cliDto);
 
-        private void AtualizarComboboxClienteForm()
-        {
-            frm_addPropostaComercial.clienteInstancia.PopularComboboxCliente();
-        }
+            Int32 id = cliDto.Id + 1;
+            string codigo = "CLI-" + id.ToString("000#");
+            DateTime dataRegistro = DateTime.Now;
 
-        private void AtualizarFormCliente()
-        {
-            InitializeComponent();
-
-            clienteInstancia = this;
+            frm_addCliente cli = new frm_addCliente(codigo, id, dataRegistro);
+            cli.Visible = true;
         }
 
         public void CarregarDadosEmpresa()
@@ -512,6 +507,8 @@ namespace SistemaSegsal.Views
         public frm_addPropostaComercial()
         {
             InitializeComponent();
+
+            clientePropostaInstancia = this;
         }
 
         //Criar nova Proposta
@@ -705,8 +702,7 @@ namespace SistemaSegsal.Views
 
         private void btn_addCliente_Click(object sender, EventArgs e)
         {
-            frm_addCliente cli = new frm_addCliente();
-            cli.Visible = true;
+            this.CriarNovoCliente();
         }
     }
 }

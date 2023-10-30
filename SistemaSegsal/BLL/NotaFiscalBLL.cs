@@ -29,6 +29,7 @@ namespace SistemaSegsal.BLL
 		Int32 valorTotalStatus;
 		Int32 valorTotalStatusAno;
 		Int32 ultimoIdNotaFiscal;
+		Int32 valorTotalStatusMesAno;
 
 		public void CriarNovoNotaFiscal(NotaFiscalDTO n)
 		{
@@ -506,12 +507,9 @@ namespace SistemaSegsal.BLL
 
 		public Int32 SomarNotasFiscaisAnoStatus(NotaFiscalDTO n)
 		{
-			staDto.Status = n.Status;
-			staBll.SelecionarIdNotaFiscalStatus(staDto);
-
 			cmd.CommandText = "SELECT SUM(valor) FROM tb_nota_fiscal " +
 				"WHERE YEAR(dataEmissao) = " + n.Ano + " " +
-				"AND idStatus = " + staDto.Id;
+				"AND emissao = 1";
 
 			try
 			{
@@ -530,6 +528,42 @@ namespace SistemaSegsal.BLL
 			}
 
 			return valorTotalStatusAno;
+		}
+
+		public Int32 SomarNotasFiscaisMesAno(NotaFiscalDTO n)
+		{
+			cmd.CommandText = "SELECT SUM(valor) FROM tb_nota_fiscal " +
+				"WHERE YEAR(dataEmissao) = " + n.Ano + " " + 
+				"AND MONTH(dataEmissao) = " + n.Mes + " " +
+				"AND emissao = 1";
+
+			try
+			{
+				cmd.Connection = conexao.conectar();
+				MySqlDataReader leitor = cmd.ExecuteReader();
+
+				leitor.Read();
+
+				Int32 valor = leitor.IsDBNull(0) ? 0 : leitor.GetInt32(0);
+
+				if (valor == null)
+                {
+					valorTotalStatusMesAno = 0;
+				}
+                else
+                {
+					valorTotalStatusMesAno = valor / 100;
+				}				
+
+				conexao.desconectar();
+				cmd.Dispose();
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			return valorTotalStatusMesAno;
 		}
 
 		public void ReceberNotaFiscal(NotaFiscalDTO n)

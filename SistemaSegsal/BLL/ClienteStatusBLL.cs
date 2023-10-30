@@ -38,5 +38,26 @@ namespace SistemaSegsal.BLL
 
 			return s.Id;
 		}
-	}
+
+		public List<ClienteStatusDTO> PopularComboboxCliente()
+		{
+			cmd.CommandText = "SELECT statusCliente FROM tb_cliente_status";
+
+			cmd.Connection = conexao.conectar();
+			MySqlDataReader leitor = cmd.ExecuteReader();
+			List<ClienteStatusDTO> statusCli = new List<ClienteStatusDTO>();
+
+			while (leitor.Read())
+			{
+				ClienteStatusDTO sta = new ClienteStatusDTO();
+				sta.Status = leitor.GetString(0);
+				statusCli.Add(sta);
+			}
+
+			conexao.desconectar();
+			cmd.Dispose();
+
+			return statusCli;
+		}
+	}	
 }

@@ -16,6 +16,7 @@ namespace SistemaSegsal.DTO
         private string _atividadeRealizada;
         private string _dataFinal;
         private string _horaFinal;
+        private Int32 _valor;
 
         public int Id { get => _id; set => _id = value; }
         public string Chamado { get => _chamado; set => _chamado = value; }
@@ -25,5 +26,6 @@ namespace SistemaSegsal.DTO
         public string AtividadeRealizada { get => _atividadeRealizada; set => _atividadeRealizada = value; }
         public string DataFinal { get => _dataFinal; set => _dataFinal = value; }
         public string HoraFinal { get => _horaFinal; set => _horaFinal = value; }
+        public int Valor { get => _valor; set => _valor = value; }
     }
 }

@@ -12,6 +12,7 @@ namespace SistemaSegsal.DTO
         private string _codigo;
         private string _dataCadastro;
         private string _nome;
+        private string _nomeCurto;
         private string _rg;
         private string _cpf;
         private string _dataNascimento;
@@ -45,5 +46,6 @@ namespace SistemaSegsal.DTO
         public string Email { get => _email; set => _email = value; }
         public string Foto { get => _foto; set => _foto = value; }
         public string Status { get => _status; set => _status = value; }
+        public string NomeCurto { get => _nomeCurto; set => _nomeCurto = value; }
     }
 }

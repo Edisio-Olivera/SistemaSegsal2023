@@ -71,6 +71,7 @@ namespace SistemaSegsal.Views
             this.btn_salvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_title = new System.Windows.Forms.Label();
+            this.cmb_chamados = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,6 +81,7 @@ namespace SistemaSegsal.Views
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.Controls.Add(this.cmb_chamados);
             this.groupBox2.Controls.Add(this.btn_addServico);
             this.groupBox2.Controls.Add(this.btn_calcular);
             this.groupBox2.Controls.Add(this.cmb_descricao);
@@ -138,9 +140,11 @@ namespace SistemaSegsal.Views
             this.cmb_descricao.ForeColor = System.Drawing.Color.Black;
             this.cmb_descricao.FormattingEnabled = true;
             this.cmb_descricao.Location = new System.Drawing.Point(29, 86);
+            this.cmb_descricao.MaxDropDownItems = 5;
             this.cmb_descricao.Name = "cmb_descricao";
             this.cmb_descricao.Size = new System.Drawing.Size(596, 23);
             this.cmb_descricao.TabIndex = 5;
+            this.cmb_descricao.SelectedValueChanged += new System.EventHandler(this.cmb_descricao_SelectedValueChanged);
             // 
             // label8
             // 
@@ -667,6 +671,15 @@ namespace SistemaSegsal.Views
             this.lbl_title.TabIndex = 7;
             this.lbl_title.Text = "Serviços da Proposta Comercial";
             // 
+            // cmb_chamados
+            // 
+            this.cmb_chamados.FormattingEnabled = true;
+            this.cmb_chamados.Location = new System.Drawing.Point(428, 40);
+            this.cmb_chamados.Name = "cmb_chamados";
+            this.cmb_chamados.Size = new System.Drawing.Size(328, 23);
+            this.cmb_chamados.TabIndex = 14;
+            this.cmb_chamados.SelectedValueChanged += new System.EventHandler(this.cmb_chamados_SelectedValueChanged);
+            // 
             // frm_listaPropostaComercialServico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -740,5 +753,6 @@ namespace SistemaSegsal.Views
         private System.Windows.Forms.Button btn_addServico;
         private System.Windows.Forms.Button btn_calcular;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox cmb_chamados;
     }
 }

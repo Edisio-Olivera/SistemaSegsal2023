@@ -31,208 +31,208 @@ namespace SistemaSegsal.View
         private void EstadoInicial()
         {
             //Visualização dos Botões
-            this.btn_novo.Visible = true;
-            this.btn_salvar.Visible = false;
-            this.btn_cancelar.Visible = false;
-            this.btn_editar.Visible = false;
-            this.btn_atualizar.Visible = false;
-            this.btn_deletar.Visible = false;
-            this.btn_sair.Visible = true;
+            //this.btn_novo.Visible = true;
+            //this.btn_salvar.Visible = false;
+            //this.btn_cancelar.Visible = false;
+            //this.btn_editar.Visible = false;
+            //this.btn_atualizar.Visible = false;
+            //this.btn_deletar.Visible = false;
+            //this.btn_sair.Visible = true;
 
-            //Posição dos Botões
-            this.btn_sair.Location = new Point(1258, 5);
-            this.btn_novo.Location = new Point(1177, 5);
+            ////Posição dos Botões
+            //this.btn_sair.Location = new Point(1258, 5);
+            //this.btn_novo.Location = new Point(1177, 5);
 
-            this.txt_id.Enabled = false;
-            this.txt_cliente.Enabled = false;
-            this.txt_nome.Enabled = false;
-            this.txt_telefone.Enabled = false;
-            this.txt_email.Enabled = false;
-            this.cmb_departamento.Enabled = false;
-            this.cbx_status.Visible = false;
-            this.lvw_listaContatos.Enabled = true;
+            //this.txt_id.Enabled = false;
+            //this.txt_cliente.Enabled = false;
+            //this.txt_nome.Enabled = false;
+            //this.txt_telefone.Enabled = false;
+            //this.txt_email.Enabled = false;
+            //this.cmb_departamento.Enabled = false;
+            //this.cbx_status.Visible = false;
+            //this.lvw_listaContatos.Enabled = true;
 
-            this.txt_id.BackColor = Color.FromArgb(192, 255, 255);
-            this.txt_cliente.BackColor = Color.FromArgb(192, 255, 255);
-            this.txt_nome.BackColor = Color.FromArgb(255, 255, 192);
-            this.txt_telefone.BackColor = Color.FromArgb(255, 255, 192);
-            this.txt_email.BackColor = Color.FromArgb(255, 255, 192);
-            this.cmb_departamento.BackColor = Color.FromArgb(255, 255, 192);
+            //this.txt_id.BackColor = Color.FromArgb(192, 255, 255);
+            //this.txt_cliente.BackColor = Color.FromArgb(192, 255, 255);
+            //this.txt_nome.BackColor = Color.FromArgb(255, 255, 192);
+            //this.txt_telefone.BackColor = Color.FromArgb(255, 255, 192);
+            //this.txt_email.BackColor = Color.FromArgb(255, 255, 192);
+            //this.cmb_departamento.BackColor = Color.FromArgb(255, 255, 192);
 
-            this.txt_id.Text = "";
-            this.txt_nome.Text = "";
-            this.txt_telefone.Text = "";
-            this.txt_email.Text = "";
-            this.cmb_departamento.Text = "";
-            this.cbx_status.Checked = false;
+            //this.txt_id.Text = "";
+            //this.txt_nome.Text = "";
+            //this.txt_telefone.Text = "";
+            //this.txt_email.Text = "";
+            //this.cmb_departamento.Text = "";
+            //this.cbx_status.Checked = false;
         }
 
         private void NovoContatoCliente()
         {
-            cntBll.CriarNovoContato(cntDto);
+            //cntBll.CriarNovoContato(cntDto);
 
-            Int32 id = cntDto.Id + 1;
+            //Int32 id = cntDto.Id + 1;
 
-            this.txt_id.Text = id.ToString();
+            //this.txt_id.Text = id.ToString();
 
-            this.btn_novo.Visible = false;
-            this.btn_salvar.Visible = true;
-            this.btn_cancelar.Visible = true;
-            this.btn_editar.Visible = false;
-            this.btn_atualizar.Visible = false;
-            this.btn_deletar.Visible = false;
-            this.btn_sair.Visible = false;
+            //this.btn_novo.Visible = false;
+            //this.btn_salvar.Visible = true;
+            //this.btn_cancelar.Visible = true;
+            //this.btn_editar.Visible = false;
+            //this.btn_atualizar.Visible = false;
+            //this.btn_deletar.Visible = false;
+            //this.btn_sair.Visible = false;
 
-            //Posição dos Botões
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_salvar.Location = new Point(1177, 5);
+            ////Posição dos Botões
+            //this.btn_cancelar.Location = new Point(1258, 5);
+            //this.btn_salvar.Location = new Point(1177, 5);
 
-            this.txt_id.Enabled = false;
-            this.txt_cliente.Enabled = false;
-            this.txt_nome.Enabled = true;
-            this.txt_telefone.Enabled = true;
-            this.txt_email.Enabled = true;
-            this.cmb_departamento.Enabled = true;
+            //this.txt_id.Enabled = false;
+            //this.txt_cliente.Enabled = false;
+            //this.txt_nome.Enabled = true;
+            //this.txt_telefone.Enabled = true;
+            //this.txt_email.Enabled = true;
+            //this.cmb_departamento.Enabled = true;
 
-            this.PopularComboboxDepartamento();
+            //this.PopularComboboxDepartamento();
 
-            this.lvw_listaContatos.Enabled = false;
-            this.txt_nome.Focus();
+            //this.lvw_listaContatos.Enabled = false;
+            //this.txt_nome.Focus();
         }
 
         private void SalvarContatoCliente()
         {
-            cntDto.Id = Int32.Parse(this.txt_id.Text);
-            cntDto.Cliente = this.txt_cliente.Text;
-            cntDto.Nome = this.txt_nome.Text;
-            cntDto.Telefone = txt_telefone.Text;
-            cntDto.Email = this.txt_email.Text;
-            cntDto.Departamento = this.cmb_departamento.Text;
-            cntDto.Status = "Ativo";
+            //cntDto.Id = Int32.Parse(this.txt_id.Text);
+            //cntDto.Cliente = this.txt_cliente.Text;
+            //cntDto.Nome = this.txt_nome.Text;
+            //cntDto.Telefone = txt_telefone.Text;
+            //cntDto.Email = this.txt_email.Text;
+            //cntDto.Departamento = this.cmb_departamento.Text;
+            //cntDto.Status = "Ativo";
 
-            cntBll.SalvarContatoCliente(cntDto);
+            //cntBll.SalvarContatoCliente(cntDto);
 
-            MessageBox.Show("Contato SALVO com sucesso!", "SALVAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("Contato SALVO com sucesso!", "SALVAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.EstadoInicial();
-            this.ListarContatos();
+            //this.EstadoInicial();
+            //this.ListarContatos();
         }
 
         private void EditarContatoCliente()
         {
-            this.btn_novo.Visible = false;
-            this.btn_salvar.Visible = false;
-            this.btn_cancelar.Visible = true;
-            this.btn_editar.Visible = false;
-            this.btn_atualizar.Visible = true;
-            this.btn_deletar.Visible = false;
-            this.btn_sair.Visible = false;
+            //this.btn_novo.Visible = false;
+            //this.btn_salvar.Visible = false;
+            //this.btn_cancelar.Visible = true;
+            //this.btn_editar.Visible = false;
+            //this.btn_atualizar.Visible = true;
+            //this.btn_deletar.Visible = false;
+            //this.btn_sair.Visible = false;
 
-            //Posição dos Botões
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_atualizar.Location = new Point(1177, 5);
+            ////Posição dos Botões
+            //this.btn_cancelar.Location = new Point(1258, 5);
+            //this.btn_atualizar.Location = new Point(1177, 5);
 
-            this.txt_id.Enabled = false;
-            this.txt_cliente.Enabled = false;
-            this.txt_nome.Enabled = true;
-            this.txt_telefone.Enabled = true;
-            this.txt_email.Enabled = true;
-            this.cmb_departamento.Enabled = true;
-            this.cbx_status.Visible = true;
+            //this.txt_id.Enabled = false;
+            //this.txt_cliente.Enabled = false;
+            //this.txt_nome.Enabled = true;
+            //this.txt_telefone.Enabled = true;
+            //this.txt_email.Enabled = true;
+            //this.cmb_departamento.Enabled = true;
+            //this.cbx_status.Visible = true;
         }
 
         private void AtualizarContatoCliente()
         {
-            cntDto.Id = Int32.Parse(this.txt_id.Text);
-            cntDto.Cliente = this.txt_cliente.Text;
-            cntDto.Nome = this.txt_nome.Text;
-            cntDto.Telefone = txt_telefone.Text;
-            cntDto.Email = this.txt_email.Text;
-            cntDto.Departamento = this.cmb_departamento.Text;
-            if (this.cbx_status.Checked == true)
-            {
-                cntDto.Status = "Ativo";
-            }
-            else
-            {
-                cntDto.Status = "Inativo";
-            }
+            //cntDto.Id = Int32.Parse(this.txt_id.Text);
+            //cntDto.Cliente = this.txt_cliente.Text;
+            //cntDto.Nome = this.txt_nome.Text;
+            //cntDto.Telefone = txt_telefone.Text;
+            //cntDto.Email = this.txt_email.Text;
+            //cntDto.Departamento = this.cmb_departamento.Text;
+            //if (this.cbx_status.Checked == true)
+            //{
+            //    cntDto.Status = "Ativo";
+            //}
+            //else
+            //{
+            //    cntDto.Status = "Inativo";
+            //}
 
-            cntBll.EditarContatoCliente(cntDto);
+            //cntBll.EditarContatoCliente(cntDto);
 
-            MessageBox.Show("Contato ATUALIZADO com sucesso!", "ATUALIZAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("Contato ATUALIZADO com sucesso!", "ATUALIZAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.EstadoInicial();
-            this.ListarContatos();
+            //this.EstadoInicial();
+            //this.ListarContatos();
         }
 
         private void DeletarContatoCliente()
         {
-            cntDto.Id = Int32.Parse(this.txt_id.Text);
+            //cntDto.Id = Int32.Parse(this.txt_id.Text);
 
-            DialogResult result = MessageBox.Show("Deseja realmente DELETAR este registro?", "DELETAR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                cntBll.ExcluirContatoCliente(cntDto);
+            //DialogResult result = MessageBox.Show("Deseja realmente DELETAR este registro?", "DELETAR!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (result == DialogResult.Yes)
+            //{
+            //    cntBll.ExcluirContatoCliente(cntDto);
 
-                MessageBox.Show("Contato DELETADO com sucesso!", "DELETAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }            
+            //    MessageBox.Show("Contato DELETADO com sucesso!", "DELETAR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}            
 
-            this.EstadoInicial();
-            this.ListarContatos();
+            //this.EstadoInicial();
+            //this.ListarContatos();
         }
 
         private void SelecionarContatoCliente()
         {
-            cntDto.Id = Int32.Parse(this.lvw_listaContatos.SelectedItems[0].SubItems[0].Text);
+            //cntDto.Id = Int32.Parse(this.lvw_listaContatos.SelectedItems[0].SubItems[0].Text);
 
-            List<ClienteContatoDTO> cont = cntBll.SelecionarContatoCliente(cntDto);
+            //List<ClienteContatoDTO> cont = cntBll.SelecionarContatoCliente(cntDto);
 
-            this.txt_id.Text = cont[0].Id.ToString();
-            this.txt_nome.Text = cont[0].Nome;
-            this.txt_telefone.Text = cont[0].Telefone;
-            this.txt_email.Text = cont[0].Email;
+            //this.txt_id.Text = cont[0].Id.ToString();
+            //this.txt_nome.Text = cont[0].Nome;
+            //this.txt_telefone.Text = cont[0].Telefone;
+            //this.txt_email.Text = cont[0].Email;
 
-            this.PopularComboboxDepartamento();
+            //this.PopularComboboxDepartamento();
 
-            this.cmb_departamento.Text = cont[0].Departamento;
-            if(cont[0].Status == "Ativo")
-            {
-                this.cbx_status.Checked = true;
-            }
-            else
-            {
-                this.cbx_status.Checked = false;
-            }
+            //this.cmb_departamento.Text = cont[0].Departamento;
+            //if(cont[0].Status == "Ativo")
+            //{
+            //    this.cbx_status.Checked = true;
+            //}
+            //else
+            //{
+            //    this.cbx_status.Checked = false;
+            //}
 
-            this.btn_novo.Visible = false;
-            this.btn_salvar.Visible = false;
-            this.btn_cancelar.Visible = true;
-            this.btn_editar.Visible = true;
-            this.btn_atualizar.Visible = false;
-            this.btn_deletar.Visible = true;
-            this.btn_sair.Visible = false;
+            //this.btn_novo.Visible = false;
+            //this.btn_salvar.Visible = false;
+            //this.btn_cancelar.Visible = true;
+            //this.btn_editar.Visible = true;
+            //this.btn_atualizar.Visible = false;
+            //this.btn_deletar.Visible = true;
+            //this.btn_sair.Visible = false;
 
-            //Posição dos Botões
-            this.btn_cancelar.Location = new Point(1258, 5);
-            this.btn_deletar.Location = new Point(1177, 5);
-            this.btn_editar.Location = new Point(1096, 5);
+            ////Posição dos Botões
+            //this.btn_cancelar.Location = new Point(1258, 5);
+            //this.btn_deletar.Location = new Point(1177, 5);
+            //this.btn_editar.Location = new Point(1096, 5);
 
-            this.cbx_status.Visible = true;
+            //this.cbx_status.Visible = true;
         }
 
         private void PopularComboboxDepartamento()
         {
-            List<DepartamentoDTO> dep = depBll.PopularComboboxDepartamento();
+            //List<DepartamentoDTO> dep = depBll.PopularComboboxDepartamento();
 
-            this.cmb_departamento.DataSource = dep;
-            this.cmb_departamento.DisplayMember = "departamento";
-            this.cmb_departamento.Text = "";
+            //this.cmb_departamento.DataSource = dep;
+            //this.cmb_departamento.DisplayMember = "departamento";
+            //this.cmb_departamento.Text = "";
         }
 
         private void ListarContatos()
         {
-            cntDto.Cliente = this.txt_cliente.Text;
+            //cntDto.Cliente = this.txt_cliente.Text;
 
             this.lvw_listaContatos.Items.Clear();
 
@@ -265,7 +265,7 @@ namespace SistemaSegsal.View
         {
             InitializeComponent();
 
-            this.txt_cliente.Text = cliente;
+            //this.txt_cliente.Text = cliente;
 
             cliDto.Codigo = codigo;
             List<ClienteDTO> cli = cliBll.SelecionarCliente(cliDto);

@@ -20,6 +20,7 @@ namespace SistemaSegsal.DTO
 		private string _formaPgto;
 		private Int32 _valor;
 		private string _notaFiscal;
+        private string _ordemServico;
 		private string _status;
 
         public int Id { get => _id; set => _id = value; }
@@ -35,5 +36,6 @@ namespace SistemaSegsal.DTO
         public int Valor { get => _valor; set => _valor = value; }
         public string NotaFiscal { get => _notaFiscal; set => _notaFiscal = value; }
         public string Status { get => _status; set => _status = value; }
+        public string OrdemServico { get => _ordemServico; set => _ordemServico = value; }
     }
 }
