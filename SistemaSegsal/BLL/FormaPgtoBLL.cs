@@ -7,28 +7,30 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class FormaPgtoBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
 		CondicaoPgtoDTO cpDto = new CondicaoPgtoDTO();
 		CondicaoPgtoBLL cpBll = new CondicaoPgtoBLL();
+
+		string tabela = "tb_forma_pgto";
 
 		public List<FormaPgtoDTO> PopularComboboxFormaPgto(FormaPgtoDTO fp)
 		{
 			cpDto.CondicaoPgto = fp.CondicaoPgto;
 			cpBll.SelecionarIdCondicaoPgto(cpDto);
 
-			cmd.CommandText = "SELECT forma FROM tb_forma_pgto " +
+			cmd.CommandText = "SELECT forma FROM " + tabela + " " +
 				"WHERE idCondicao = " + cpDto.Id;
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<FormaPgtoDTO> forma = new List<FormaPgtoDTO>();
 
 			while (leitor.Read())
@@ -46,13 +48,17 @@ namespace SistemaSegsal.BLL
 
 		public Int32 SelecionarIdFormaPgto(FormaPgtoDTO fp)
 		{
-			cmd.CommandText = "SELECT id FROM tb_forma_pgto " +
-				"WHERE forma = '" + fp.FormaPgto + "'";
+			cpDto.CondicaoPgto = fp.CondicaoPgto;
+			cpBll.SelecionarIdCondicaoPgto(cpDto);
+
+			cmd.CommandText = "SELECT id FROM " + tabela + " " +
+				"WHERE forma = '" + fp.FormaPgto + "' " +
+				"AND idCondicao = " + cpDto.Id;
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				fp.Id = leitor.GetInt32(0);
@@ -60,7 +66,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

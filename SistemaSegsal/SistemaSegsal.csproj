@@ -13,9 +13,24 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,12 +48,71 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-adapter, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.bouncy-castle-adapter.8.0.2\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-connector, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.commons, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.commons.8.0.2\lib\net461\itext.commons.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.svg.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
@@ -51,6 +125,31 @@
     </Reference>
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.5.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -74,12 +173,21 @@
     <Reference Include="MySql.Data, Version=8.0.33.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.33\lib\net48\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OleDb, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.OleDb.8.0.0\lib\net462\System.Data.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -98,6 +206,9 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -112,9 +223,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliar\Class1.cs" />
+    <Compile Include="Auxiliar\PropostaComercialAUX.cs" />
+    <Compile Include="BLL\AprBLL.cs" />
+    <Compile Include="BLL\AprStatusBLL.cs" />
     <Compile Include="BLL\AtividadePrincipalBLL.cs" />
+    <Compile Include="BLL\BancoBLL.cs" />
     <Compile Include="BLL\BaseClienteBLL.cs" />
     <Compile Include="BLL\BaseClienteStatusBLL.cs" />
+    <Compile Include="BLL\CartaoBancoBLL.cs" />
+    <Compile Include="BLL\CartaoBancoTipoBLL.cs" />
     <Compile Include="BLL\ChamadoAssuntoBLL.cs" />
     <Compile Include="BLL\ChamadoAtendimentoBLL.cs" />
     <Compile Include="BLL\ChamadoAtendimentoTipoBLL.cs" />
@@ -132,9 +250,27 @@
     <Compile Include="BLL\ClienteStatusBLL.cs" />
     <Compile Include="BLL\ClienteTipoBLL.cs" />
     <Compile Include="BLL\CondicaoPgtoBLL.cs" />
+    <Compile Include="BLL\ContaBancariaBLL.cs" />
+    <Compile Include="BLL\ContaBancariaTipoBLL.cs" />
+    <Compile Include="BLL\ContaPagarBLL.cs" />
+    <Compile Include="BLL\ContaReceberBLL.cs" />
+    <Compile Include="BLL\DocumentoBLL.cs" />
+    <Compile Include="BLL\DocumentoStatusBLL.cs" />
+    <Compile Include="BLL\DocumentoTipoBLL.cs" />
+    <Compile Include="BLL\FuncaoBLL.cs" />
+    <Compile Include="BLL\MovimentacaoBLL.cs" />
     <Compile Include="BLL\DepartamentoBLL.cs" />
     <Compile Include="BLL\EmpresaBLL.cs" />
+    <Compile Include="BLL\EquipamentoBLL.cs" />
+    <Compile Include="BLL\EquipamentoCategoriaBLL.cs" />
+    <Compile Include="BLL\EquipamentoFabricanteBLL.cs" />
+    <Compile Include="BLL\EquipamentoModeloBLL.cs" />
     <Compile Include="BLL\FormaPgtoBLL.cs" />
+    <Compile Include="BLL\FornecedorBLL.cs" />
+    <Compile Include="BLL\FornecedorContatoBLL.cs" />
+    <Compile Include="BLL\FornecedorLojaBLL.cs" />
+    <Compile Include="BLL\MovimentacaoStatusBLL.cs" />
+    <Compile Include="BLL\MovimentacaoTipoBLL.cs" />
     <Compile Include="BLL\OrdemServicoBLL.cs" />
     <Compile Include="BLL\OrdemServicoStatusBLL.cs" />
     <Compile Include="BLL\PropostaComercialServicoBLL.cs" />
@@ -145,13 +281,28 @@
     <Compile Include="BLL\PropostaComercialServicoStatusBLL.cs" />
     <Compile Include="BLL\PropostaComercialServicoTipoBLL.cs" />
     <Compile Include="BLL\PropostaComercialStatusBLL.cs" />
+    <Compile Include="BLL\SexoBLL.cs" />
     <Compile Include="BLL\TecnicoBLL.cs" />
+    <Compile Include="BLL\TecnicoDocumentoBLL.cs" />
+    <Compile Include="BLL\TecnicoEpiBLL.cs" />
     <Compile Include="BLL\TecnicoStatusBLL.cs" />
     <Compile Include="BLL\UfBLL.cs" />
+    <Compile Include="BLL\UnidadeBLL.cs" />
     <Compile Include="DAO\Conexao.cs" />
+    <Compile Include="db_gestao_segsalDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_gestao_segsalDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\AprDTO.cs" />
+    <Compile Include="DTO\AprStatusDTO.cs" />
+    <Compile Include="DTO\AprTecnicoDTO.cs" />
     <Compile Include="DTO\AtividadePrincipalDTO.cs" />
+    <Compile Include="DTO\BancoDTO.cs" />
     <Compile Include="DTO\BaseClienteDTO.cs" />
     <Compile Include="DTO\BaseClienteStatusDTO.cs" />
+    <Compile Include="DTO\CartaoBancoDTO.cs" />
+    <Compile Include="DTO\CartaoBancoTipoDTO.cs" />
     <Compile Include="DTO\ChamadoAssuntoDTO.cs" />
     <Compile Include="DTO\ChamadoAtendimentoDTO.cs" />
     <Compile Include="DTO\ChamadoAtendimentoTipoDTO.cs" />
@@ -169,9 +320,30 @@
     <Compile Include="DTO\ClienteStatusDTO.cs" />
     <Compile Include="DTO\ClienteTipoDTO.cs" />
     <Compile Include="DTO\CondicaoPgtoDTO.cs" />
+    <Compile Include="DTO\ContaBancariaTipoDTO.cs" />
+    <Compile Include="DTO\ContaBancariaDTO.cs" />
+    <Compile Include="DTO\ContaPagarDTO.cs" />
+    <Compile Include="DTO\ContasPagarStatusDTO.cs" />
+    <Compile Include="DTO\ContasPagarTipoDTO.cs" />
+    <Compile Include="DTO\DocumentoDTO.cs" />
+    <Compile Include="DTO\DocumentoStatusDTO.cs" />
+    <Compile Include="DTO\DocumentoTipoDTO.cs" />
+    <Compile Include="DTO\FuncaoDTO.cs" />
+    <Compile Include="DTO\MovimentacaoDTO.cs" />
+    <Compile Include="DTO\EquipamentoCategoriaDTO.cs" />
+    <Compile Include="DTO\EquipamentoDTO.cs" />
+    <Compile Include="DTO\EquipamentoFabricanteDTO.cs" />
+    <Compile Include="DTO\EquipamentoModeloDTO.cs" />
+    <Compile Include="DTO\FornecedorContatoDTO.cs" />
+    <Compile Include="DTO\CoresGeraisDTO.cs" />
     <Compile Include="DTO\DepartamentoDTO.cs" />
     <Compile Include="DTO\EmpresaDTO.cs" />
     <Compile Include="DTO\FormaPgtoDTO.cs" />
+    <Compile Include="DTO\FornecedorDTO.cs" />
+    <Compile Include="DTO\FornecedorLojaDTO.cs" />
+    <Compile Include="DTO\MedidasGeraisDTO.cs" />
+    <Compile Include="DTO\MovimentacaoStatusDTO.cs" />
+    <Compile Include="DTO\MovimentacaoTipoDTO.cs" />
     <Compile Include="DTO\NotaFiscalDTO.cs" />
     <Compile Include="DTO\NotaFiscalStatusDTO.cs" />
     <Compile Include="DTO\OrdemServicoDTO.cs" />
@@ -182,10 +354,19 @@
     <Compile Include="DTO\PropostaComercialServicoTipoDTO.cs" />
     <Compile Include="DTO\PropostaComercialStatusDTO.cs" />
     <Compile Include="DTO\NotaFiscalTipoDTO.cs" />
+    <Compile Include="DTO\SexoDTO.cs" />
+    <Compile Include="DTO\TecnicoDocumentoDTO.cs" />
     <Compile Include="DTO\TecnicoDTO.cs" />
+    <Compile Include="DTO\TecnicoEpiDTO.cs" />
     <Compile Include="DTO\TecnicoStatusDTO.cs" />
     <Compile Include="DTO\TipoServicoDTO.cs" />
     <Compile Include="DTO\UfDTO.cs" />
+    <Compile Include="DTO\UnidadeDTO.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\frm_relatorioPropostaComercial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +379,12 @@
     </Compile>
     <Compile Include="Views\calendarioChamadoInicio.Designer.cs">
       <DependentUpon>calendarioChamadoInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addApr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addApr.Designer.cs">
+      <DependentUpon>frm_addApr.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_addBaseCliente.cs">
       <SubType>Form</SubType>
@@ -223,6 +410,18 @@
     <Compile Include="Views\frm_addClienteContato.Designer.cs">
       <DependentUpon>frm_addClienteContato.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_addContasPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addContasPagar.Designer.cs">
+      <DependentUpon>frm_addContasPagar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addEquipamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addEquipamento.Designer.cs">
+      <DependentUpon>frm_addEquipamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_addMovimentacaoFinanceira.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +445,30 @@
     </Compile>
     <Compile Include="Views\frm_addPropostaComercialServico.Designer.cs">
       <DependentUpon>frm_addPropostaComercialServico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_addTecnico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_addTecnico.Designer.cs">
+      <DependentUpon>frm_addTecnico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaTecnicoDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaTecnicoDocumento.Designer.cs">
+      <DependentUpon>frm_listaTecnicoDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaTecnicoEpi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaTecnicoEpi.Designer.cs">
+      <DependentUpon>frm_listaTecnicoEpi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaApr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaApr.Designer.cs">
+      <DependentUpon>frm_listaApr.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_listaChamadoAtendimento.cs">
       <SubType>Form</SubType>
@@ -295,6 +518,30 @@
     <Compile Include="Views\frm_listaBaseCliente.Designer.cs">
       <DependentUpon>frm_listaBaseCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_listaDocumentacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaDocumentacao.Designer.cs">
+      <DependentUpon>frm_listaDocumentacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaEpi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaEpi.Designer.cs">
+      <DependentUpon>frm_listaEpi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaEquipamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaEquipamento.Designer.cs">
+      <DependentUpon>frm_listaEquipamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaFerramenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaFerramenta.Designer.cs">
+      <DependentUpon>frm_listaFerramenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_listaFornecedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,6 +553,12 @@
     </Compile>
     <Compile Include="Views\frm_listaCliente.Designer.cs">
       <DependentUpon>frm_listaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_listaFrota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaFrota.Designer.cs">
+      <DependentUpon>frm_listaFrota.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_listaFuncionarios.cs">
       <SubType>Form</SubType>
@@ -337,6 +590,12 @@
     <Compile Include="Views\frm_listaChamado.Designer.cs">
       <DependentUpon>frm_listaChamado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_listaTecnicos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_listaTecnicos.Designer.cs">
+      <DependentUpon>frm_listaTecnicos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +614,24 @@
     <Compile Include="Views\frm_listaPropostaComercial.Designer.cs">
       <DependentUpon>frm_listaPropostaComercial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_principalMdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_principalMdi.Designer.cs">
+      <DependentUpon>frm_principalMdi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_progressoImpressao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_progressoImpressao.Designer.cs">
+      <DependentUpon>frm_progressoImpressao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_propostaComercialEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_propostaComercialEmail.Designer.cs">
+      <DependentUpon>frm_propostaComercialEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_splash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,12 +640,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\medidasGeraisForm.cs" />
     <EmbeddedResource Include="Relatorios\frm_relatorioPropostaComercial.resx">
       <DependentUpon>frm_relatorioPropostaComercial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rel_propostaComercial.rdlc" />
     <EmbeddedResource Include="Views\calendarioChamadoInicio.resx">
       <DependentUpon>calendarioChamadoInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addApr.resx">
+      <DependentUpon>frm_addApr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addBaseCliente.resx">
       <DependentUpon>frm_addBaseCliente.cs</DependentUpon>
@@ -382,6 +663,12 @@
     <EmbeddedResource Include="Views\frm_addClienteContato.resx">
       <DependentUpon>frm_addClienteContato.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addContasPagar.resx">
+      <DependentUpon>frm_addContasPagar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addEquipamento.resx">
+      <DependentUpon>frm_addEquipamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addMovimentacaoFinanceira.resx">
       <DependentUpon>frm_addMovimentacaoFinanceira.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +680,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_addPropostaComercialServico.resx">
       <DependentUpon>frm_addPropostaComercialServico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_addTecnico.resx">
+      <DependentUpon>frm_addTecnico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaApr.resx">
+      <DependentUpon>frm_listaApr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaTecnicoDocumento.resx">
+      <DependentUpon>frm_listaTecnicoDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaTecnicoEpi.resx">
+      <DependentUpon>frm_listaTecnicoEpi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_listaChamadoAtendimento.resx">
       <DependentUpon>frm_listaChamadoAtendimento.cs</DependentUpon>
@@ -421,6 +720,12 @@
     <EmbeddedResource Include="Views\frm_listaCliente.resx">
       <DependentUpon>frm_listaCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaEpi.resx">
+      <DependentUpon>frm_listaEpi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaEquipamento.resx">
+      <DependentUpon>frm_listaEquipamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_listaFornecedor.resx">
       <DependentUpon>frm_listaFornecedor.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,6 +741,9 @@
     <EmbeddedResource Include="Views\frm_listaChamado.resx">
       <DependentUpon>frm_listaChamado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_listaTecnicos.resx">
+      <DependentUpon>frm_listaTecnicos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
@@ -445,19 +753,34 @@
     <EmbeddedResource Include="Views\frm_listaPropostaComercial.resx">
       <DependentUpon>frm_listaPropostaComercial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_principalMdi.resx">
+      <DependentUpon>frm_principalMdi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_progressoImpressao.resx">
+      <DependentUpon>frm_progressoImpressao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_propostaComercialEmail.resx">
+      <DependentUpon>frm_propostaComercialEmail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_splash.resx">
       <DependentUpon>frm_splash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <None Include="db_gestao_segsalDataSet.xsc">
+      <DependentUpon>db_gestao_segsalDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="db_gestao_segsalDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>db_gestao_segsalDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="db_gestao_segsalDataSet.xss">
+      <DependentUpon>db_gestao_segsalDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -567,6 +890,44 @@
     <None Include="Resources\concrete-wall-pipe-cctv.jpg" />
     <None Include="Resources\1683212708845.jfif" />
     <None Include="Resources\como-montar-o-sistema-de-cftv-via-fibra-optica-1080x627.jpg" />
+    <None Include="Resources\BackgroundSys.jpg" />
+    <None Include="Resources\sair.png" />
+    <None Include="bin\Debug\Imagens\Sistema\ordem.png" />
+    <None Include="Resources\email.png" />
+    <None Include="bin\Debug\Imagens\Sistema\imprimir25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\servico25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\email25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\ordem25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\cancelar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\cancelar25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\imprimir25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\servico25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\email25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\ordem25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\novo25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\cancelarR25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\editar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\deletar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\sair25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\atualizar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\salvar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\finalizar25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\contato25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\foto25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\material25.png" />
+    <None Include="bin\Debug\Imagens\Sistema\pagar25b.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\printGif.gif" />
+    <None Include="bin\Debug\Imagens\Sistema\editar25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\deletar25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\atualizar25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\aberto.png" />
+    <None Include="bin\Debug\Imagens\Sistema\base25b.png" />
+    <None Include="bin\Debug\Imagens\Sistema\documentos.png" />
+    <Content Include="db_gestao_segsal.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\new-document.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -580,6 +941,18 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaSegsal.View;
+using SistemaSegsal.Views;
 
 namespace SistemaSegsal
 {

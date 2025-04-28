@@ -100,8 +100,7 @@ namespace SistemaSegsal.Views
             this.txt_razaoSocial.Text = emp[0].RazaoSocial;
             this.txt_nomeFantasia.Text = emp[0].NomeFantasia;
             this.txt_porte.Text = emp[0].Porte;
-            var dataAbertura = emp[0].DataAbertura;
-            this.dtp_dataAbertura.Value = DateTime.Parse(dataAbertura);
+            this.dtp_dataAbertura.Value = emp[0].DataAbertura;
             this.txt_cnpj.Text = emp[0].Cnpj;
             this.txt_inscEstadual.Text = emp[0].InscricaoEstadual;
             this.txt_naturezaJuridica.Text = emp[0].NaturezaJuridica;
@@ -199,8 +198,7 @@ namespace SistemaSegsal.Views
             empDto.RazaoSocial = this.txt_razaoSocial.Text;
             empDto.NomeFantasia = this.txt_nomeFantasia.Text;
             empDto.Porte = this.txt_porte.Text;
-            string dataAbertura = dtp_dataAbertura.Value.ToString("yyyy-MM-dd");  
-            empDto.DataAbertura = dataAbertura;
+            empDto.DataAbertura = dtp_dataAbertura.Value;
             empDto.Cnpj = this.txt_cnpj.Text;
             empDto.InscricaoEstadual = this.txt_inscEstadual.Text;
             empDto.NaturezaJuridica = this.txt_naturezaJuridica.Text;

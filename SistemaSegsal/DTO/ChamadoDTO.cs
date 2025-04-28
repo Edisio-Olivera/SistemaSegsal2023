@@ -10,8 +10,8 @@ namespace SistemaSegsal.DTO
     {
         private Int32 _id;
         private string _codigo;
-        private string _chamadoCliente;
-        private string _dataChamado;
+        private string _proposta;
+        private DateTime _dataChamado;
         private string _cliente;
         private string _baseCliente;
         private string _localSetor;
@@ -21,18 +21,18 @@ namespace SistemaSegsal.DTO
         private string _assunto;
         private string _urgencia;
         private string _informacaoCliente;
-        private string _dataVisita;
-        private string _horaVisita;
+        private DateTime _dataVisita;
+        private DateTime _horaVisita;
         private string _tecnico;
         private string _diagnostico;
         private string _solucao;
-        private string _dataFinal;
+        private DateTime _dataFinal;
         private Int32 _valorTotal;
         private string _status;
 
         public int Id { get => _id; set => _id = value; }
         public string Codigo { get => _codigo; set => _codigo = value; }
-        public string DataChamado { get => _dataChamado; set => _dataChamado = value; }
+        public DateTime DataChamado { get => _dataChamado; set => _dataChamado = value; }
         public string Cliente { get => _cliente; set => _cliente = value; }
         public string BaseCliente { get => _baseCliente; set => _baseCliente = value; }
         public string ContatoCliente { get => _contatoCliente; set => _contatoCliente = value; }
@@ -41,15 +41,15 @@ namespace SistemaSegsal.DTO
         public string InformacaoCliente { get => _informacaoCliente; set => _informacaoCliente = value; }
         public string Diagnostico { get => _diagnostico; set => _diagnostico = value; }
         public string Solucao { get => _solucao; set => _solucao = value; }
-        public string DataFinal { get => _dataFinal; set => _dataFinal = value; }
+        public DateTime DataFinal { get => _dataFinal; set => _dataFinal = value; }
         public string Status { get => _status; set => _status = value; }
         public string LocalSetor { get => _localSetor; set => _localSetor = value; }
         public int ValorTotal { get => _valorTotal; set => _valorTotal = value; }
         public string Situacao { get => _situacao; set => _situacao = value; }
-        public string DataVisita { get => _dataVisita; set => _dataVisita = value; }
-        public string HoraVisita { get => _horaVisita; set => _horaVisita = value; }
+        public DateTime DataVisita { get => _dataVisita; set => _dataVisita = value; }
+        public DateTime HoraVisita { get => _horaVisita; set => _horaVisita = value; }
         public string Tecnico { get => _tecnico; set => _tecnico = value; }
         public string Equipamento { get => _equipamento; set => _equipamento = value; }
-        public string ChamadoCliente { get => _chamadoCliente; set => _chamadoCliente = value; }
+        public string Proposta { get => _proposta; set => _proposta = value; }
     }
 }

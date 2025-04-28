@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.View;
+using System.Threading;
 
 namespace SistemaSegsal.Views
 {
@@ -26,6 +27,15 @@ namespace SistemaSegsal.Views
 
         ChamadoAtendimentoTipoDTO tipDto = new ChamadoAtendimentoTipoDTO();
         ChamadoAtendimentoTipoBLL tipBll = new ChamadoAtendimentoTipoBLL();
+
+        Thread t1;
+
+        string codigoChamado;
+        
+        private void abrirFormListaChamadoAtendimento(object obj)
+        {
+            Application.Run(new frm_listaChamadoAtendimento(codigoChamado));
+        }
 
         private void EstadoInicial()
         {
@@ -153,13 +163,19 @@ namespace SistemaSegsal.Views
 
             bll.SalvarAtendimentoChamado(dto);
 
+            chmDto.Codigo = dto.Chamado;
+            chmDto.ValorTotal = dto.Valor;
+
+            chmBll.AtualizarValorChamado(chmDto);
+
             MessageBox.Show("Atendimento Cadastrado com sucesso!", "Cadastrar!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            frm_listaChamadoAtendimento.atendimentoIntancia.ListarAtendimentoChamados(dto.Chamado);
+            codigoChamado = dto.Chamado;
 
-            this.Visible = false;
-
-
+            this.Close();
+            t1 = new Thread(abrirFormListaChamadoAtendimento);
+            t1.SetApartmentState(ApartmentState.STA);
+            t1.Start();
         }
 
         private void AtualizarAtendimento()
@@ -294,7 +310,12 @@ namespace SistemaSegsal.Views
             DialogResult result = MessageBox.Show("Deseja realmente Cancelar esse registro?", "Cancelar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                this.Visible = false;
+                codigoChamado = dto.Chamado;
+
+                this.Close();
+                t1 = new Thread(abrirFormListaChamadoAtendimento);
+                t1.SetApartmentState(ApartmentState.STA);
+                t1.Start();
             }
         }
 
@@ -378,6 +399,11 @@ namespace SistemaSegsal.Views
         private void btn_atualizar_Click(object sender, EventArgs e)
         {
             this.AtualizarAtendimento();
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.CancelarRegistro();
         }
     }
 }

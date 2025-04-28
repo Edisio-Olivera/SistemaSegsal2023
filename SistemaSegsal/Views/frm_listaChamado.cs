@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.View;
+using System.Threading;
 
 namespace SistemaSegsal.Views
 {
@@ -18,70 +19,119 @@ namespace SistemaSegsal.Views
         ChamadoDTO dto = new ChamadoDTO();
         ChamadoBLL bll = new ChamadoBLL();
 
-        ClienteDTO cliDto = new ClienteDTO();
-        ClienteBLL cliBll = new ClienteBLL();
+        //ClienteDTO cliDto = new ClienteDTO();
+        //ClienteBLL cliBll = new ClienteBLL();
 
-        BaseClienteDTO basDto = new BaseClienteDTO();
-        BaseClienteBLL basBll = new BaseClienteBLL();
+        //BaseClienteDTO basDto = new BaseClienteDTO();
+        //BaseClienteBLL basBll = new BaseClienteBLL();
 
-        ClienteContatoDTO cntDto = new ClienteContatoDTO();
-        ClienteContatoBLL cntBll = new ClienteContatoBLL();
+        //ClienteContatoDTO cntDto = new ClienteContatoDTO();
+        //ClienteContatoBLL cntBll = new ClienteContatoBLL();
 
-        ChamadoAssuntoDTO assDto = new ChamadoAssuntoDTO();
-        ChamadoAssuntoBLL assBll = new ChamadoAssuntoBLL();
+        //ChamadoAssuntoDTO assDto = new ChamadoAssuntoDTO();
+        //ChamadoAssuntoBLL assBll = new ChamadoAssuntoBLL();
 
-        ChamadoUrgenciaDTO urgDto = new ChamadoUrgenciaDTO();
-        ChamadoUrgenciaBLL urgBll = new ChamadoUrgenciaBLL();
+        //ChamadoUrgenciaDTO urgDto = new ChamadoUrgenciaDTO();
+        //ChamadoUrgenciaBLL urgBll = new ChamadoUrgenciaBLL();
 
         ChamadoStatusDTO staDto = new ChamadoStatusDTO();
         ChamadoStatusBLL staBll = new ChamadoStatusBLL();
 
-        public static frm_listaChamado chamadoInstancia;
+        MedidasGeraisDTO medFormDTO = new MedidasGeraisDTO();
+
+        public static frm_listaChamado chamadoInstancia;        
+
+        Thread t1;
+
+        Int32 id;
+        string codigo;
+        string statusChamado;
+
+        double larguraListView = 1280.0;
+
+        private static double PercentOf(double valor, double total)
+        {
+            return (total / 100.0) * valor;
+        }
+
+        private void abrirFormPrincipal(object obj)
+        {
+            Application.Run(new frm_principal());
+        }
+
+        private void abrirFormAddChamadoNovo(object obj)
+        {
+            Application.Run(new frm_addChamado(id, codigo));
+        }
+
+        private void abrirFormAddChamadoEditar(object obj)
+        {
+            Application.Run(new frm_addChamado(codigo));
+        }
 
         private void EstadoInicial()
         {
-            //Menu
+            //Botões de Registros
             this.btn_novo.Visible = true;
-            this.btn_atendimento.Visible = false;
             this.btn_cancelar.Visible = false;
             this.btn_editar.Visible = false;
             this.btn_deletar.Visible = false;
-            this.btn_finalizar.Visible = false;
-            this.btn_imprimir.Visible = false;
-            this.btn_cancelarChamado.Visible = false;
             this.btn_sair.Visible = true;
 
-            this.btn_sair.Location = new Point(1277, 5);
-            this.btn_novo.Location = new Point(1211, 5);
-            
+            this.btn_sair.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_novo.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
 
-            //Painel 02
+            //Botôes de Registro Selecionado
+            this.btn_atendimento.Visible = false;
+            this.btn_finalizar.Visible = false;
+            this.btn_imprimir.Visible = false;
+            this.btn_cancelarChamado.Visible = false;            
+
             this.cmb_status.Enabled = true;
-
-            //Listview
             this.lvw_listaChamados.Enabled = true;
-            //=======================================================            
+
+            this.cmb_status.Focus();
+
+            statusChamado = "Aberto";
+            //this.ListarChamadosStatus(statusChamado);
+            this.ListarChamados();
+
+            this.lbl_qtdAberto.Text = this.ContarChamadoStatus(statusChamado).ToString();
+
+            statusChamado = "Andamento";
+            this.lbl_qtdAndamento.Text = this.ContarChamadoStatus(statusChamado).ToString();
+
+            statusChamado = "Cancelado";
+            this.lbl_qtdCancelado.Text = this.ContarChamadoStatus(statusChamado).ToString();
+
+            statusChamado = "Fechado";
+            this.lbl_qtdFechado.Text = this.ContarChamadoStatus(statusChamado).ToString();
+
+            statusChamado = "Faturado";
+            this.lbl_qtdFaturado.Text = this.ContarChamadoStatus(statusChamado).ToString();
         }
 
-        private void CriarChamado()
+        private void CriarNovoChamado()
         {
             bll.CriarNovoChamado(dto);
 
-            Int32 id = dto.Id + 1;
-            string codigo = "CHM-" + id.ToString("00000#");
+            id = dto.Id;
+            codigo = "CHM-" + id.ToString("00000#");
 
-            frm_addChamado cham = new frm_addChamado(id, codigo);
-            cham.Visible = true;
+            this.Close();
+            t1 = new Thread(abrirFormAddChamadoNovo);
+            t1.SetApartmentState(ApartmentState.STA);
+            t1.Start();
         }        
 
         private void EditarChamado()
         {
-            string codigo = this.lvw_listaChamados.SelectedItems[0].SubItems[2].Text;
+            codigo = this.lvw_listaChamados.SelectedItems[0].SubItems[2].Text;
 
-            frm_addChamado chm = new frm_addChamado(codigo);
-            chm.Visible = true;            
-
-            this.cmb_status.Enabled = false;
+            this.Close();
+            t1 = new Thread(abrirFormAddChamadoEditar);
+            t1.SetApartmentState(ApartmentState.STA);
+            t1.Start();
         }
         
         private void DeletarChamado()
@@ -112,7 +162,7 @@ namespace SistemaSegsal.Views
                 item[0] = chm.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = chm.Codigo;
-                item[3] = chm.DataChamado;
+                item[3] = chm.DataChamado.ToString("dd/MM/yyyy");
                 item[4] = chm.Cliente + "-" + chm.BaseCliente;
                 item[5] = chm.Equipamento;
                 item[6] = chm.Assunto;
@@ -147,7 +197,7 @@ namespace SistemaSegsal.Views
                 item[0] = chm.Id.ToString();
                 item[1] = prox.ToString();
                 item[2] = chm.Codigo;
-                item[3] = chm.DataChamado;
+                item[3] = chm.DataChamado.ToString("dd/MM/yyyy");
                 item[4] = chm.Cliente + "-" + chm.BaseCliente;
                 item[5] = chm.Equipamento + " - " + chm.InformacaoCliente;
                 item[6] = chm.Assunto;
@@ -161,42 +211,38 @@ namespace SistemaSegsal.Views
                 valor = valor + chm.ValorTotal;
             }
 
-            this.txt_qtdChamado.Text = "Qtd de Chamados " + statusChamado + "s: " + qtd;
-            this.txt_valorChamado.Text = "Valor Total de Chamados " + statusChamado + "s: " + valor.ToString("R$ #,##0.00");
+            this.txt_qtdChamado.Text = "Qtd de Chamados " + statusChamado + "(s): " + qtd;
+            //this.txt_valorChamado.Text = "Valor Total de Chamados " + statusChamado + "s: " + valor.ToString("R$ #,##0.00");
         }
 
         private void SelecionarChamado()
         {
-            dto.Codigo = this.lvw_listaChamados.SelectedItems[0].SubItems[2].Text;
-
-            List<ChamadoDTO> chm = bll.SelecionarChamado(dto);
-
-            
-
+            //Botões de Registros
             this.btn_novo.Visible = false;
-            this.btn_atendimento.Visible = false;
             this.btn_cancelar.Visible = true;
             this.btn_editar.Visible = true;
             this.btn_deletar.Visible = true;
+            this.btn_sair.Visible = false;
+
+            this.btn_deletar.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_editar.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
+            this.btn_cancelar.Location = new Point(MedidasGeraisDTO.posicaoHor03, MedidasGeraisDTO.posicaoVer);
+
+            //Botôes de Registro Selecionado
+            this.btn_atendimento.Visible = true;
             this.btn_finalizar.Visible = true;
             this.btn_imprimir.Visible = true;
             this.btn_cancelarChamado.Visible = true;
-            this.btn_sair.Visible = false;
 
-            
+            this.btn_cancelarChamado.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor01, MedidasGeraisDTO.posicaoSubMenuVer);
+            this.btn_imprimir.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor02, MedidasGeraisDTO.posicaoSubMenuVer);
+            this.btn_finalizar.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor03, MedidasGeraisDTO.posicaoSubMenuVer);
+            this.btn_atendimento.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor04, MedidasGeraisDTO.posicaoSubMenuVer);
 
+            this.cmb_status.Enabled = true;
             this.lvw_listaChamados.Enabled = true;
 
-            this.btn_editar.Location = new Point(0, 80);
-            this.btn_deletar.Location = new Point(0, 140);
-            this.btn_finalizar.Location = new Point(0, 200);
-            this.btn_imprimir.Location = new Point(0, 260);
-            this.btn_cancelarChamado.Location = new Point(0, 320);
-            this.btn_cancelar.Location = new Point(0, 380);
-
-           
-
-           
+            this.cmb_status.Focus();            
         }
 
         private void PopularComboboxStatus()
@@ -228,7 +274,7 @@ namespace SistemaSegsal.Views
             string ano = dataFinalQuebrada[2];
 
             string dataFinalBanco = ano + "-" + mes + "-" + dia;
-            dto.DataFinal = dataFinalBanco;
+            dto.DataFinal = DateTime.Parse(dataFinalBanco);
 
             dto.Status = "Fechado";
 
@@ -236,13 +282,24 @@ namespace SistemaSegsal.Views
 
             MessageBox.Show("Chamado Finalizado com sucesso!", "Deletar!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            string statusChamado = "Aberto";
+
             this.EstadoInicial();
-            this.ListarChamados();
+            this.ListarChamadosStatus(statusChamado);
         }
 
         private void ImprimirChamado()
         {
 
+        }
+
+        private Int32 ContarChamadoStatus(string status)
+        {
+            dto.Status = status;
+
+            Int32 qtd = bll.ContarChamadoStatus(dto);
+
+            return qtd;
         }
 
         private void AbrirAtendimento()
@@ -260,7 +317,10 @@ namespace SistemaSegsal.Views
             DialogResult result = MessageBox.Show("Deseja realmente Cancelar esse registro?", "Cancelar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                this.EstadoInicial();
+                this.Close();
+                t1 = new Thread(abrirFormPrincipal);
+                t1.SetApartmentState(ApartmentState.STA);
+                t1.Start();
             }
         }
 
@@ -270,9 +330,9 @@ namespace SistemaSegsal.Views
             if (result == DialogResult.Yes)
             {
                 this.Close();
-
-                frm_principal pri = new frm_principal();
-                pri.Visible = true;                
+                t1 = new Thread(abrirFormPrincipal);
+                t1.SetApartmentState(ApartmentState.STA);
+                t1.Start();
             }
         }
 
@@ -283,26 +343,30 @@ namespace SistemaSegsal.Views
             chamadoInstancia = this;
         }
 
+        public frm_listaChamado(string statusChamado)
+        {
+            InitializeComponent();
+
+            this.ListarChamadosStatus(statusChamado);
+        }
+
         private void frm_listChamado_Load(object sender, EventArgs e)
         {
-            this.EstadoInicial();
-
-            //Id, Item, Código, Data Abertura, Cliente-Base, Equipamento, Assunto, Situação-Urgência, Valor Total, Status
-
-            this.lvw_listaChamados.Columns.Add("Id", 0).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaChamados.Columns.Add("Item", 40).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaChamados.Columns.Add("Número", 90).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaChamados.Columns.Add("Data Chamado", 95).TextAlign = HorizontalAlignment.Center;
-            this.lvw_listaChamados.Columns.Add("Cliente-Base", 210).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaChamados.Columns.Add("Equipamento", 500).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaChamados.Columns.Add("Assunto", 150).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaChamados.Columns.Add("Situação - Urgência", 120).TextAlign = HorizontalAlignment.Left;
-            this.lvw_listaChamados.Columns.Add("Valor Total", 80).TextAlign = HorizontalAlignment.Right;
-            this.lvw_listaChamados.Columns.Add("Status", 0).TextAlign = HorizontalAlignment.Right;
+            this.lvw_listaChamados.Columns.Add("Id", (int)PercentOf(0, larguraListView)).TextAlign = HorizontalAlignment.Center;
+            this.lvw_listaChamados.Columns.Add("Item", (int)PercentOf(4, larguraListView)).TextAlign = HorizontalAlignment.Center;
+            this.lvw_listaChamados.Columns.Add("Número", (int)PercentOf(7, larguraListView)).TextAlign = HorizontalAlignment.Center;
+            this.lvw_listaChamados.Columns.Add("Data", (int)PercentOf(7, larguraListView)).TextAlign = HorizontalAlignment.Center;
+            this.lvw_listaChamados.Columns.Add("Cliente-Base", (int)PercentOf(16, larguraListView)).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaChamados.Columns.Add("Equipamento", (int)PercentOf(32, larguraListView)).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaChamados.Columns.Add("Assunto", (int)PercentOf(12, larguraListView)).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaChamados.Columns.Add("Situação-Urgência", (int)PercentOf(9, larguraListView)).TextAlign = HorizontalAlignment.Left;
+            this.lvw_listaChamados.Columns.Add("Valor Total", (int)PercentOf(6, larguraListView)).TextAlign = HorizontalAlignment.Right;
+            this.lvw_listaChamados.Columns.Add("Status", (int)PercentOf(7, larguraListView)).TextAlign = HorizontalAlignment.Left;
             
-            this.PopularComboboxStatus();
-            string statusChamado = "Aberto";
-            this.ListarChamadosStatus(statusChamado);
+            //this.PopularComboboxStatus();
+            
+
+            this.EstadoInicial();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -312,36 +376,14 @@ namespace SistemaSegsal.Views
 
         private void btn_novo_Click(object sender, EventArgs e)
         {
-            this.CriarChamado();
+            this.CriarNovoChamado();
         }
 
         private void lvw_listaChamados_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvw_listaChamados.SelectedItems.Count > 0)
             {
-                this.btn_novo.Visible = false;
-                this.btn_cancelar.Visible = true;
-                this.btn_editar.Visible = true;
-                this.btn_deletar.Visible = true;
-                this.btn_sair.Visible = false;
-
-                this.btn_cancelarChamado.Visible = true;
-                this.btn_imprimir.Visible = true;
-                this.btn_finalizar.Visible = true;
-                this.btn_atendimento.Visible = true;
-                //this.btn_fotoChamado.Visible = true;
-                //this.btn_materialChamado.Visible = true;
-
-                this.btn_cancelar.Location = new Point(1277, 5);
-                this.btn_editar.Location = new Point(1211, 5);
-                this.btn_deletar.Location = new Point(1145, 5);
-
-                this.btn_imprimir.Location = new Point(1237, 151);
-                this.btn_finalizar.Location = new Point(1131, 151);
-                this.btn_cancelarChamado.Location = new Point(1025, 151);
-                //this.btn_fotoChamado.Location = new Point(919, 151);
-                //this.btn_materialChamado.Location = new Point(813, 151);
-                this.btn_atendimento.Location = new Point(707, 151);
+                this.SelecionarChamado();                
             }
         }
 
@@ -352,11 +394,11 @@ namespace SistemaSegsal.Views
 
         private void btn_salvar_Click(object sender, EventArgs e)
         {
-            string codigo = this.lvw_listaChamados.SelectedItems[0].SubItems[2].Text;
-            Int32 id = 1;
+            //string codigo = this.lvw_listaChamados.SelectedItems[0].SubItems[2].Text;
+            //Int32 id = 1;
 
-            frm_addChamado chm = new frm_addChamado(codigo, id);
-            chm.Visible = true;
+            //frm_addChamado chm = new frm_addChamado(codigo, id);
+            //chm.Visible = true;
         }
 
         private void btn_cancelar_Click(object sender, EventArgs e)

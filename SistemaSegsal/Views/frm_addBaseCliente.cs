@@ -77,7 +77,7 @@ namespace SistemaSegsal.Views
 
             this.txt_id.Text = bas[0].Id.ToString();
             this.txt_codigoBase.Text = bas[0].Codigo;
-            this.txt_dataRegistro.Text = bas[0].DataRegistro;
+            this.txt_dataRegistro.Text = bas[0].DataRegistro.ToString("dd/MM/yyyy");
             this.txt_cliente.Text = bas[0].Cliente;
             this.txt_nomeBase.Text = bas[0].NomeBase;
             this.txt_endereco.Text = bas[0].Endereco;
@@ -197,14 +197,7 @@ namespace SistemaSegsal.Views
             basDto.Id = Int32.Parse(this.txt_id.Text);
             basDto.Codigo = this.txt_codigoBase.Text;
 
-            string dataRegistroForm = this.txt_dataRegistro.Text;
-            string[] dataRegistroQuebrada = dataRegistroForm.Split('/');
-            string dia = dataRegistroQuebrada[0];
-            string mes = dataRegistroQuebrada[1];
-            string ano = dataRegistroQuebrada[2];
-
-            string dataChamadoBanco = ano + "-" + mes + "-" + dia;
-            basDto.DataRegistro = dataChamadoBanco;
+            basDto.DataRegistro = DateTime.Parse(this.txt_dataRegistro.Text);
 
             basDto.Cliente = this.txt_cliente.Text;
 

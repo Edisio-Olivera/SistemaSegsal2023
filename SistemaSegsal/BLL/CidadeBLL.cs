@@ -7,14 +7,14 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class CidadeBLL
     {
         Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
 		UfDTO ufDto = new UfDTO();
 		UfBLL ufBll = new UfBLL();
@@ -28,7 +28,7 @@ namespace SistemaSegsal.BLL
 				"WHERE idUf = " + ufDto.Id;
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<CidadeDTO> cidade = new List<CidadeDTO>();
 
 			while (leitor.Read())
@@ -46,13 +46,17 @@ namespace SistemaSegsal.BLL
 
 		public Int32 SelecionarIdCidade(CidadeDTO c)
 		{
+			ufDto.Sigla = c.Uf;
+			ufBll.SelecionarIdUf(ufDto);
+
 			cmd.CommandText = "SELECT id FROM tb_cidade " +
-				"WHERE cidade = '" + c.Cidade + "'";
+				"WHERE cidade = '" + c.Cidade + "' " +
+				"AND idUf = " + ufDto.Id;
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				c.Id = leitor.GetInt32(0);
@@ -60,7 +64,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

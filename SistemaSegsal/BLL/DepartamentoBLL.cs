@@ -7,14 +7,14 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class DepartamentoBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
 		//DepartamentoDTO dDto = new DepartamentoDTO();
 		//DepartamentoBLL dBll = new DepartamentoBLL();
@@ -25,7 +25,7 @@ namespace SistemaSegsal.BLL
 			cmd.CommandText = "SELECT departamento FROM tb_cliente_contato_departamento";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<DepartamentoDTO> depart = new List<DepartamentoDTO>();
 
 			while (leitor.Read())
@@ -49,7 +49,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				d.Id = leitor.GetInt32(0);
@@ -57,7 +57,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

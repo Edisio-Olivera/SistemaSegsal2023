@@ -7,31 +7,31 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class PropostaComercialStatusBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
 		public Int32 SelecionarIdStatus(PropostaComercialStatusDTO s)
 		{
 			cmd.CommandText = "SELECT id FROM tb_proposta_comercial_status " +
-				"WHERE statusProposta = '" + s.Status + "'";
+				"WHERE status = '" + s.Status + "'";
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				s.Id = leitor.GetInt32(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -41,10 +41,10 @@ namespace SistemaSegsal.BLL
 
 		public List<PropostaComercialStatusDTO> PopularComboboxPropostaComercialStatus()
 		{
-			cmd.CommandText = "SELECT statusProposta FROM tb_proposta_comercial_status";
+			cmd.CommandText = "SELECT status FROM tb_proposta_comercial_status";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<PropostaComercialStatusDTO> statusProposta = new List<PropostaComercialStatusDTO>();
 
 			while (leitor.Read())

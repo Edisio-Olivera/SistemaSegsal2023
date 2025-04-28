@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class EmpresaBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
         CidadeDTO cidDto = new CidadeDTO();
         CidadeBLL cidBll = new CidadeBLL();
@@ -54,7 +54,7 @@ namespace SistemaSegsal.BLL
                 cmd.ExecuteNonQuery();
                 conexao.desconectar();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Não foi possível se conectar ao banco de dados! - " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -73,7 +73,7 @@ namespace SistemaSegsal.BLL
                 cmd.ExecuteNonQuery();
                 conexao.desconectar();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Não foi possível se conectar ao banco de dados! - " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -92,7 +92,7 @@ namespace SistemaSegsal.BLL
                 cmd.ExecuteNonQuery();
                 conexao.desconectar();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Não foi possível se conectar ao banco de dados! - " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -101,39 +101,38 @@ namespace SistemaSegsal.BLL
         public List<EmpresaDTO> SelecionarEmpresa()
 		{
             cmd.CommandText = "SELECT " +
-                "e.id, " +
-                "e.razaoSocial, " +
-                "e.nomeFantasia, " +
-                "e.porte, " +
-                "e.dataAbertura, " +
-                "e.cnpj, " +
-                "e.inscricaoEstadual, " +
-                "e.naturezaJuridica, " +
-                "e.endereco, " +
-                "e.complemento, " +
-                "e.bairro, " +
-                "c.cidade, " +
-                "u.sigla, " +
-                "e.cep, " +
-                "e.email, " +
-                "e.senhaEmail, " +
-                "e.telefone, " +
-                "e.celular, " +
-                "a.atividade, " +
-                "e.site, " +
-                "e.instagram, " +
-                "e.facebook, " +
-                "e.youtube, " +
-                "e.logo, " +
-                "e.logoImpressao " +
-                "FROM tb_empresa e " +
-                "INNER JOIN tb_cidade c ON e.idCidade = c.id " +
-                "INNER JOIN tb_uf u ON c.idUf = u.id " +
-                "INNER JOIN tb_atividade a ON e.idAtividadePrincipal = a.id " +
-                "WHERE e.id = 1";
+                "tb_empresa.id, " +
+                "tb_empresa.razaoSocial, " +
+                "tb_empresa.nomeFantasia, " +
+                "tb_empresa.porte, " +
+                "tb_empresa.dataAbertura, " +
+                "tb_empresa.cnpj, " +
+                "tb_empresa.inscricaoEstadual, " +
+                "tb_empresa.naturezaJuridica, " +
+                "tb_empresa.endereco, " +
+                "tb_empresa.complemento, " +
+                "tb_empresa.bairro, " +
+                "tb_cidade.cidade, " +
+                "tb_uf.sigla, " +
+                "tb_empresa.cep, " +
+                "tb_empresa.email, " +
+                "tb_empresa.senhaEmail, " +
+                "tb_empresa.telefone, " +
+                "tb_empresa.celular, " +
+                "tb_empresa.atividade, " +
+                "tb_empresa.site, " +
+                "tb_empresa.instagram, " +
+                "tb_empresa.facebook, " +
+                "tb_empresa.youtube, " +
+                "tb_empresa.logo, " +
+                "tb_empresa.logoImpressao " +
+                "FROM ((tb_empresa " +
+                "INNER JOIN tb_cidade ON tb_empresa.idCidade = tb_cidade.id) " +
+                "INNER JOIN tb_uf ON tb_cidade.idUf = tb_uf.id) " +
+                "WHERE tb_empresa.id = 1";
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
             List<EmpresaDTO> empresa = new List<EmpresaDTO>();
 
             leitor.Read();
@@ -144,8 +143,7 @@ namespace SistemaSegsal.BLL
             empresa[0].RazaoSocial = leitor.GetString(1);
             empresa[0].NomeFantasia = leitor.GetString(2);
             empresa[0].Porte = leitor.GetString(3);
-            DateTime dataAbertura = DateTime.Parse(leitor.GetString(4));
-            empresa[0].DataAbertura = dataAbertura.ToString("dd/MM/yyyy");
+            empresa[0].DataAbertura = leitor.GetDateTime(4);
             empresa[0].Cnpj = leitor.GetString(5);
             empresa[0].InscricaoEstadual = leitor.GetString(6);
             empresa[0].NaturezaJuridica = leitor.GetString(7);

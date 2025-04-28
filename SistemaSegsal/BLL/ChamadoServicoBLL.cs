@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class ChamadoServicoBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
         ChamadoDTO chmDto = new ChamadoDTO();
         ChamadoBLL chmBll = new ChamadoBLL();
@@ -38,14 +38,14 @@ namespace SistemaSegsal.BLL
                 try
                 {
                     cmd.Connection = conexao.conectar();
-                    MySqlDataReader leitor = cmd.ExecuteReader();
+                    OleDbDataReader leitor = cmd.ExecuteReader();
 
                     leitor.Read();
                     s.Id = leitor.GetInt32(0);
 
                     conexao.desconectar();
                 }
-                catch (MySqlException ex)
+                catch (OleDbException ex)
                 {
                     MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -59,7 +59,7 @@ namespace SistemaSegsal.BLL
             try
             {
                 cmd.Connection = conexao.conectar();
-                MySqlDataReader leitor = cmd.ExecuteReader();
+                OleDbDataReader leitor = cmd.ExecuteReader();
 
                 leitor.Read();
                 qtdIdServicoChamado = leitor.GetInt32(0);
@@ -67,7 +67,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -109,7 +109,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -139,7 +139,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -157,7 +157,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -181,7 +181,7 @@ namespace SistemaSegsal.BLL
                 "ORDER BY s.id DESC";
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<ChamadoServicoDTO> servico = new List<ChamadoServicoDTO>();
 
@@ -229,7 +229,7 @@ namespace SistemaSegsal.BLL
                 "WHERE s.codChamado = '" + s.Chamado + "'";
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<ChamadoServicoDTO> servico = new List<ChamadoServicoDTO>();
 

@@ -86,14 +86,14 @@ namespace SistemaSegsal.Relatorios
             List<PropostaComercialDTO> proposta = bll.SelecionarPropostaComercial(dto);
 
             codigoProposta = proposta[0].Codigo;
-            dataProposta = proposta[0].DataProposta;
+            dataProposta = proposta[0].DataProposta.ToString("dd/MM/yyyy");
             titulo = proposta[0].Titulo;
             descricao = proposta[0].Descricao;
             observacao = proposta[0].Observacao;
             condPgto = proposta[0].CondicaoPgto;
             formaPgto = proposta[0].FormaPgto;
             valorProposta = proposta[0].Valor;
-            string dataPropostaExt = DateTime.Parse(proposta[0].DataProposta).ToString("dd/MMMM/yyyy");
+            string dataPropostaExt = proposta[0].DataProposta.ToString("dd/MMMM/yyyy");
             string[] dataQuebrada = dataPropostaExt.Split('/');
             string dia = dataQuebrada[0];
             string mes = dataQuebrada[1];

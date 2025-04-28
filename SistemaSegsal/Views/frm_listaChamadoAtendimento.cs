@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.Views;
+using System.Threading;
 
 namespace SistemaSegsal.Views
 {
@@ -21,7 +22,21 @@ namespace SistemaSegsal.Views
         ChamadoAtendimentoDTO dto = new ChamadoAtendimentoDTO();
         ChamadoAtendimentoBLL bll = new ChamadoAtendimentoBLL();
 
+        MedidasGeraisDTO medFormDTO = new MedidasGeraisDTO();
+
         public static frm_listaChamadoAtendimento atendimentoIntancia;
+
+        Int32 id;
+        string codigo;
+
+        Thread t1;
+
+
+
+        private void abrirFormAddChamadoAtendimento(object obj)
+        {
+            Application.Run(new frm_addChamadoAtendimento(id, codigo));
+        }
 
         private void EstadoInicial()
         {
@@ -31,8 +46,12 @@ namespace SistemaSegsal.Views
             this.btn_deletar.Visible = false;
             this.btn_editar.Visible = false;
 
-            this.btn_sair.Location = new Point(1278, 10);
-            this.btn_novo.Location = new Point(1212, 10);
+            this.btn_sair.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_novo.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
+
+            this.btn_materialChamado.Visible = false;
+            this.btn_servicoChamado.Visible = false;
+            this.btn_fotoChamado.Visible = false;
 
             this.txt_codigo.Enabled = false;
             this.txt_dataChamado.Enabled = false;
@@ -44,11 +63,13 @@ namespace SistemaSegsal.Views
         {
             bll.CriarNovoAtendimentoChamado(dto);
 
-            Int32 id = dto.Id + 1;
-            string codigo = this.txt_codigo.Text;
+            id = dto.Id + 1;
+            codigo = this.txt_codigo.Text;
 
-            frm_addChamadoAtendimento atd = new frm_addChamadoAtendimento(id, codigo);
-            atd.Visible = true;
+            this.Close();
+            t1 = new Thread(abrirFormAddChamadoAtendimento);
+            t1.SetApartmentState(ApartmentState.STA);
+            t1.Start();
         }
 
         private void EditarAtendimento()
@@ -124,8 +145,14 @@ namespace SistemaSegsal.Views
             //this.txt_valorChamado.Text = "Valor Total de Chamados : " + valor.ToString("R$ #,##0.00");
         }
 
+        private void AtualizarPropostaChamado()
+        {
+            //string[] chamado = this.cmb_chamados.Text.Split('-');
+            //chmDto.Proposta = this.txt_codigo.Text;
+            //chmDto.Codigo = chamado[0];
 
-
+            chmBll.AtualizarPropostaChamado(chmDto);
+        }
 
         public frm_listaChamadoAtendimento()
         {
@@ -191,14 +218,22 @@ namespace SistemaSegsal.Views
             if (lvw_listaAtendimento.SelectedItems.Count > 0)
             {
                 this.btn_novo.Visible = false;
-                this.btn_cancelar.Visible = true;
-                this.btn_editar.Visible = true;
-                this.btn_deletar.Visible = true;
                 this.btn_sair.Visible = false;
+                this.btn_cancelar.Visible = true;
+                this.btn_deletar.Visible = true;
+                this.btn_editar.Visible = true;
 
-                this.btn_cancelar.Location = new Point(1278, 10);
-                this.btn_editar.Location = new Point(1212, 10);
-                this.btn_deletar.Location = new Point(1146, 10);
+                this.btn_cancelar.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+                this.btn_deletar.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
+                this.btn_editar.Location = new Point(MedidasGeraisDTO.posicaoHor03, MedidasGeraisDTO.posicaoVer);
+
+                this.btn_materialChamado.Visible = true;
+                this.btn_servicoChamado.Visible = true;
+                this.btn_fotoChamado.Visible = true;
+
+                this.btn_fotoChamado.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor01, MedidasGeraisDTO.posicaoSubMenuVer);
+                this.btn_servicoChamado.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor02, MedidasGeraisDTO.posicaoSubMenuVer);
+                this.btn_materialChamado.Location = new Point(MedidasGeraisDTO.posicaoSubMenuHor03, MedidasGeraisDTO.posicaoSubMenuVer);
             }
         }
 

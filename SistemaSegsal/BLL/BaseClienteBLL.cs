@@ -7,14 +7,14 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class BaseClienteBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
 		ClienteDTO cliDto = new ClienteDTO();
 		ClienteBLL cliBll = new ClienteBLL();
@@ -29,7 +29,9 @@ namespace SistemaSegsal.BLL
 		Int32 qtdIdBasesPorCliente;
 		Int32 qtdBaseClienteCodigo;
 
-		public void CriarNovoBaseCliente(BaseClienteDTO bc)
+		string tabela = "tb_cliente_base";
+
+        public void CriarNovoBaseCliente(BaseClienteDTO bc)
 		{
 			this.ContarBasesCliente();
 
@@ -44,7 +46,7 @@ namespace SistemaSegsal.BLL
 				try
 				{
 					cmd.Connection = conexao.conectar();
-					MySqlDataReader leitor = cmd.ExecuteReader();
+					OleDbDataReader leitor = cmd.ExecuteReader();
 
 					leitor.Read();
 					bc.Id = leitor.GetInt32(0);
@@ -52,7 +54,7 @@ namespace SistemaSegsal.BLL
 					conexao.desconectar();
 
 				}
-				catch (MySqlException ex)
+				catch (OleDbException ex)
 				{
 					MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
@@ -66,7 +68,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdIdBaseCliente = leitor.GetInt32(0);
@@ -74,7 +76,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -130,7 +132,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -167,7 +169,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -187,7 +189,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -196,29 +198,29 @@ namespace SistemaSegsal.BLL
 		public List<BaseClienteDTO> SelecionarBaseCliente(BaseClienteDTO bc)
 		{
 			cmd.CommandText = "SELECT " +
-				"cb.id, " +
-				"cb.codigo, " +
-				"cb.dataRegistro, " +
-				"cl.nomeFantasia, " +
-				"cb.nomeBase, " +
-				"cb.endereco, " +
-				"cb.complemento, " +
-				"cb.bairro, " +
-				"cd.cidade, " +
-				"uf.sigla, " +
-				"cb.cep, " +
-				"cb.cnpj, " +
-				"cb.ie, " +
-				"st.statusClienteBase " +
-				"FROM tb_cliente_base cb " +
-				"INNER JOIN tb_cliente cl ON cb.codCliente = cl.codigo " +
-				"INNER JOIN tb_cidade cd ON cb.idCidade = cd.id " +
-				"INNER JOIN tb_uf uf ON cd.idUf = uf.id " +
-				"INNER JOIN tb_cliente_base_status st ON cb.idStatus = st.id " +
-				"WHERE cb.codigo = '" + bc.Codigo + "'";
+                "tb_cliente_base.id, " +
+                "tb_cliente_base.codigo, " +
+                "tb_cliente_base.dataRegistro, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_cliente_base.endereco, " +
+                "tb_cliente_base.complemento, " +
+                "tb_cliente_base.bairro, " +
+                "tb_cidade.cidade, " +
+                "tb_uf.sigla, " +
+                "tb_cliente_base.cep, " +
+                "tb_cliente_base.cnpj, " +
+                "tb_cliente_base.ie, " +
+                "tb_cliente_base_status.status " +
+				"FROM ((((tb_cliente_base " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_cidade ON tb_cliente_base.idCidade = tb_cidade.id) " +
+                "INNER JOIN tb_uf ON tb_cidade.idUf = tb_uf.id) " +
+                "INNER JOIN tb_cliente_base_status ON tb_cliente_base.idStatus = tb_cliente_base_status.id) " +
+                "WHERE tb_cliente_base.codigo = '" + bc.Codigo + "'";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<BaseClienteDTO> baseCli = new List<BaseClienteDTO>();
 
@@ -228,7 +230,7 @@ namespace SistemaSegsal.BLL
 
 			baseCli[0].Id = leitor.GetInt32(0);
 			baseCli[0].Codigo = leitor.GetString(1);
-			baseCli[0].DataRegistro = leitor.GetString(2);
+			baseCli[0].DataRegistro = leitor.GetDateTime(2);
 			baseCli[0].Cliente = leitor.GetString(3);
 			baseCli[0].NomeBase = leitor.GetString(4);
 			baseCli[0].Endereco = leitor.GetString(5);
@@ -249,20 +251,24 @@ namespace SistemaSegsal.BLL
 
 		public string SelecionarCodigoBaseCliente(BaseClienteDTO bc)
 		{
-			cmd.CommandText = "SELECT codigo FROM tb_cliente_base " +
-				"WHERE nomeBase = '" + bc.NomeBase + "'";
+			cliDto.NomeFantasia = bc.Cliente;
+			cliBll.SelecionarCodigoCliente(cliDto);
+
+			cmd.CommandText = "SELECT codigo FROM " + tabela + " " +
+				"WHERE nomeBase = '" + bc.NomeBase + "' " +
+				"AND codCliente = '" + cliDto.Codigo + "'";
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				bc.Codigo = leitor.GetString(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -279,7 +285,7 @@ namespace SistemaSegsal.BLL
 				"WHERE codCliente = '" + cliDto.Codigo + "'";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<BaseClienteDTO> baseCli = new List<BaseClienteDTO>();
 
 			while (leitor.Read())
@@ -301,25 +307,25 @@ namespace SistemaSegsal.BLL
 			cliBll.SelecionarCodigoCliente(cliDto);
 
 			cmd.CommandText = "SELECT " +
-				"cb.id, " +
-				"cb.codigo, " +
-				"cl.nomeFantasia, " +
-				"cb.nomeBase, " +
-				"cd.cidade, " +
-				"uf.sigla, " +
-				"cb.cnpj, " +
-				"cb.ie, " +
-				"st.statusClienteBase " +
-				"FROM tb_cliente_base cb " +
-				"INNER JOIN tb_cliente cl ON cb.codCliente = cl.codigo " +
-				"INNER JOIN tb_cidade cd ON cb.idCidade = cd.id " +
-				"INNER JOIN tb_uf uf ON cd.idUf = uf.id " +
-				"INNER JOIN tb_cliente_base_status st ON cb.idStatus = st.id " +
-				"WHERE cb.codCliente = '" + cliDto.Codigo + "' " +
-				"ORDER BY cb.codigo ASC";
+                "tb_cliente_base.id, " +
+                "tb_cliente_base.codigo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_cidade.cidade, " +
+                "tb_uf.sigla, " +
+                "tb_cliente_base.cnpj, " +
+                "tb_cliente_base.ie, " +
+                "tb_cliente_base_status.status " +
+				"FROM ((((tb_cliente_base " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_cidade ON tb_cliente_base.idCidade = tb_cidade.id) " +
+                "INNER JOIN tb_uf ON tb_cidade.idUf = tb_uf.id) " +
+                "INNER JOIN tb_cliente_base_status ON tb_cliente_base.idStatus = tb_cliente_base_status.id) " +
+                "WHERE tb_cliente_base.codCliente = '" + cliDto.Codigo + "' " +
+                "ORDER BY tb_cliente_base.codigo ASC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<BaseClienteDTO> baseCli = new List<BaseClienteDTO>(9);
 
@@ -357,7 +363,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdIdBasesPorCliente = leitor.GetInt32(0);
@@ -365,7 +371,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -384,7 +390,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdBaseClienteCodigo = leitor.GetInt32(0);
@@ -392,7 +398,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -404,29 +410,29 @@ namespace SistemaSegsal.BLL
 		public List<BaseClienteDTO> SelecionarBaseClienteCnpj(BaseClienteDTO bc)
 		{
 			cmd.CommandText = "SELECT " +
-				"cb.id, " +
-				"cb.codigo, " +
-				"cb.dataRegistro, " +
-				"cl.nomeFantasia, " +
-				"cb.nomeBase, " +
-				"cb.endereco, " +
-				"cb.complemento, " +
-				"cb.bairro, " +
-				"cd.cidade, " +
-				"uf.sigla, " +
-				"cb.cep, " +
-				"cb.cnpj, " +
-				"cb.ie, " +
-				"st.statusClienteBase " +
-				"FROM tb_cliente_base cb " +
-				"INNER JOIN tb_cliente cl ON cb.codCliente = cl.codigo " +
-				"INNER JOIN tb_cidade cd ON cb.idCidade = cd.id " +
-				"INNER JOIN tb_uf uf ON cd.idUf = uf.id " +
-				"INNER JOIN tb_cliente_base_status st ON cb.idStatus = st.id " +
-				"WHERE cb.cnpj = '" + bc.Cnpj + "'";
+                "tb_cliente_base.id, " +
+                "tb_cliente_base.codigo, " +
+                "tb_cliente_base.dataRegistro, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_cliente_base.endereco, " +
+                "tb_cliente_base.complemento, " +
+                "tb_cliente_base.bairro, " +
+                "tb_cidade.cidade, " +
+                "tb_uf.sigla, " +
+                "tb_cliente_base.cep, " +
+                "tb_cliente_base.cnpj, " +
+                "tb_cliente_base.ie, " +
+                "tb_cliente_base_status.status " +
+				"FROM ((((tb_cliente_base " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_cidade ON tb_cliente_base.idCidade = tb_cidade.id) " +
+                "INNER JOIN tb_uf ON tb_cliente_base.idUf = tb_uf.id) " +
+                "INNER JOIN tb_cliente_base_status ON tb_cliente_base.idStatus = tb_cliente_base_status.id) " +
+                "WHERE tb_cliente_base.cnpj = '" + bc.Cnpj + "'";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<BaseClienteDTO> baseCli = new List<BaseClienteDTO>();
 
@@ -436,7 +442,7 @@ namespace SistemaSegsal.BLL
 
 			baseCli[0].Id = leitor.GetInt32(0);
 			baseCli[0].Codigo = leitor.GetString(1);
-			baseCli[0].DataRegistro = leitor.GetString(2);
+			baseCli[0].DataRegistro = leitor.GetDateTime(2);
 			baseCli[0].Cliente = leitor.GetString(3);
 			baseCli[0].NomeBase = leitor.GetString(4);
 			baseCli[0].Endereco = leitor.GetString(5);

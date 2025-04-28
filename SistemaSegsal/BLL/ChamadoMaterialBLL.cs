@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class ChamadoMaterialBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
         public void CriarNovoMaterialChamado(ChamadoMaterialDTO m)
         {

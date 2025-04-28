@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class ChamadoAtendimentoBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
         ChamadoDTO chmDto = new ChamadoDTO();
         ChamadoBLL chmBll = new ChamadoBLL();
@@ -40,14 +40,14 @@ namespace SistemaSegsal.BLL
                 try
                 {
                     cmd.Connection = conexao.conectar();
-                    MySqlDataReader leitor = cmd.ExecuteReader();
+                    OleDbDataReader leitor = cmd.ExecuteReader();
 
                     leitor.Read();
                     a.Id = leitor.GetInt32(0);
 
                     conexao.desconectar();
                 }
-                catch (MySqlException ex)
+                catch (OleDbException ex)
                 {
                     MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -61,7 +61,7 @@ namespace SistemaSegsal.BLL
             try
             {
                 cmd.Connection = conexao.conectar();
-                MySqlDataReader leitor = cmd.ExecuteReader();
+                OleDbDataReader leitor = cmd.ExecuteReader();
 
                 leitor.Read();
                 qtdIdAtendimento = leitor.GetInt32(0);
@@ -69,7 +69,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -82,7 +82,7 @@ namespace SistemaSegsal.BLL
             tipDto.Tipo = s.Tipo;
             tipBll.SelecionarIdTipoAtendimento(tipDto);
 
-            tecDto.Nome = s.Tecnico;
+            tecDto.NomeUsual = s.Tecnico;
             tecBll.SelecionarCodigoTecnico(tecDto);
 
             cmd.CommandText = "INSERT INTO tb_chamado_atendimento (" +
@@ -94,7 +94,8 @@ namespace SistemaSegsal.BLL
                 "horaInicio, " +
                 "atividadeRealizada, " +
                 "dataFinal, " +
-                "horaFinal) " +
+                "horaFinal, " +
+                "valor)" +
                 "VALUES (" +
                 s.Id + ", '" +
                 s.Chamado + "', " +
@@ -104,7 +105,8 @@ namespace SistemaSegsal.BLL
                 s.HoraInicio + "', '" +
                 s.AtividadeRealizada + "', '" +
                 s.DataFinal + "', '" +
-                s.HoraFinal + ")";
+                s.HoraFinal + "', " +
+                s.Valor * 100 + ")";
 
             try
             {
@@ -114,7 +116,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -148,7 +150,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -166,7 +168,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -192,7 +194,7 @@ namespace SistemaSegsal.BLL
                 "ORDER BY s.id DESC";
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<ChamadoAtendimentoDTO> atendimento = new List<ChamadoAtendimentoDTO>();
 
@@ -243,7 +245,7 @@ namespace SistemaSegsal.BLL
                 "WHERE s.id = " + s.Id;
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<ChamadoAtendimentoDTO> atendimento = new List<ChamadoAtendimentoDTO>();
 

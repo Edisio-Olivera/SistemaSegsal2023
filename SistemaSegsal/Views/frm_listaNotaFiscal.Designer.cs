@@ -29,10 +29,13 @@ namespace SistemaSegsal.Views
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_sair = new System.Windows.Forms.Button();
+            this.btn_cancelar = new System.Windows.Forms.Button();
+            this.btn_editar = new System.Windows.Forms.Button();
+            this.btn_deletar = new System.Windows.Forms.Button();
+            this.btn_novo = new System.Windows.Forms.Button();
+            this.img_logoEmpresa = new System.Windows.Forms.PictureBox();
             this.lbl_title = new System.Windows.Forms.Label();
             this.lvw_listaNotaFiscal = new System.Windows.Forms.ListView();
             this.cmb_status = new System.Windows.Forms.ComboBox();
@@ -42,56 +45,190 @@ namespace SistemaSegsal.Views
             this.btn_filtrar = new System.Windows.Forms.Button();
             this.cmb_ano = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btn_cancelarRegistro = new System.Windows.Forms.Button();
+            this.btn_relatorioAnual = new System.Windows.Forms.Button();
+            this.btn_receber = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lbl_mes01 = new System.Windows.Forms.Label();
+            this.lbl_qtdNotasMes1 = new System.Windows.Forms.Label();
+            this.lbl_valorNotasMes1 = new System.Windows.Forms.Label();
             this.lbl_mes1 = new System.Windows.Forms.Label();
-            this.lbl_mes2 = new System.Windows.Forms.Label();
-            this.lbl_mes3 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.lbl_anoAtual = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbl_faturamentoMes3 = new System.Windows.Forms.Label();
             this.btn_proximo = new System.Windows.Forms.Button();
             this.btn_anterior = new System.Windows.Forms.Button();
-            this.img_logoEmpresa = new System.Windows.Forms.PictureBox();
-            this.btn_novo = new System.Windows.Forms.Button();
-            this.btn_cancelar = new System.Windows.Forms.Button();
-            this.btn_sair = new System.Windows.Forms.Button();
-            this.btn_editar = new System.Windows.Forms.Button();
-            this.btn_pagar = new System.Windows.Forms.Button();
-            this.btn_deletar = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lbl_faturamentoAnual = new System.Windows.Forms.Label();
-            this.lbl_faturamentoMes1 = new System.Windows.Forms.Label();
-            this.lbl_faturamentoMes2 = new System.Windows.Forms.Label();
-            this.lbl_faturamentoMes3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.lbl_mes02 = new System.Windows.Forms.Label();
+            this.lbl_qtdNotasMes2 = new System.Windows.Forms.Label();
+            this.lbl_valorNotasMes2 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.lbl_mes03 = new System.Windows.Forms.Label();
+            this.lbl_qtdNotasMes3 = new System.Windows.Forms.Label();
+            this.lbl_valorNotasMes3 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.lbl_ano = new System.Windows.Forms.Label();
+            this.lbl_qtdNotasAno = new System.Windows.Forms.Label();
+            this.lbl_valorNotasAno = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_logoEmpresa)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.img_logoEmpresa)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.btn_sair);
+            this.panel2.Controls.Add(this.btn_cancelar);
+            this.panel2.Controls.Add(this.btn_editar);
+            this.panel2.Controls.Add(this.btn_deletar);
+            this.panel2.Controls.Add(this.btn_novo);
             this.panel2.Controls.Add(this.img_logoEmpresa);
             this.panel2.Controls.Add(this.lbl_title);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1370, 60);
+            this.panel2.Size = new System.Drawing.Size(1370, 65);
             this.panel2.TabIndex = 5;
+            // 
+            // btn_sair
+            // 
+            this.btn_sair.BackColor = System.Drawing.Color.Red;
+            this.btn_sair.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_sair.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn_sair.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_sair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btn_sair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btn_sair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sair.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sair.ForeColor = System.Drawing.Color.White;
+            this.btn_sair.Image = global::SistemaSegsal.Properties.Resources.sair25;
+            this.btn_sair.Location = new System.Drawing.Point(1187, 7);
+            this.btn_sair.Name = "btn_sair";
+            this.btn_sair.Size = new System.Drawing.Size(150, 55);
+            this.btn_sair.TabIndex = 1;
+            this.btn_sair.Text = "     Sair";
+            this.btn_sair.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_sair.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_sair.UseVisualStyleBackColor = false;
+            this.btn_sair.Click += new System.EventHandler(this.btn_sair_Click);
+            // 
+            // btn_cancelar
+            // 
+            this.btn_cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_cancelar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_cancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btn_cancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancelar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancelar.ForeColor = System.Drawing.Color.White;
+            this.btn_cancelar.Image = global::SistemaSegsal.Properties.Resources.cancelarR25;
+            this.btn_cancelar.Location = new System.Drawing.Point(720, 7);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(150, 55);
+            this.btn_cancelar.TabIndex = 6;
+            this.btn_cancelar.Text = "     Cancelar";
+            this.btn_cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_cancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_cancelar.UseVisualStyleBackColor = false;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
+            // 
+            // btn_editar
+            // 
+            this.btn_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_editar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_editar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_editar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btn_editar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editar.ForeColor = System.Drawing.Color.White;
+            this.btn_editar.Image = global::SistemaSegsal.Properties.Resources.editar25;
+            this.btn_editar.Location = new System.Drawing.Point(875, 7);
+            this.btn_editar.Name = "btn_editar";
+            this.btn_editar.Size = new System.Drawing.Size(150, 55);
+            this.btn_editar.TabIndex = 40;
+            this.btn_editar.Text = "     Editar";
+            this.btn_editar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_editar.UseVisualStyleBackColor = false;
+            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
+            // 
+            // btn_deletar
+            // 
+            this.btn_deletar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_deletar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_deletar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_deletar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_deletar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btn_deletar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_deletar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deletar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_deletar.ForeColor = System.Drawing.Color.White;
+            this.btn_deletar.Image = global::SistemaSegsal.Properties.Resources.deletar25;
+            this.btn_deletar.Location = new System.Drawing.Point(1031, 7);
+            this.btn_deletar.Name = "btn_deletar";
+            this.btn_deletar.Size = new System.Drawing.Size(150, 55);
+            this.btn_deletar.TabIndex = 39;
+            this.btn_deletar.Text = "     Deletar";
+            this.btn_deletar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_deletar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_deletar.UseVisualStyleBackColor = false;
+            this.btn_deletar.Click += new System.EventHandler(this.btn_deletar_Click);
+            // 
+            // btn_novo
+            // 
+            this.btn_novo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_novo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_novo.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_novo.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_novo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btn_novo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.btn_novo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_novo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_novo.ForeColor = System.Drawing.Color.White;
+            this.btn_novo.Image = global::SistemaSegsal.Properties.Resources.novo25;
+            this.btn_novo.Location = new System.Drawing.Point(564, 7);
+            this.btn_novo.Name = "btn_novo";
+            this.btn_novo.Size = new System.Drawing.Size(150, 55);
+            this.btn_novo.TabIndex = 38;
+            this.btn_novo.Text = "     Novo";
+            this.btn_novo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_novo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_novo.UseVisualStyleBackColor = false;
+            this.btn_novo.Click += new System.EventHandler(this.btn_novo_Click);
+            // 
+            // img_logoEmpresa
+            // 
+            this.img_logoEmpresa.Image = global::SistemaSegsal.Properties.Resources.financeiro2;
+            this.img_logoEmpresa.Location = new System.Drawing.Point(0, 0);
+            this.img_logoEmpresa.Name = "img_logoEmpresa";
+            this.img_logoEmpresa.Size = new System.Drawing.Size(70, 60);
+            this.img_logoEmpresa.TabIndex = 42;
+            this.img_logoEmpresa.TabStop = false;
             // 
             // lbl_title
             // 
@@ -113,7 +250,7 @@ namespace SistemaSegsal.Views
             this.lvw_listaNotaFiscal.HideSelection = false;
             this.lvw_listaNotaFiscal.Location = new System.Drawing.Point(28, 365);
             this.lvw_listaNotaFiscal.Name = "lvw_listaNotaFiscal";
-            this.lvw_listaNotaFiscal.Size = new System.Drawing.Size(728, 312);
+            this.lvw_listaNotaFiscal.Size = new System.Drawing.Size(1309, 242);
             this.lvw_listaNotaFiscal.TabIndex = 38;
             this.lvw_listaNotaFiscal.UseCompatibleStateImageBehavior = false;
             this.lvw_listaNotaFiscal.View = System.Windows.Forms.View.Details;
@@ -134,7 +271,7 @@ namespace SistemaSegsal.Views
             this.groupBox2.Controls.Add(this.txt_valorNotaFiscal);
             this.groupBox2.Controls.Add(this.txt_qtdNotaFiscal);
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(28, 683);
+            this.groupBox2.Location = new System.Drawing.Point(27, 613);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1309, 83);
             this.groupBox2.TabIndex = 40;
@@ -193,192 +330,161 @@ namespace SistemaSegsal.Views
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.Controls.Add(this.btn_novo);
-            this.panel1.Controls.Add(this.btn_cancelar);
-            this.panel1.Controls.Add(this.btn_sair);
-            this.panel1.Controls.Add(this.btn_editar);
-            this.panel1.Controls.Add(this.btn_pagar);
-            this.panel1.Controls.Add(this.btn_deletar);
+            this.panel1.Controls.Add(this.btn_cancelarRegistro);
+            this.panel1.Controls.Add(this.btn_relatorioAnual);
+            this.panel1.Controls.Add(this.btn_receber);
             this.panel1.Location = new System.Drawing.Point(0, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1370, 65);
+            this.panel1.Size = new System.Drawing.Size(1370, 50);
             this.panel1.TabIndex = 42;
             // 
-            // textBox3
+            // btn_cancelarRegistro
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox3.Enabled = false;
-            this.textBox3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(29, 285);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(118, 23);
-            this.textBox3.TabIndex = 43;
-            this.textBox3.Text = " Status";
+            this.btn_cancelarRegistro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btn_cancelarRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelarRegistro.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_cancelarRegistro.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_cancelarRegistro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btn_cancelarRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btn_cancelarRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancelarRegistro.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancelarRegistro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_cancelarRegistro.Image = global::SistemaSegsal.Properties.Resources.cancelar25b;
+            this.btn_cancelarRegistro.Location = new System.Drawing.Point(839, 7);
+            this.btn_cancelarRegistro.Name = "btn_cancelarRegistro";
+            this.btn_cancelarRegistro.Size = new System.Drawing.Size(150, 40);
+            this.btn_cancelarRegistro.TabIndex = 43;
+            this.btn_cancelarRegistro.Text = "     Cancelar NF";
+            this.btn_cancelarRegistro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_cancelarRegistro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_cancelarRegistro.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // btn_relatorioAnual
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.Location = new System.Drawing.Point(332, 285);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(118, 23);
-            this.textBox1.TabIndex = 43;
-            this.textBox1.Text = " Ano";
+            this.btn_relatorioAnual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btn_relatorioAnual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_relatorioAnual.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_relatorioAnual.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_relatorioAnual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btn_relatorioAnual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btn_relatorioAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_relatorioAnual.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_relatorioAnual.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_relatorioAnual.Image = global::SistemaSegsal.Properties.Resources.imprimir25b;
+            this.btn_relatorioAnual.Location = new System.Drawing.Point(1006, 7);
+            this.btn_relatorioAnual.Name = "btn_relatorioAnual";
+            this.btn_relatorioAnual.Size = new System.Drawing.Size(150, 40);
+            this.btn_relatorioAnual.TabIndex = 42;
+            this.btn_relatorioAnual.Text = "     Relatório Anual";
+            this.btn_relatorioAnual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_relatorioAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_relatorioAnual.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // btn_receber
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.Black;
-            this.textBox2.Location = new System.Drawing.Point(28, 336);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(728, 23);
-            this.textBox2.TabIndex = 43;
-            this.textBox2.Text = " Lista de Notas Fiscais";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel3.Controls.Add(this.lbl_mes3);
-            this.panel3.Controls.Add(this.lbl_faturamentoMes1);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(699, 142);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(258, 117);
-            this.panel3.TabIndex = 44;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(48, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 19);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Faturamento do Mês";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.panel4.Controls.Add(this.lbl_mes2);
-            this.panel4.Controls.Add(this.lbl_faturamentoMes2);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(409, 142);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(258, 117);
-            this.panel4.TabIndex = 44;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(43, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 19);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Faturamento do Mês";
+            this.btn_receber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btn_receber.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_receber.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.btn_receber.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_receber.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btn_receber.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btn_receber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_receber.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_receber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_receber.Image = global::SistemaSegsal.Properties.Resources.pagar25b;
+            this.btn_receber.Location = new System.Drawing.Point(1162, 7);
+            this.btn_receber.Name = "btn_receber";
+            this.btn_receber.Size = new System.Drawing.Size(150, 40);
+            this.btn_receber.TabIndex = 41;
+            this.btn_receber.Text = "     Receber NF";
+            this.btn_receber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_receber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_receber.UseVisualStyleBackColor = false;
+            this.btn_receber.Click += new System.EventHandler(this.btn_pagar_Click);
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.panel7);
+            this.panel5.Controls.Add(this.lbl_qtdNotasMes1);
+            this.panel5.Controls.Add(this.lbl_valorNotasMes1);
             this.panel5.Controls.Add(this.lbl_mes1);
             this.panel5.Controls.Add(this.lbl_faturamentoMes3);
-            this.panel5.Controls.Add(this.label3);
             this.panel5.Location = new System.Drawing.Point(119, 142);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(258, 117);
             this.panel5.TabIndex = 44;
             // 
-            // label3
+            // panel7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(48, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 19);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "Faturamento do Mês";
+            this.panel7.BackColor = System.Drawing.Color.Navy;
+            this.panel7.Controls.Add(this.lbl_mes01);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(256, 32);
+            this.panel7.TabIndex = 47;
+            // 
+            // lbl_mes01
+            // 
+            this.lbl_mes01.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_mes01.ForeColor = System.Drawing.Color.White;
+            this.lbl_mes01.Location = new System.Drawing.Point(54, 7);
+            this.lbl_mes01.Name = "lbl_mes01";
+            this.lbl_mes01.Size = new System.Drawing.Size(147, 19);
+            this.lbl_mes01.TabIndex = 46;
+            this.lbl_mes01.Text = "Mês";
+            this.lbl_mes01.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_qtdNotasMes1
+            // 
+            this.lbl_qtdNotasMes1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_qtdNotasMes1.ForeColor = System.Drawing.Color.Black;
+            this.lbl_qtdNotasMes1.Location = new System.Drawing.Point(158, 49);
+            this.lbl_qtdNotasMes1.Name = "lbl_qtdNotasMes1";
+            this.lbl_qtdNotasMes1.Size = new System.Drawing.Size(82, 19);
+            this.lbl_qtdNotasMes1.TabIndex = 46;
+            this.lbl_qtdNotasMes1.Text = "0";
+            this.lbl_qtdNotasMes1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_valorNotasMes1
+            // 
+            this.lbl_valorNotasMes1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_valorNotasMes1.ForeColor = System.Drawing.Color.Black;
+            this.lbl_valorNotasMes1.Location = new System.Drawing.Point(158, 84);
+            this.lbl_valorNotasMes1.Name = "lbl_valorNotasMes1";
+            this.lbl_valorNotasMes1.Size = new System.Drawing.Size(82, 19);
+            this.lbl_valorNotasMes1.TabIndex = 46;
+            this.lbl_valorNotasMes1.Text = "0";
+            this.lbl_valorNotasMes1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbl_mes1
             // 
             this.lbl_mes1.AutoSize = true;
-            this.lbl_mes1.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_mes1.ForeColor = System.Drawing.Color.White;
-            this.lbl_mes1.Location = new System.Drawing.Point(48, 85);
+            this.lbl_mes1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_mes1.ForeColor = System.Drawing.Color.Black;
+            this.lbl_mes1.Location = new System.Drawing.Point(17, 84);
             this.lbl_mes1.Name = "lbl_mes1";
-            this.lbl_mes1.Size = new System.Drawing.Size(49, 19);
+            this.lbl_mes1.Size = new System.Drawing.Size(82, 19);
             this.lbl_mes1.TabIndex = 46;
-            this.lbl_mes1.Text = "Mes 1";
+            this.lbl_mes1.Text = "Valor Total:";
             this.lbl_mes1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lbl_mes2
+            // lbl_faturamentoMes3
             // 
-            this.lbl_mes2.AutoSize = true;
-            this.lbl_mes2.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_mes2.ForeColor = System.Drawing.Color.White;
-            this.lbl_mes2.Location = new System.Drawing.Point(43, 85);
-            this.lbl_mes2.Name = "lbl_mes2";
-            this.lbl_mes2.Size = new System.Drawing.Size(49, 19);
-            this.lbl_mes2.TabIndex = 46;
-            this.lbl_mes2.Text = "Mes 2";
-            this.lbl_mes2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbl_mes3
-            // 
-            this.lbl_mes3.AutoSize = true;
-            this.lbl_mes3.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_mes3.ForeColor = System.Drawing.Color.White;
-            this.lbl_mes3.Location = new System.Drawing.Point(48, 85);
-            this.lbl_mes3.Name = "lbl_mes3";
-            this.lbl_mes3.Size = new System.Drawing.Size(49, 19);
-            this.lbl_mes3.TabIndex = 46;
-            this.lbl_mes3.Text = "Mes 3";
-            this.lbl_mes3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.panel6.Controls.Add(this.lbl_anoAtual);
-            this.panel6.Controls.Add(this.lbl_faturamentoAnual);
-            this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(1079, 142);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(258, 117);
-            this.panel6.TabIndex = 44;
-            // 
-            // lbl_anoAtual
-            // 
-            this.lbl_anoAtual.AutoSize = true;
-            this.lbl_anoAtual.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_anoAtual.ForeColor = System.Drawing.Color.White;
-            this.lbl_anoAtual.Location = new System.Drawing.Point(48, 85);
-            this.lbl_anoAtual.Name = "lbl_anoAtual";
-            this.lbl_anoAtual.Size = new System.Drawing.Size(35, 19);
-            this.lbl_anoAtual.TabIndex = 46;
-            this.lbl_anoAtual.Text = "Ano";
-            this.lbl_anoAtual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(48, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(137, 19);
-            this.label5.TabIndex = 46;
-            this.label5.Text = "Faturamento Anual";
+            this.lbl_faturamentoMes3.AutoSize = true;
+            this.lbl_faturamentoMes3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_faturamentoMes3.ForeColor = System.Drawing.Color.Black;
+            this.lbl_faturamentoMes3.Location = new System.Drawing.Point(17, 49);
+            this.lbl_faturamentoMes3.Name = "lbl_faturamentoMes3";
+            this.lbl_faturamentoMes3.Size = new System.Drawing.Size(111, 19);
+            this.lbl_faturamentoMes3.TabIndex = 46;
+            this.lbl_faturamentoMes3.Text = "Notas Emitidas:";
             // 
             // btn_proximo
             // 
-            this.btn_proximo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_proximo.BackColor = System.Drawing.Color.Navy;
             this.btn_proximo.FlatAppearance.BorderSize = 0;
             this.btn_proximo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_proximo.Image = global::SistemaSegsal.Properties.Resources.FF;
@@ -391,7 +497,7 @@ namespace SistemaSegsal.Views
             // 
             // btn_anterior
             // 
-            this.btn_anterior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btn_anterior.BackColor = System.Drawing.Color.Navy;
             this.btn_anterior.FlatAppearance.BorderSize = 0;
             this.btn_anterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_anterior.Image = global::SistemaSegsal.Properties.Resources.REW;
@@ -400,232 +506,300 @@ namespace SistemaSegsal.Views
             this.btn_anterior.Size = new System.Drawing.Size(58, 117);
             this.btn_anterior.TabIndex = 45;
             this.btn_anterior.UseVisualStyleBackColor = false;
+            this.btn_anterior.Click += new System.EventHandler(this.btn_anterior_Click);
             // 
-            // img_logoEmpresa
+            // label4
             // 
-            this.img_logoEmpresa.Image = global::SistemaSegsal.Properties.Resources.financeiro2;
-            this.img_logoEmpresa.Location = new System.Drawing.Point(0, 0);
-            this.img_logoEmpresa.Name = "img_logoEmpresa";
-            this.img_logoEmpresa.Size = new System.Drawing.Size(70, 60);
-            this.img_logoEmpresa.TabIndex = 42;
-            this.img_logoEmpresa.TabStop = false;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(28, 336);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(1309, 23);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "Lista de Notas Fiscais";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btn_novo
+            // panel4
             // 
-            this.btn_novo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_novo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_novo.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_novo.FlatAppearance.BorderSize = 0;
-            this.btn_novo.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_novo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_novo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_novo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_novo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_novo.ForeColor = System.Drawing.Color.White;
-            this.btn_novo.Image = global::SistemaSegsal.Properties.Resources.novo;
-            this.btn_novo.Location = new System.Drawing.Point(947, 5);
-            this.btn_novo.Name = "btn_novo";
-            this.btn_novo.Size = new System.Drawing.Size(60, 55);
-            this.btn_novo.TabIndex = 38;
-            this.btn_novo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_novo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_novo.UseVisualStyleBackColor = false;
-            this.btn_novo.Click += new System.EventHandler(this.btn_novo_Click);
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.panel8);
+            this.panel4.Controls.Add(this.lbl_qtdNotasMes2);
+            this.panel4.Controls.Add(this.lbl_valorNotasMes2);
+            this.panel4.Controls.Add(this.label10);
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Location = new System.Drawing.Point(409, 142);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(258, 117);
+            this.panel4.TabIndex = 44;
             // 
-            // btn_cancelar
+            // panel8
             // 
-            this.btn_cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_cancelar.FlatAppearance.BorderSize = 0;
-            this.btn_cancelar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_cancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_cancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cancelar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cancelar.ForeColor = System.Drawing.Color.White;
-            this.btn_cancelar.Image = global::SistemaSegsal.Properties.Resources.cancelar;
-            this.btn_cancelar.Location = new System.Drawing.Point(1013, 5);
-            this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(60, 55);
-            this.btn_cancelar.TabIndex = 6;
-            this.btn_cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_cancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_cancelar.UseVisualStyleBackColor = false;
-            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
+            this.panel8.BackColor = System.Drawing.Color.Navy;
+            this.panel8.Controls.Add(this.lbl_mes02);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(256, 32);
+            this.panel8.TabIndex = 47;
             // 
-            // btn_sair
+            // lbl_mes02
             // 
-            this.btn_sair.BackColor = System.Drawing.Color.Red;
-            this.btn_sair.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_sair.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_sair.FlatAppearance.BorderSize = 0;
-            this.btn_sair.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_sair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btn_sair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_sair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_sair.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_sair.ForeColor = System.Drawing.Color.White;
-            this.btn_sair.Image = global::SistemaSegsal.Properties.Resources.sair;
-            this.btn_sair.Location = new System.Drawing.Point(1277, 5);
-            this.btn_sair.Name = "btn_sair";
-            this.btn_sair.Size = new System.Drawing.Size(60, 55);
-            this.btn_sair.TabIndex = 1;
-            this.btn_sair.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_sair.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_sair.UseVisualStyleBackColor = false;
-            this.btn_sair.Click += new System.EventHandler(this.btn_sair_Click);
+            this.lbl_mes02.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_mes02.ForeColor = System.Drawing.Color.White;
+            this.lbl_mes02.Location = new System.Drawing.Point(54, 7);
+            this.lbl_mes02.Name = "lbl_mes02";
+            this.lbl_mes02.Size = new System.Drawing.Size(147, 19);
+            this.lbl_mes02.TabIndex = 46;
+            this.lbl_mes02.Text = "Mês";
+            this.lbl_mes02.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btn_editar
+            // lbl_qtdNotasMes2
             // 
-            this.btn_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_editar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_editar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_editar.FlatAppearance.BorderSize = 0;
-            this.btn_editar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_editar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_editar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editar.ForeColor = System.Drawing.Color.White;
-            this.btn_editar.Image = global::SistemaSegsal.Properties.Resources.editar;
-            this.btn_editar.Location = new System.Drawing.Point(1079, 5);
-            this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(60, 55);
-            this.btn_editar.TabIndex = 40;
-            this.btn_editar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_editar.UseVisualStyleBackColor = false;
-            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
+            this.lbl_qtdNotasMes2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_qtdNotasMes2.ForeColor = System.Drawing.Color.Black;
+            this.lbl_qtdNotasMes2.Location = new System.Drawing.Point(158, 49);
+            this.lbl_qtdNotasMes2.Name = "lbl_qtdNotasMes2";
+            this.lbl_qtdNotasMes2.Size = new System.Drawing.Size(82, 19);
+            this.lbl_qtdNotasMes2.TabIndex = 46;
+            this.lbl_qtdNotasMes2.Text = "0";
+            this.lbl_qtdNotasMes2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btn_pagar
+            // lbl_valorNotasMes2
             // 
-            this.btn_pagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_pagar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_pagar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_pagar.FlatAppearance.BorderSize = 0;
-            this.btn_pagar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_pagar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_pagar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_pagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_pagar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_pagar.ForeColor = System.Drawing.Color.White;
-            this.btn_pagar.Image = global::SistemaSegsal.Properties.Resources.pagar;
-            this.btn_pagar.Location = new System.Drawing.Point(1211, 5);
-            this.btn_pagar.Name = "btn_pagar";
-            this.btn_pagar.Size = new System.Drawing.Size(60, 55);
-            this.btn_pagar.TabIndex = 41;
-            this.btn_pagar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_pagar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_pagar.UseVisualStyleBackColor = false;
-            this.btn_pagar.Click += new System.EventHandler(this.btn_pagar_Click);
+            this.lbl_valorNotasMes2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_valorNotasMes2.ForeColor = System.Drawing.Color.Black;
+            this.lbl_valorNotasMes2.Location = new System.Drawing.Point(158, 84);
+            this.lbl_valorNotasMes2.Name = "lbl_valorNotasMes2";
+            this.lbl_valorNotasMes2.Size = new System.Drawing.Size(82, 19);
+            this.lbl_valorNotasMes2.TabIndex = 46;
+            this.lbl_valorNotasMes2.Text = "0";
+            this.lbl_valorNotasMes2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btn_deletar
+            // label10
             // 
-            this.btn_deletar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btn_deletar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_deletar.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
-            this.btn_deletar.FlatAppearance.BorderSize = 0;
-            this.btn_deletar.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_deletar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_deletar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.btn_deletar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_deletar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_deletar.ForeColor = System.Drawing.Color.White;
-            this.btn_deletar.Image = global::SistemaSegsal.Properties.Resources.deletar;
-            this.btn_deletar.Location = new System.Drawing.Point(1145, 5);
-            this.btn_deletar.Name = "btn_deletar";
-            this.btn_deletar.Size = new System.Drawing.Size(60, 55);
-            this.btn_deletar.TabIndex = 39;
-            this.btn_deletar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_deletar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_deletar.UseVisualStyleBackColor = false;
-            this.btn_deletar.Click += new System.EventHandler(this.btn_deletar_Click);
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(17, 84);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 19);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "Valor Total:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // chart1
+            // label11
             // 
-            this.chart1.BorderlineColor = System.Drawing.Color.Black;
-            this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(773, 336);
-            this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.YValuesPerPoint = 6;
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(564, 341);
-            this.chart1.TabIndex = 46;
-            this.chart1.Text = "chart1";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(17, 49);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(111, 19);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Notas Emitidas:";
             // 
-            // lbl_faturamentoAnual
+            // panel3
             // 
-            this.lbl_faturamentoAnual.AutoSize = true;
-            this.lbl_faturamentoAnual.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_faturamentoAnual.ForeColor = System.Drawing.Color.White;
-            this.lbl_faturamentoAnual.Location = new System.Drawing.Point(46, 37);
-            this.lbl_faturamentoAnual.Name = "lbl_faturamentoAnual";
-            this.lbl_faturamentoAnual.Size = new System.Drawing.Size(64, 33);
-            this.lbl_faturamentoAnual.TabIndex = 46;
-            this.lbl_faturamentoAnual.Text = "Fatu";
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.panel9);
+            this.panel3.Controls.Add(this.lbl_qtdNotasMes3);
+            this.panel3.Controls.Add(this.lbl_valorNotasMes3);
+            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Location = new System.Drawing.Point(699, 142);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(258, 117);
+            this.panel3.TabIndex = 44;
             // 
-            // lbl_faturamentoMes1
+            // panel9
             // 
-            this.lbl_faturamentoMes1.AutoSize = true;
-            this.lbl_faturamentoMes1.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_faturamentoMes1.ForeColor = System.Drawing.Color.White;
-            this.lbl_faturamentoMes1.Location = new System.Drawing.Point(46, 35);
-            this.lbl_faturamentoMes1.Name = "lbl_faturamentoMes1";
-            this.lbl_faturamentoMes1.Size = new System.Drawing.Size(64, 33);
-            this.lbl_faturamentoMes1.TabIndex = 46;
-            this.lbl_faturamentoMes1.Text = "Fatu";
+            this.panel9.BackColor = System.Drawing.Color.Navy;
+            this.panel9.Controls.Add(this.lbl_mes03);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(256, 32);
+            this.panel9.TabIndex = 47;
             // 
-            // lbl_faturamentoMes2
+            // lbl_mes03
             // 
-            this.lbl_faturamentoMes2.AutoSize = true;
-            this.lbl_faturamentoMes2.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_faturamentoMes2.ForeColor = System.Drawing.Color.White;
-            this.lbl_faturamentoMes2.Location = new System.Drawing.Point(41, 35);
-            this.lbl_faturamentoMes2.Name = "lbl_faturamentoMes2";
-            this.lbl_faturamentoMes2.Size = new System.Drawing.Size(64, 33);
-            this.lbl_faturamentoMes2.TabIndex = 46;
-            this.lbl_faturamentoMes2.Text = "Fatu";
+            this.lbl_mes03.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_mes03.ForeColor = System.Drawing.Color.White;
+            this.lbl_mes03.Location = new System.Drawing.Point(54, 7);
+            this.lbl_mes03.Name = "lbl_mes03";
+            this.lbl_mes03.Size = new System.Drawing.Size(147, 19);
+            this.lbl_mes03.TabIndex = 46;
+            this.lbl_mes03.Text = "Mês";
+            this.lbl_mes03.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_faturamentoMes3
+            // lbl_qtdNotasMes3
             // 
-            this.lbl_faturamentoMes3.AutoSize = true;
-            this.lbl_faturamentoMes3.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_faturamentoMes3.ForeColor = System.Drawing.Color.White;
-            this.lbl_faturamentoMes3.Location = new System.Drawing.Point(46, 35);
-            this.lbl_faturamentoMes3.Name = "lbl_faturamentoMes3";
-            this.lbl_faturamentoMes3.Size = new System.Drawing.Size(64, 33);
-            this.lbl_faturamentoMes3.TabIndex = 46;
-            this.lbl_faturamentoMes3.Text = "Fatu";
+            this.lbl_qtdNotasMes3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_qtdNotasMes3.ForeColor = System.Drawing.Color.Black;
+            this.lbl_qtdNotasMes3.Location = new System.Drawing.Point(158, 49);
+            this.lbl_qtdNotasMes3.Name = "lbl_qtdNotasMes3";
+            this.lbl_qtdNotasMes3.Size = new System.Drawing.Size(82, 19);
+            this.lbl_qtdNotasMes3.TabIndex = 46;
+            this.lbl_qtdNotasMes3.Text = "0";
+            this.lbl_qtdNotasMes3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_valorNotasMes3
+            // 
+            this.lbl_valorNotasMes3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_valorNotasMes3.ForeColor = System.Drawing.Color.Black;
+            this.lbl_valorNotasMes3.Location = new System.Drawing.Point(158, 84);
+            this.lbl_valorNotasMes3.Name = "lbl_valorNotasMes3";
+            this.lbl_valorNotasMes3.Size = new System.Drawing.Size(82, 19);
+            this.lbl_valorNotasMes3.TabIndex = 46;
+            this.lbl_valorNotasMes3.Text = "0";
+            this.lbl_valorNotasMes3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(17, 84);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 19);
+            this.label14.TabIndex = 46;
+            this.label14.Text = "Valor Total:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(17, 49);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(111, 19);
+            this.label15.TabIndex = 46;
+            this.label15.Text = "Notas Emitidas:";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.panel10);
+            this.panel6.Controls.Add(this.lbl_qtdNotasAno);
+            this.panel6.Controls.Add(this.lbl_valorNotasAno);
+            this.panel6.Controls.Add(this.label18);
+            this.panel6.Controls.Add(this.label19);
+            this.panel6.Location = new System.Drawing.Point(1079, 142);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(258, 117);
+            this.panel6.TabIndex = 44;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.Navy;
+            this.panel10.Controls.Add(this.lbl_ano);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(256, 32);
+            this.panel10.TabIndex = 47;
+            // 
+            // lbl_ano
+            // 
+            this.lbl_ano.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ano.ForeColor = System.Drawing.Color.White;
+            this.lbl_ano.Location = new System.Drawing.Point(54, 7);
+            this.lbl_ano.Name = "lbl_ano";
+            this.lbl_ano.Size = new System.Drawing.Size(147, 19);
+            this.lbl_ano.TabIndex = 46;
+            this.lbl_ano.Text = "Ano";
+            this.lbl_ano.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_qtdNotasAno
+            // 
+            this.lbl_qtdNotasAno.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_qtdNotasAno.ForeColor = System.Drawing.Color.Black;
+            this.lbl_qtdNotasAno.Location = new System.Drawing.Point(158, 49);
+            this.lbl_qtdNotasAno.Name = "lbl_qtdNotasAno";
+            this.lbl_qtdNotasAno.Size = new System.Drawing.Size(82, 19);
+            this.lbl_qtdNotasAno.TabIndex = 46;
+            this.lbl_qtdNotasAno.Text = "0";
+            this.lbl_qtdNotasAno.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_valorNotasAno
+            // 
+            this.lbl_valorNotasAno.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_valorNotasAno.ForeColor = System.Drawing.Color.Black;
+            this.lbl_valorNotasAno.Location = new System.Drawing.Point(158, 84);
+            this.lbl_valorNotasAno.Name = "lbl_valorNotasAno";
+            this.lbl_valorNotasAno.Size = new System.Drawing.Size(82, 19);
+            this.lbl_valorNotasAno.TabIndex = 46;
+            this.lbl_valorNotasAno.Text = "0";
+            this.lbl_valorNotasAno.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(17, 84);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(82, 19);
+            this.label18.TabIndex = 46;
+            this.label18.Text = "Valor Total:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Black;
+            this.label19.Location = new System.Drawing.Point(17, 49);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(111, 19);
+            this.label19.TabIndex = 46;
+            this.label19.Text = "Notas Emitidas:";
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(29, 285);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 23);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Status";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(332, 285);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 23);
+            this.label2.TabIndex = 68;
+            this.label2.Text = "Ano";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frm_listaNotaFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1370, 772);
+            this.ClientSize = new System.Drawing.Size(1370, 666);
             this.ControlBox = false;
-            this.Controls.Add(this.chart1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_proximo);
             this.Controls.Add(this.btn_anterior);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.btn_filtrar);
             this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.btn_filtrar);
             this.Controls.Add(this.cmb_status);
             this.Controls.Add(this.cmb_ano);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lvw_listaNotaFiscal);
             this.Controls.Add(this.panel2);
@@ -634,25 +808,28 @@ namespace SistemaSegsal.Views
             this.MinimizeBox = false;
             this.Name = "frm_listaNotaFiscal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Notas Fiscais";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_listaNotaFiscal_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_logoEmpresa)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.img_logoEmpresa)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.panel10.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -666,7 +843,7 @@ namespace SistemaSegsal.Views
         private System.Windows.Forms.Button btn_novo;
         private System.Windows.Forms.Button btn_sair;
         private System.Windows.Forms.ListView lvw_listaNotaFiscal;
-        private System.Windows.Forms.Button btn_pagar;
+        private System.Windows.Forms.Button btn_receber;
         private System.Windows.Forms.ComboBox cmb_status;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_filtrar;
@@ -675,27 +852,40 @@ namespace SistemaSegsal.Views
         private System.Windows.Forms.TextBox txt_qtdNotaFiscal;
         private System.Windows.Forms.PictureBox img_logoEmpresa;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lbl_mes3;
-        private System.Windows.Forms.Label lbl_mes2;
+        private System.Windows.Forms.Label lbl_mes01;
         private System.Windows.Forms.Label lbl_mes1;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label lbl_anoAtual;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_anterior;
         private System.Windows.Forms.Button btn_proximo;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label lbl_faturamentoAnual;
-        private System.Windows.Forms.Label lbl_faturamentoMes1;
-        private System.Windows.Forms.Label lbl_faturamentoMes2;
         private System.Windows.Forms.Label lbl_faturamentoMes3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lbl_qtdNotasMes1;
+        private System.Windows.Forms.Label lbl_valorNotasMes1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label lbl_mes02;
+        private System.Windows.Forms.Label lbl_qtdNotasMes2;
+        private System.Windows.Forms.Label lbl_valorNotasMes2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label lbl_mes03;
+        private System.Windows.Forms.Label lbl_qtdNotasMes3;
+        private System.Windows.Forms.Label lbl_valorNotasMes3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label lbl_ano;
+        private System.Windows.Forms.Label lbl_qtdNotasAno;
+        private System.Windows.Forms.Label lbl_valorNotasAno;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btn_cancelarRegistro;
+        private System.Windows.Forms.Button btn_relatorioAnual;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

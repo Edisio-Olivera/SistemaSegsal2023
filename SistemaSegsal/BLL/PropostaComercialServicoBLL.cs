@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class PropostaComercialServicoBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
         PropostaComercialServicoTipoDTO tipDto = new PropostaComercialServicoTipoDTO();
         PropostaComercialServicoTipoBLL tipBll = new PropostaComercialServicoTipoBLL();
@@ -38,14 +38,14 @@ namespace SistemaSegsal.BLL
                 try
                 {
                     cmd.Connection = conexao.conectar();
-                    MySqlDataReader leitor = cmd.ExecuteReader();
+                    OleDbDataReader leitor = cmd.ExecuteReader();
 
                     leitor.Read();
                     p.Id = leitor.GetInt32(0);
 
                     conexao.desconectar();
                 }
-                catch (MySqlException ex)
+                catch (OleDbException ex)
                 {
                     MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -59,7 +59,7 @@ namespace SistemaSegsal.BLL
             try
             {
                 cmd.Connection = conexao.conectar();
-                MySqlDataReader leitor = cmd.ExecuteReader();
+                OleDbDataReader leitor = cmd.ExecuteReader();
 
                 leitor.Read();
                 qtdIdPropostaComercialServico = leitor.GetInt32(0);
@@ -67,7 +67,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -77,7 +77,7 @@ namespace SistemaSegsal.BLL
 
         public void SalvarServicoProposta(PropostaComercialServicoDTO p)
         {
-            tipDto.TipoServico = p.TipoServico;
+            tipDto.Descricao = p.TipoServico;
             tipBll.SelecionarIdPropostaComercialServicoTipo(tipDto);
 
             cmd.CommandText = "INSERT INTO tb_proposta_comercial_servico (" +
@@ -105,7 +105,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -132,7 +132,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -150,7 +150,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -159,20 +159,20 @@ namespace SistemaSegsal.BLL
         public List<PropostaComercialServicoDTO> ListaServicoProposta(PropostaComercialServicoDTO p)
         {
             cmd.CommandText = "SELECT " +
-                "p.id, " +
-                "p.codProposta, " +
-                "t.sigla, " +
-                "p.qtd, " +
-                "p.descricao, " +
-                "p.valorUnitario, " +
-                "p.valorTotal " +
-                "FROM tb_proposta_comercial_servico p " +
-                "INNER JOIN tb_proposta_comercial_servico_tipo t ON p.idTipoServico = t.id " +
-                "WHERE p.codProposta = '" + p.Proposta + "' " +
-                "ORDER BY p.id ASC";
+                "tb_proposta_comercial_servico.id, " +
+                "tb_proposta_comercial_servico.codProposta, " +
+                "tb_proposta_comercial_servico_tipo.descricao, " +
+                "tb_proposta_comercial_servico.qtd, " +
+                "tb_proposta_comercial_servico.descricao, " +
+                "tb_proposta_comercial_servico.valorUnitario, " +
+                "tb_proposta_comercial_servico.valorTotal " +
+                "FROM (tb_proposta_comercial_servico " +
+                "INNER JOIN tb_proposta_comercial_servico_tipo ON tb_proposta_comercial_servico.idTipoServico = tb_proposta_comercial_servico_tipo.id) " +
+                "WHERE tb_proposta_comercial_servico.codProposta = '" + p.Proposta + "' " +
+                "ORDER BY tb_proposta_comercial_servico.id ASC";
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<PropostaComercialServicoDTO> servico = new List<PropostaComercialServicoDTO>();
 
@@ -196,23 +196,64 @@ namespace SistemaSegsal.BLL
 
             return servico;
         }
-    
+
+        public List<PropostaComercialServicoDTO> ListaServicoPropostaSigla(PropostaComercialServicoDTO p)
+        {
+            cmd.CommandText = "SELECT " +
+                "tb_proposta_comercial_servico.id, " +
+                "tb_proposta_comercial_servico.codProposta, " +
+                "tb_proposta_comercial_servico_tipo.tipoServico, " +
+                "tb_proposta_comercial_servico.qtd, " +
+                "tb_proposta_comercial_servico.descricao, " +
+                "tb_proposta_comercial_servico.valorUnitario, " +
+                "tb_proposta_comercial_servico.valorTotal " +
+                "FROM (tb_proposta_comercial_servico " +
+                "INNER JOIN tb_proposta_comercial_servico_tipo ON tb_proposta_comercial_servico.idTipoServico = tb_proposta_comercial_servico_tipo.id) " +
+                "WHERE tb_proposta_comercial_servico.codProposta = '" + p.Proposta + "' " +
+                "ORDER BY tb_proposta_comercial_servico.id ASC";
+
+            cmd.Connection = conexao.conectar();
+            OleDbDataReader leitor = cmd.ExecuteReader();
+
+            List<PropostaComercialServicoDTO> servico = new List<PropostaComercialServicoDTO>();
+
+            while (leitor.Read())
+            {
+                PropostaComercialServicoDTO serv = new PropostaComercialServicoDTO();
+
+                serv.Id = leitor.GetInt32(0);
+                serv.Proposta = leitor.GetString(1);
+                serv.TipoServico = leitor.GetString(2);
+                serv.Qtd = leitor.GetInt32(3);
+                serv.Descricao = leitor.GetString(4);
+                serv.ValorUnitario = leitor.GetInt32(5) / 100;
+                serv.ValorTotal = leitor.GetInt32(6) / 100;
+
+                servico.Add(serv);
+            }
+
+            conexao.desconectar();
+            cmd.Dispose();
+
+            return servico;
+        }
+
         public List<PropostaComercialServicoDTO> SelecionarServicoProposta(PropostaComercialServicoDTO p)
         {
             cmd.CommandText = "SELECT " +
-                "p.id, " +
-                "p.codProposta, " +
-                "t.tipoServico, " +
-                "p.qtd, " +
-                "p.descricao, " +
-                "p.valorUnitario, " +
-                "p.valorTotal " +
-                "FROM tb_proposta_comercial_servico p " +
-                "INNER JOIN tb_proposta_comercial_servico_tipo t ON p.idTipoServico = t.id " +
-                "WHERE p.id = " + p.Id;
+                "tb_proposta_comercial_servico.id, " +
+                "tb_proposta_comercial_servico.codProposta, " +
+                "tb_proposta_comercial_servico_tipo.descricao, " +
+                "tb_proposta_comercial_servico.qtd, " +
+                "tb_proposta_comercial_servico.descricao, " +
+                "tb_proposta_comercial_servico.valorUnitario, " +
+                "tb_proposta_comercial_servico.valorTotal " +
+                "FROM (tb_proposta_comercial_servico " +
+                "INNER JOIN tb_proposta_comercial_servico_tipo ON tb_proposta_comercial_servico.idTipoServico = tb_proposta_comercial_servico_tipo.id) " +
+                "WHERE tb_proposta_comercial_servico.id = " + p.Id;
 
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
 
             List<PropostaComercialServicoDTO> servico = new List<PropostaComercialServicoDTO>(7);
 
@@ -232,7 +273,7 @@ namespace SistemaSegsal.BLL
             cmd.Dispose();
 
             return servico;
-        }
+        }        
 
         public void EditarValorServicoProposta(PropostaComercialServicoDTO p)
         {
@@ -255,7 +296,7 @@ namespace SistemaSegsal.BLL
                 conexao.desconectar();
                 cmd.Dispose();
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

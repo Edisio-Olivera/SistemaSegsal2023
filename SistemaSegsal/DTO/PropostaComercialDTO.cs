@@ -10,7 +10,7 @@ namespace SistemaSegsal.DTO
     {
 		private Int32 _id;
 		private string _codigo;
-		private string _dataProposta;
+		private DateTime _dataProposta;
 		private string _titulo;
 		private string _descricao;
 		private string _observacao;
@@ -20,12 +20,12 @@ namespace SistemaSegsal.DTO
 		private string _formaPgto;
 		private Int32 _valor;
 		private string _notaFiscal;
-        private string _ordemServico;
+        	private string _ordemServico;
 		private string _status;
 
         public int Id { get => _id; set => _id = value; }
         public string Codigo { get => _codigo; set => _codigo = value; }
-        public string DataProposta { get => _dataProposta; set => _dataProposta = value; }
+        public DateTime DataProposta { get => _dataProposta; set => _dataProposta = value; }
         public string Titulo { get => _titulo; set => _titulo = value; }
         public string Descricao { get => _descricao; set => _descricao = value; }
         public string Observacao { get => _observacao; set => _observacao = value; }

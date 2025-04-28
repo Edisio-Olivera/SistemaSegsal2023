@@ -7,14 +7,16 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
+using iText.StyledXmlParser.Jsoup.Select;
+using System.Reflection;
 
 namespace SistemaSegsal.BLL
 {
     class NotaFiscalBLL
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
 		NotaFiscalTipoDTO tipDto = new NotaFiscalTipoDTO();
 		NotaFiscalTipoBLL tipBll = new NotaFiscalTipoBLL();
@@ -25,13 +27,23 @@ namespace SistemaSegsal.BLL
 		BaseClienteDTO basDto = new BaseClienteDTO();
 		BaseClienteBLL basBll = new BaseClienteBLL();
 
+		CondicaoPgtoDTO cndDto = new CondicaoPgtoDTO();
+		CondicaoPgtoBLL cndBll = new CondicaoPgtoBLL();
+
+		FormaPgtoDTO frmDto = new FormaPgtoDTO();
+		FormaPgtoBLL frmBll = new FormaPgtoBLL();
+
 		Int32 qtdIdNotaFiscal;
 		Int32 valorTotalStatus;
 		Int32 valorTotalStatusAno;
 		Int32 ultimoIdNotaFiscal;
 		Int32 valorTotalStatusMesAno;
+		Int32 qtdNotasMesAno;
+        Int32 qtdNotasAno;
 
-		public void CriarNovoNotaFiscal(NotaFiscalDTO n)
+		string tabela = "tb_nota_fiscal";
+
+        public void CriarNovoNotaFiscal(NotaFiscalDTO n)
 		{
 			this.ContarNotasFiscais();
 
@@ -46,14 +58,14 @@ namespace SistemaSegsal.BLL
 				try
 				{
 					cmd.Connection = conexao.conectar();
-					MySqlDataReader leitor = cmd.ExecuteReader();
+					OleDbDataReader leitor = cmd.ExecuteReader();
 
 					leitor.Read();
 					n.Id = leitor.GetInt32(0);
 
 					conexao.desconectar();
 				}
-				catch (MySqlException ex)
+				catch (OleDbException ex)
 				{
 					MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
@@ -67,7 +79,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdIdNotaFiscal = leitor.GetInt32(0);
@@ -75,7 +87,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -90,14 +102,14 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				ultimoIdNotaFiscal = leitor.GetInt32(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -113,21 +125,28 @@ namespace SistemaSegsal.BLL
 			staDto.Status = n.Status;
 			staBll.SelecionarIdNotaFiscalStatus(staDto);
 
+			basDto.Cliente = n.Cliente;
 			basDto.NomeBase = n.BaseCliente;
 			basBll.SelecionarCodigoBaseCliente(basDto);
 
-			cmd.CommandText = "INSERT INTO tb_nota_fiscal (" +
+			frmDto.CondicaoPgto = n.CondPgto;
+			frmDto.FormaPgto = n.FormaPgto;
+			frmBll.SelecionarIdFormaPgto(frmDto);
+
+			cmd.CommandText = "INSERT INTO " + tabela + " (" +
 				"id, " +	
 				"codigo, " +
 				"dataEmissao, " +
 				"dataRecebimento, " +
 				"idTipoNotaFiscal, " +
-				"codBaseCliente, " +
-				"codigoVerificacao, " +
-				"competencia, " +
-				"numeroPedido, " +
-				"servico, " +
+                "competencia, " +
+                "codigoVerificacao, " +
+                "codBaseCliente, " +
+                "servico, " +
+                "numeroPedido, " +
+				"idFormaPgto, " +				
 				"valor, " +
+				"arquivo, " +
 				"idStatus) " +
 				"VALUES (" +
 				n.Id + ", '" +
@@ -135,12 +154,14 @@ namespace SistemaSegsal.BLL
 				n.DataEmissao + "', '" +
 				n.DataRecebimento + "', " +
 				tipDto.Id + ", '" +
-				basDto.Codigo + "', '" +
+                n.Competencia + "', '" +                
 				n.CodigoVerificacao + "', '" +
-				n.Competencia + "', '" +
-				n.NumeroPedido + "', '" +
-				n.Servico + "', " +
-				n.Valor * 100 + ", " +
+                basDto.Codigo + "', '" +                
+				n.Servico + "', '" +
+                n.NumeroPedido + "', " +
+				frmDto.Id + ", " +
+                n.Valor * 100 + ", '" +
+                n.Arquivo + "', " +                
 				staDto.Id + ")";
 
 			try
@@ -151,7 +172,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -185,7 +206,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -204,7 +225,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -213,28 +234,28 @@ namespace SistemaSegsal.BLL
 		public List<NotaFiscalDTO> SelecionarNotaFiscal(NotaFiscalDTO n)
 		{
 			cmd.CommandText = "SELECT " +
-				"n.id, " +
-				"n.codigo, " +
-				"n.dataEmissao, " +
-				"n.dataRecebimento, " +
-				"t.tipoNotaFiscal, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"n.codigoVerificacao, " +
-				"n.competencia, " +
-				"n.numeroPedido, " +
-				"n.servico, " +
-				"n.valor, " +
-				"s.statusNotaFiscal " +
-				"FROM tb_nota_fiscal n " +
-				"INNER JOIN tb_nota_fiscal_tipo t ON n.idTipoNotaFiscal = t.id " +
-				"INNER JOIN tb_cliente_base b ON n.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"INNER JOIN tb_nota_fiscal_status s ON n.idStatus = s.id " +
-				"WHERE n.codigo = '" + n.Codigo + "'";
+                "tb_nota_fiscal.id, " +
+                "tb_nota_fiscal.codigo, " +
+                "tb_nota_fiscal.dataEmissao, " +
+                "tb_nota_fiscal.dataRecebimento, " +
+                "tb_nota_fiscal_tipo.tipo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_nota_fiscal.codigoVerificacao, " +
+                "tb_nota_fiscal.competencia, " +
+                "tb_nota_fiscal.numeroPedido, " +
+                "tb_nota_fiscal.servico, " +
+                "tb_nota_fiscal.valor, " +
+                "tb_nota_fiscal_status.status " +
+				"FROM ((((tb_nota_fiscal " +
+                "INNER JOIN tb_nota_fiscal_tipo ON tb_nota_fiscal.idTipoNotaFiscal = tb_nota_fiscal_tipo.id) " +
+                "INNER JOIN tb_cliente_base ON tb_nota_fiscal.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_nota_fiscal_status ON tb_nota_fiscal.idStatus = tb_nota_fiscal_status.id) " +
+                "WHERE tb_nota_fiscal.codigo = '" + n.Codigo + "'";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<NotaFiscalDTO> nota = new List<NotaFiscalDTO>(13);
 
@@ -244,10 +265,8 @@ namespace SistemaSegsal.BLL
 
 			nota[0].Id = leitor.GetInt32(0);
 			nota[0].Codigo = leitor.GetString(1);
-			DateTime dataEmissao = DateTime.Parse(leitor.GetString(2));
-			nota[0].DataEmissao = dataEmissao.ToString("dd/MM/yyyy");
-			DateTime dataRecebimento = DateTime.Parse(leitor.GetString(3));
-			nota[0].DataRecebimento = dataRecebimento.ToString("dd/MM/yyyy");
+			nota[0].DataEmissao = leitor.GetDateTime(2);
+			nota[0].DataRecebimento = leitor.GetDateTime(3);
 			nota[0].TipoNotaFiscal = leitor.GetString(4);
 			nota[0].Cliente = leitor.GetString(5);
 			nota[0].BaseCliente = leitor.GetString(6);
@@ -267,25 +286,25 @@ namespace SistemaSegsal.BLL
 		public List<NotaFiscalDTO> ListarNotasFiscais()
 		{
 			cmd.CommandText = "SELECT " +
-				"n.id, " +
-				"n.codigo, " +
-				"n.dataEmissao, " +
-				"n.dataRecebimento, " +
-				"t.tipoNotaFiscal, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"n.servico, " +
-				"n.valor, " +
-				"s.statusNotaFiscal " +
-				"FROM tb_nota_fiscal n " +
-				"INNER JOIN tb_nota_fiscal_tipo t ON n.idTipoNotaFiscal = t.id " +
-				"INNER JOIN tb_nota_fiscal_status s ON n.idStatus = s.id " +
-				"INNER JOIN  tb_cliente_base b ON n.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"ORDER BY n.codigo DESC";
+                "tb_nota_fiscal.id, " +
+                "tb_nota_fiscal.codigo, " +
+                "tb_nota_fiscal.dataEmissao, " +
+                "tb_nota_fiscal.dataRecebimento, " +
+                "tb_nota_fiscal_tipo.tipo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_nota_fiscal.servico, " +
+                "tb_nota_fiscal.valor, " +
+                "tb_nota_fiscal_status.status " +
+                "FROM ((((tb_nota_fiscal " +
+                "INNER JOIN tb_nota_fiscal_tipo ON tb_nota_fiscal.idTipoNotaFiscal = tb_nota_fiscal_tipo.id) " +
+                "INNER JOIN tb_nota_fiscal_status ON tb_nota_fiscal.idStatus = tb_nota_fiscal_status.id) " +
+                "INNER JOIN tb_cliente_base ON tb_nota_fiscal.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "ORDER BY tb_nota_fiscal.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<NotaFiscalDTO> nota = new List<NotaFiscalDTO>();
 
@@ -293,20 +312,18 @@ namespace SistemaSegsal.BLL
 			{
 				NotaFiscalDTO nt = new NotaFiscalDTO();
 
-				nt.Id = leitor.GetInt32(0);
-				nt.Codigo = leitor.GetString(1);
-				DateTime dataEmissao = DateTime.Parse(leitor.GetString(2));
-				nt.DataEmissao = dataEmissao.ToString("dd/MM/yyyy");
-				DateTime dataRecebimento = DateTime.Parse(leitor.GetString(3));
-				nt.DataRecebimento = dataRecebimento.ToString("dd/MM/yyyy");
-				nt.TipoNotaFiscal = leitor.GetString(4);
-				nt.Cliente = leitor.GetString(5);
-				nt.BaseCliente = leitor.GetString(6);
-				nt.Servico = leitor.GetString(7);
-				nt.Valor = leitor.GetInt32(8) / 100;
-				nt.Status = leitor.GetString(9);
+                nt.Id = leitor.GetInt32(0);
+                nt.Codigo = leitor.GetString(1);
+                nt.DataEmissao = leitor.GetDateTime(2);
+                nt.DataRecebimento = leitor.GetDateTime(3);
+                nt.TipoNotaFiscal = leitor.GetString(4);
+                nt.Cliente = leitor.GetString(5);
+                nt.BaseCliente = leitor.GetString(6);
+                nt.Servico = leitor.GetString(7);
+                nt.Valor = leitor.GetInt32(8) / 100;
+                nt.Status = leitor.GetString(9);
 
-				nota.Add(nt);
+                nota.Add(nt);
 			}
 
 			conexao.desconectar();
@@ -321,26 +338,26 @@ namespace SistemaSegsal.BLL
 			staBll.SelecionarIdNotaFiscalStatus(staDto);
 
 			cmd.CommandText = "SELECT " +
-				"n.id, " + 
-				"n.codigo, " + 
-				"n.dataEmissao, " + 
-				"n.dataRecebimento, " + 
-				"t.tipoNotaFiscal, " +	 
-				"c.nomeFantasia, " + 
-				"b.nomeBase, " + 
-				"n.servico, " + 
-				"n.valor, " + 
-				"s.statusNotaFiscal " + 
-				"FROM tb_nota_fiscal n " + 
-				"INNER JOIN tb_nota_fiscal_tipo t ON n.idTipoNotaFiscal = t.id " +
-				"INNER JOIN tb_nota_fiscal_status s ON n.idStatus = s.id " +
-				"INNER JOIN  tb_cliente_base b ON n.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"WHERE n.idStatus = " + staDto.Id + " " +
-				"ORDER BY n.codigo DESC";
+                "tb_nota_fiscal.id, " +
+                "tb_nota_fiscal.codigo, " +
+                "tb_nota_fiscal.dataEmissao, " +
+                "tb_nota_fiscal.dataRecebimento, " +
+                "tb_nota_fiscal_tipo.tipo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_nota_fiscal.servico, " +
+                "tb_nota_fiscal.valor, " +
+                "tb_nota_fiscal_status.status " +
+                "FROM ((((tb_nota_fiscal " +
+                "INNER JOIN tb_nota_fiscal_tipo ON tb_nota_fiscal.idTipoNotaFiscal = tb_nota_fiscal_tipo.id) " +
+                "INNER JOIN tb_nota_fiscal_status ON tb_nota_fiscal.idStatus = tb_nota_fiscal_status.id) " +
+                "INNER JOIN tb_cliente_base ON tb_nota_fiscal.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "WHERE tb_nota_fiscal.idStatus = " + staDto.Id + " " +
+                "ORDER BY tb_nota_fiscal.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<NotaFiscalDTO> nota = new List<NotaFiscalDTO>();
 
@@ -348,20 +365,18 @@ namespace SistemaSegsal.BLL
 			{
 				NotaFiscalDTO nt = new NotaFiscalDTO();
 
-				nt.Id = leitor.GetInt32(0);
-				nt.Codigo = leitor.GetString(1);
-				DateTime dataEmissao = DateTime.Parse(leitor.GetString(2));
-				nt.DataEmissao = dataEmissao.ToString("dd/MM/yyyy");
-				DateTime dataRecebimento = DateTime.Parse(leitor.GetString(3));
-				nt.DataRecebimento = dataRecebimento.ToString("dd/MM/yyyy");
-				nt.TipoNotaFiscal = leitor.GetString(4);
-				nt.Cliente = leitor.GetString(5);
-				nt.BaseCliente = leitor.GetString(6);
-				nt.Servico = leitor.GetString(7);
-				nt.Valor = leitor.GetInt32(8) / 100;
-				nt.Status = leitor.GetString(9);
+                nt.Id = leitor.GetInt32(0);
+                nt.Codigo = leitor.GetString(1);
+                nt.DataEmissao = leitor.GetDateTime(2);
+                nt.DataRecebimento = leitor.GetDateTime(3);
+                nt.TipoNotaFiscal = leitor.GetString(4);
+                nt.Cliente = leitor.GetString(5);
+                nt.BaseCliente = leitor.GetString(6);
+                nt.Servico = leitor.GetString(7);
+                nt.Valor = leitor.GetInt32(8) / 100;
+                nt.Status = leitor.GetString(9);
 
-				nota.Add(nt);
+                nota.Add(nt);
 			}
 
 			conexao.desconectar();
@@ -373,26 +388,26 @@ namespace SistemaSegsal.BLL
 		public List<NotaFiscalDTO> ListarNotasFiscaisAno(NotaFiscalDTO n)
 		{
 			cmd.CommandText = "SELECT " +
-				"n.id, " +
-				"n.codigo, " +
-				"n.dataEmissao, " +
-				"n.dataRecebimento, " +
-				"t.tipoNotaFiscal, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"n.servico, " +
-				"n.valor, " +
-				"s.statusNotaFiscal " +
-				"FROM tb_nota_fiscal n " +
-				"INNER JOIN tb_nota_fiscal_tipo t ON n.idTipoNotaFiscal = t.id " +
-				"INNER JOIN tb_nota_fiscal_status s ON n.idStatus = s.id " +
-				"INNER JOIN  tb_cliente_base b ON n.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"WHERE YEAR(dataEmissao) = " + n.Ano + " " +
-				"ORDER BY n.codigo DESC";
+				"tb_nota_fiscal.id, " + 
+				"tb_nota_fiscal.codigo, " +
+				"tb_nota_fiscal.dataEmissao, " +
+                "tb_nota_fiscal.dataRecebimento, " +
+                "tb_nota_fiscal_tipo.tipo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_nota_fiscal.servico, " +
+                "tb_nota_fiscal.valor, " +
+                "tb_nota_fiscal_status.status " +
+                "FROM ((((tb_nota_fiscal " +
+                "INNER JOIN tb_nota_fiscal_tipo ON tb_nota_fiscal.idTipoNotaFiscal = tb_nota_fiscal_tipo.id) " +
+                "INNER JOIN tb_nota_fiscal_status ON tb_nota_fiscal.idStatus = tb_nota_fiscal_status.id) " + 
+                "INNER JOIN tb_cliente_base ON tb_nota_fiscal.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "WHERE YEAR(dataEmissao) = '" + n.Ano + "' " +
+                "ORDER BY tb_nota_fiscal.codigo DESC;";
 
-			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+            cmd.Connection = conexao.conectar();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<NotaFiscalDTO> nota = new List<NotaFiscalDTO>();
 
@@ -402,10 +417,8 @@ namespace SistemaSegsal.BLL
 
 				nt.Id = leitor.GetInt32(0);
 				nt.Codigo = leitor.GetString(1);
-				DateTime dataEmissao = DateTime.Parse(leitor.GetString(2));
-				nt.DataEmissao = dataEmissao.ToString("dd/MM/yyyy");
-				DateTime dataRecebimento = DateTime.Parse(leitor.GetString(3));
-				nt.DataRecebimento = dataRecebimento.ToString("dd/MM/yyyy");
+				nt.DataEmissao = leitor.GetDateTime(2);
+				nt.DataRecebimento = leitor.GetDateTime(3);
 				nt.TipoNotaFiscal = leitor.GetString(4);
 				nt.Cliente = leitor.GetString(5);
 				nt.BaseCliente = leitor.GetString(6);
@@ -428,27 +441,27 @@ namespace SistemaSegsal.BLL
 			staBll.SelecionarIdNotaFiscalStatus(staDto);
 
 			cmd.CommandText = "SELECT " +
-				"n.id, " +
-				"n.codigo, " +
-				"n.dataEmissao, " +
-				"n.dataRecebimento, " +
-				"t.tipoNotaFiscal, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"n.servico, " +
-				"n.valor, " +
-				"s.statusNotaFiscal " +
-				"FROM tb_nota_fiscal n " +
-				"INNER JOIN tb_nota_fiscal_tipo t ON n.idTipoNotaFiscal = t.id " +
-				"INNER JOIN tb_nota_fiscal_status s ON n.idStatus = s.id " +
-				"INNER JOIN  tb_cliente_base b ON n.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"WHERE YEAR(dataEmissao) = " + n.Ano + " " + 
-				"AND n.idStatus = " + staDto.Id + " " +
-				"ORDER BY n.codigo DESC";
+                "tb_nota_fiscal.id, " +
+                "tb_nota_fiscal.codigo, " +
+                "tb_nota_fiscal.dataEmissao, " +
+                "tb_nota_fiscal.dataRecebimento, " +
+                "tb_nota_fiscal_tipo.tipo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_nota_fiscal.servico, " +
+                "tb_nota_fiscal.valor, " +
+                "tb_nota_fiscal_status.status " +
+                "FROM ((((tb_nota_fiscal " +
+                "INNER JOIN tb_nota_fiscal_tipo ON tb_nota_fiscal.idTipoNotaFiscal = tb_nota_fiscal_tipo.id) " +
+                "INNER JOIN tb_nota_fiscal_status ON tb_nota_fiscal.idStatus = tb_nota_fiscal_status.id) " +
+                "INNER JOIN tb_cliente_base ON tb_nota_fiscal.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "WHERE YEAR(dataEmissao) = " + n.Ano + " " +
+                "AND tb_nota_fiscal.idStatus = " + staDto.Id + " " +
+                "ORDER BY tb_nota_fiscal.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<NotaFiscalDTO> nota = new List<NotaFiscalDTO>();
 
@@ -458,10 +471,8 @@ namespace SistemaSegsal.BLL
 
 				nt.Id = leitor.GetInt32(0);
 				nt.Codigo = leitor.GetString(1);
-				DateTime dataEmissao = DateTime.Parse(leitor.GetString(2));
-				nt.DataEmissao = dataEmissao.ToString("dd/MM/yyyy");
-				DateTime dataRecebimento = DateTime.Parse(leitor.GetString(3));
-				nt.DataRecebimento = dataRecebimento.ToString("dd/MM/yyyy");
+				nt.DataEmissao = leitor.GetDateTime(2);
+				nt.DataRecebimento = leitor.GetDateTime(3);
 				nt.TipoNotaFiscal = leitor.GetString(4);
 				nt.Cliente = leitor.GetString(5);
 				nt.BaseCliente = leitor.GetString(6);
@@ -489,7 +500,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				valorTotalStatus = leitor.GetInt32(0) / 100;
@@ -497,7 +508,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -514,15 +525,15 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
-				valorTotalStatusAno = leitor.GetInt32(0) / 100;
+				valorTotalStatusAno = leitor.GetInt32(0);
 
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -535,30 +546,30 @@ namespace SistemaSegsal.BLL
 			cmd.CommandText = "SELECT SUM(valor) FROM tb_nota_fiscal " +
 				"WHERE YEAR(dataEmissao) = " + n.Ano + " " + 
 				"AND MONTH(dataEmissao) = " + n.Mes + " " +
-				"AND emissao = 1";
+				"AND idStatus <> 3";
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 
-				Int32 valor = leitor.IsDBNull(0) ? 0 : leitor.GetInt32(0);
+                valorTotalStatusMesAno = leitor.GetInt32(0);
 
-				if (valor == null)
-                {
-					valorTotalStatusMesAno = 0;
-				}
-                else
-                {
-					valorTotalStatusMesAno = valor / 100;
-				}				
-
+				//if(valor == null)
+				//{
+				//	valorTotalStatusMesAno = 0;
+				//}
+				//else
+				//{
+				//	valorTotalStatusMesAno = valor;
+    //            }
+			
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -566,7 +577,101 @@ namespace SistemaSegsal.BLL
 			return valorTotalStatusMesAno;
 		}
 
-		public void ReceberNotaFiscal(NotaFiscalDTO n)
+        public Int32 SomarNotasFiscaisAno(NotaFiscalDTO n)
+        {
+            cmd.CommandText = "SELECT SUM(valor) FROM tb_nota_fiscal " +
+                "WHERE YEAR(dataEmissao) = " + n.Ano + " " +
+                "AND idStatus <> 3";
+
+			MessageBox.Show(cmd.CommandText);
+
+            try
+            {
+                cmd.Connection = conexao.conectar();
+                OleDbDataReader leitor = cmd.ExecuteReader();
+
+                leitor.Read();
+
+                valorTotalStatusAno = Convert.ToInt32(leitor.GetInt32(0));
+
+                //if (valor == "")
+                //{
+                //    valorTotalStatusAno = 0;
+                //}
+                //else
+                //{
+                //    valorTotalStatusAno = Int32.Parse(valor);
+                //}
+		
+                conexao.desconectar();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return valorTotalStatusAno;
+        }
+
+        public Int32 ContarNotasFiscaisMesAno(NotaFiscalDTO n)
+        {
+            cmd.CommandText = "SELECT COUNT(id) FROM tb_nota_fiscal " +
+                "WHERE YEAR(dataEmissao) = " + n.Ano + " " +
+                "AND MONTH(dataEmissao) = " + n.Mes + " " +
+                "AND idStatus <> 3";
+
+            try
+            {
+                cmd.Connection = conexao.conectar();
+                OleDbDataReader leitor = cmd.ExecuteReader();
+
+                leitor.Read();
+
+                Int32 qtd = leitor.GetInt32(0);
+
+                qtdNotasMesAno = qtd;
+
+                conexao.desconectar();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return qtdNotasMesAno;
+        }
+
+        public Int32 ContarNotasFiscaisAno(NotaFiscalDTO n)
+        {
+            cmd.CommandText = "SELECT COUNT(id) FROM tb_nota_fiscal " +
+                "WHERE YEAR(dataEmissao) = " + n.Ano + " " +
+                "AND idStatus <> 3";
+
+            try
+            {
+                cmd.Connection = conexao.conectar();
+                OleDbDataReader leitor = cmd.ExecuteReader();
+
+                leitor.Read();
+
+                Int32 qtd = leitor.GetInt32(0);
+
+                qtdNotasAno = qtd;
+
+                conexao.desconectar();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return qtdNotasAno;
+        }
+
+        public void ReceberNotaFiscal(NotaFiscalDTO n)
 		{
 			staDto.Status = n.Status;
 			staBll.SelecionarIdNotaFiscalStatus(staDto);
@@ -583,7 +688,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

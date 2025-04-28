@@ -125,12 +125,14 @@ namespace SistemaSegsal.View
             this.mnu_equipamento.Name = "mnu_equipamento";
             this.mnu_equipamento.Size = new System.Drawing.Size(150, 22);
             this.mnu_equipamento.Text = "Equipamentos";
+            this.mnu_equipamento.Click += new System.EventHandler(this.mnu_equipamento_Click);
             // 
             // mnu_epi
             // 
             this.mnu_epi.Name = "mnu_epi";
             this.mnu_epi.Size = new System.Drawing.Size(150, 22);
             this.mnu_epi.Text = "E.P.I.";
+            this.mnu_epi.Click += new System.EventHandler(this.mnu_epi_Click);
             // 
             // mnu_ferramenta
             // 
@@ -144,6 +146,7 @@ namespace SistemaSegsal.View
             this.mnu_frota.Name = "mnu_frota";
             this.mnu_frota.Size = new System.Drawing.Size(150, 22);
             this.mnu_frota.Text = "Frota";
+            this.mnu_frota.Click += new System.EventHandler(this.mnu_frota_Click);
             // 
             // recursosHumanosToolStripMenuItem
             // 
@@ -161,18 +164,21 @@ namespace SistemaSegsal.View
             this.mnu_funcionario.Name = "mnu_funcionario";
             this.mnu_funcionario.Size = new System.Drawing.Size(155, 22);
             this.mnu_funcionario.Text = "Funcionários";
+            this.mnu_funcionario.Click += new System.EventHandler(this.mnu_funcionario_Click);
             // 
             // mnu_tecnico
             // 
             this.mnu_tecnico.Name = "mnu_tecnico";
             this.mnu_tecnico.Size = new System.Drawing.Size(155, 22);
             this.mnu_tecnico.Text = "Técnicos";
+            this.mnu_tecnico.Click += new System.EventHandler(this.mnu_tecnico_Click);
             // 
             // mnu_documentacao
             // 
             this.mnu_documentacao.Name = "mnu_documentacao";
             this.mnu_documentacao.Size = new System.Drawing.Size(155, 22);
             this.mnu_documentacao.Text = "Documentação";
+            this.mnu_documentacao.Click += new System.EventHandler(this.mnu_documentacao_Click);
             // 
             // mnu_frequencia
             // 
@@ -212,12 +218,14 @@ namespace SistemaSegsal.View
             this.mnu_receber.Name = "mnu_receber";
             this.mnu_receber.Size = new System.Drawing.Size(188, 22);
             this.mnu_receber.Text = "Contas a Receber";
+            this.mnu_receber.Click += new System.EventHandler(this.mnu_receber_Click);
             // 
             // mnu_pagar
             // 
             this.mnu_pagar.Name = "mnu_pagar";
             this.mnu_pagar.Size = new System.Drawing.Size(188, 22);
             this.mnu_pagar.Text = "Contas a Pagar";
+            this.mnu_pagar.Click += new System.EventHandler(this.mnu_pagar_Click);
             // 
             // mnu_caixa
             // 
@@ -244,22 +252,23 @@ namespace SistemaSegsal.View
             // mnu_chamado
             // 
             this.mnu_chamado.Name = "mnu_chamado";
-            this.mnu_chamado.Size = new System.Drawing.Size(174, 22);
+            this.mnu_chamado.Size = new System.Drawing.Size(180, 22);
             this.mnu_chamado.Text = "Chamados";
             this.mnu_chamado.Click += new System.EventHandler(this.mnu_chamado_Click);
             // 
             // mnu_ordemServico
             // 
             this.mnu_ordemServico.Name = "mnu_ordemServico";
-            this.mnu_ordemServico.Size = new System.Drawing.Size(174, 22);
+            this.mnu_ordemServico.Size = new System.Drawing.Size(180, 22);
             this.mnu_ordemServico.Text = "Ordens de Serviços";
             this.mnu_ordemServico.Click += new System.EventHandler(this.ordensDeServiçosToolStripMenuItem_Click);
             // 
             // mnu_apr
             // 
             this.mnu_apr.Name = "mnu_apr";
-            this.mnu_apr.Size = new System.Drawing.Size(174, 22);
+            this.mnu_apr.Size = new System.Drawing.Size(180, 22);
             this.mnu_apr.Text = "A.P.R.";
+            this.mnu_apr.Click += new System.EventHandler(this.mnu_apr_Click);
             // 
             // essenciaisToolStripMenuItem
             // 
@@ -330,16 +339,17 @@ namespace SistemaSegsal.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1363, 749);
+            this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Gestão SEGSAL";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_principal_Load);
             this.menuStrip1.ResumeLayout(false);

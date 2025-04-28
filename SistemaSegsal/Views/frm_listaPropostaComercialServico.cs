@@ -16,6 +16,20 @@ namespace SistemaSegsal.Views
 {
     public partial class frm_listaPropostaComercialServico : Form
     {
+        private void Algoritmo()
+        {
+            //VINCULAR SERVIÇO/CHAMADO À PROPOSTA
+
+
+
+
+
+
+
+
+
+
+        }
         PropostaComercialServicoDTO dto = new PropostaComercialServicoDTO();
         PropostaComercialServicoBLL bll = new PropostaComercialServicoBLL();
 
@@ -37,15 +51,13 @@ namespace SistemaSegsal.Views
             this.btn_cancelar.Visible = false;
             this.btn_editar.Visible = false;
             this.btn_deletar.Visible = false;
-            this.btn_servico.Visible = false;
-            this.btn_imprimir.Visible = false;
             this.btn_salvar.Visible = false;
             this.btn_atualizar.Visible = false;
             this.btn_sair.Visible = true;
                         
             //Posição dos Botões            
-            this.btn_novo.Location = new Point(0, 100);
-            this.btn_sair.Location = new Point(0, 160);
+            this.btn_sair.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_novo.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
             
             this.txt_codigo.Enabled = false;
             this.txt_dataProposta.Enabled = false;
@@ -57,18 +69,17 @@ namespace SistemaSegsal.Views
             this.cmb_tipoServico.Enabled = false;
             this.txt_qtd.Enabled = false;
             this.txt_descricao.Enabled = false;
-            this.cmb_descricao.Visible = false;
+            this.cmb_chamados.Visible = false;            
             this.txt_valorUnitario.Enabled = false;
             this.txt_valorTotal.Enabled = false;
-            this.btn_addServico.Visible = true;
 
             this.lvw_listaServico.Enabled = true;
 
             this.txt_id.Text = "";
             this.cmb_tipoServico.Text = "";
             this.txt_qtd.Text = "";
+            this.lbl_descricao.Text = "Descrição";
             this.txt_descricao.Text = "";
-            this.cmb_descricao.Text = "";
             this.txt_valorUnitario.Text = "";
             this.txt_valorTotal.Text = "";
 
@@ -94,44 +105,42 @@ namespace SistemaSegsal.Views
 
             Int32 id = dto.Id + 1;
 
-            frm_addPropostaComercialServico serv = new frm_addPropostaComercialServico(id);
-            serv.Visible = true;
+            //frm_addPropostaComercialServico serv = new frm_addPropostaComercialServico(id);
+            //serv.Visible = true;
 
-            //this.txt_id.Text = id.ToString();
+            this.txt_id.Text = id.ToString();
 
-            ////Visualização dos Botões
-            //this.btn_novo.Visible = false;
-            //this.btn_cancelar.Visible = true;
-            //this.btn_editar.Visible = false;
-            //this.btn_deletar.Visible = false;
-            //this.btn_servico.Visible = false;
-            //this.btn_imprimir.Visible = false;
-            //this.btn_salvar.Visible = true;
-            //this.btn_atualizar.Visible = false;
-            //this.btn_cancelar.Visible = false;
+            //Visualização dos Botões
+            this.btn_novo.Visible = false;
+            this.btn_cancelar.Visible = true;
+            this.btn_salvar.Visible = true;
+            this.btn_sair.Visible = false;
 
-            ////Posição dos Botões            
-            //this.btn_salvar.Location = new Point(0, 100);
-            //this.btn_sair.Location = new Point(0, 160);
+            this.btn_editar.Visible = false;
+            this.btn_deletar.Visible = false;            
+            this.btn_atualizar.Visible = false;
 
-            //this.txt_codigo.Enabled = false;
-            //this.txt_dataProposta.Enabled = false;
-            //this.txt_cliente.Enabled = false;
-            //this.txt_titulo.Enabled = false;
-            //this.txt_valor.Enabled = false;
+            //Posição dos Botões            
+            this.btn_salvar.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_cancelar.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
 
-            //this.txt_id.Enabled = false;
+            this.txt_codigo.Enabled = false;
+            this.txt_dataProposta.Enabled = false;
+            this.txt_cliente.Enabled = false;
+            this.txt_titulo.Enabled = false;
+            this.txt_valor.Enabled = false;
 
-            //this.PopularComboboxTipoServico();
+            this.txt_id.Enabled = false;
 
-            //this.cmb_tipoServico.Enabled = true;
-            //this.txt_qtd.Enabled = true;
-            //this.txt_descricao.Enabled = true;
-            //this.cmb_descricao.Visible = false;
-            //this.txt_valorUnitario.Enabled = true;
-            //this.txt_valorTotal.Enabled = false;
+            this.PopularComboboxTipoServico();
 
-            //this.lvw_listaServico.Enabled = true;                        
+            this.cmb_tipoServico.Enabled = true;
+            this.txt_qtd.Enabled = true;
+            this.txt_descricao.Enabled = true;
+            this.txt_valorUnitario.Enabled = true;
+            this.txt_valorTotal.Enabled = false;
+
+            this.lvw_listaServico.Enabled = true;
         }
 
         private void SalvarServico()
@@ -161,16 +170,23 @@ namespace SistemaSegsal.Views
                 dto.Qtd = Int32.Parse(this.txt_qtd.Text);
             }
             
-            if(this.txt_descricao.Text == "")
+            if(this.cmb_tipoServico.Text == "Ordem de Serviço")
             {
-                MessageBox.Show("Digite uma descrição!", "Campo Vazio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.txt_descricao.Focus();
-                return;
+                if (this.txt_descricao.Text == "")
+                {
+                    MessageBox.Show("Digite uma descrição!", "Campo Vazio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.txt_descricao.Focus();
+                    return;
+                }
+                else
+                {
+                    dto.Descricao = this.txt_descricao.Text;
+                }
             }
             else
             {
                 dto.Descricao = this.txt_descricao.Text;
-            }
+            }            
             
             if(this.txt_valorUnitario.Text == "")
             {
@@ -197,15 +213,17 @@ namespace SistemaSegsal.Views
             //Salva o serviço
             bll.SalvarServicoProposta(dto);
 
-            //Atualiza o valor da proposta
+            //Soma o valor do serviço com o da proposta
             this.SomarValorServico(dto.Proposta, dto.ValorTotal);            
 
+            //Atualiza o valor da proposta no formulário
             List<PropostaComercialDTO> proposta = proBll.SelecionarPropostaComercial(proDto);
             Int32 valorPropostaAtual = proposta[0].Valor;
             this.txt_valor.Text = valorPropostaAtual.ToString("#,##0.00");
 
             MessageBox.Show("Serviço Salvo com sucesso!", "Salvar!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            //this.AtualizarPropostaChamado();
             this.EstadoInicial();
             this.ListarServico(dto.Proposta);
         }
@@ -217,8 +235,6 @@ namespace SistemaSegsal.Views
             this.btn_cancelar.Visible = true;
             this.btn_editar.Visible = false;
             this.btn_deletar.Visible = false;
-            this.btn_servico.Visible = false;
-            this.btn_imprimir.Visible = false;
             this.btn_salvar.Visible = false;
             this.btn_atualizar.Visible = true;
             this.btn_sair.Visible = true;
@@ -237,10 +253,8 @@ namespace SistemaSegsal.Views
             this.cmb_tipoServico.Enabled = true;
             this.txt_qtd.Enabled = true;
             this.txt_descricao.Enabled = false;
-            this.cmb_descricao.Visible = false;
             this.txt_valorUnitario.Enabled = true;
             this.txt_valorTotal.Enabled = false;
-            this.btn_addServico.Visible = true;
 
             this.lvw_listaServico.Enabled = true;
         }
@@ -408,54 +422,94 @@ namespace SistemaSegsal.Views
 
             this.txt_id.Text = serv[0].Id.ToString();
             this.cmb_tipoServico.Text = serv[0].TipoServico;
+
+            switch (serv[0].TipoServico)
+            {
+                case "Manutenção Corretiva":
+                    this.txt_descricao.Visible = true;
+                    this.txt_descricao.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = false;
+                    this.lbl_descricao.Text = "Descrição";
+                break;
+
+                case "Manutenção Preventiva":
+                    this.txt_descricao.Visible = true;
+                    this.txt_descricao.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = false;
+                    this.lbl_descricao.Text = "Descrição";
+                break;
+
+                case "Mão de Obra":
+                    this.txt_descricao.Visible = true;
+                    this.txt_descricao.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = false;
+                    this.lbl_descricao.Text = "Descrição";
+                break;
+
+                case "Equipamento":
+                    this.txt_descricao.Visible = true;
+                    this.txt_descricao.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = false;
+                    this.lbl_descricao.Text = "Descrição";
+                break;
+
+                case "Material":
+                    this.txt_descricao.Visible = true;
+                    this.txt_descricao.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = false;
+                    this.lbl_descricao.Text = "Descrição";
+                break;
+
+                case "Chamado":
+                    this.txt_descricao.Visible = false;
+                    this.PopularComboboxChamados();
+                    this.cmb_chamados.Text = serv[0].Descricao;
+                    this.cmb_chamados.Visible = true;
+                    this.lbl_descricao.Text = "Chamado";
+                break;
+            }
+
+
+
+
+            //if(serv[0].TipoServico == "Ordem de Serviço")
+            //{
+            //    this.txt_descricao.Visible = true;
+            //    this.txt_descricao.Text = serv[0].Descricao;
+            //    this.cmb_chamados.Visible = false;
+            //    this.lbl_descricao.Text = "Descrição";
+            //}
+            //else if (serv[0].TipoServico == "Manutenção Corretiva")
+            //{
+            //    this.txt_descricao.Visible = false;
+            //    this.PopularComboboxChamados();
+            //    this.cmb_chamados.Text = serv[0].Descricao;
+            //    this.cmb_chamados.Visible = true;
+            //    this.lbl_descricao.Text = "Chamado";
+            //}
+
             this.txt_qtd.Text = serv[0].Qtd.ToString();
-            if(serv[0].Descricao == "Equipamento")
-            {
-                this.cmb_descricao.Visible = true;
-                this.btn_addServico.Visible = true;
-                this.txt_descricao.Visible = false;
-                //this.PopularComboboxEquipamento();
-                this.cmb_descricao.Text = serv[0].Descricao;
-            }
-            else if (serv[0].Descricao == "Material")
-            {
-                this.cmb_descricao.Visible = true;
-                this.btn_addServico.Visible = true;
-                this.txt_descricao.Visible = false;
-                //this.PopularComboboxMaterial();
-                this.cmb_descricao.Text = serv[0].Descricao;
-            }
-            else
-            {
-                this.cmb_descricao.Visible = false;
-                this.btn_addServico.Visible = false;
-                this.txt_descricao.Visible = true;
-                this.txt_descricao.Text = serv[0].Descricao;
-            }
-            this.txt_valorUnitario.Text = serv[0].ValorUnitario.ToString();
-            this.txt_valorTotal.Text = serv[0].ValorTotal.ToString();
+            this.txt_valorUnitario.Text = serv[0].ValorUnitario.ToString("#,##0.00");
+            this.txt_valorTotal.Text = serv[0].ValorTotal.ToString("#,##0.00");         
 
             //Visualização dos Botões
             this.btn_novo.Visible = false;
             this.btn_cancelar.Visible = true;
             this.btn_editar.Visible = true;
             this.btn_deletar.Visible = true;
-            this.btn_servico.Visible = false;
-            this.btn_imprimir.Visible = false;
             this.btn_salvar.Visible = false;
             this.btn_atualizar.Visible = false;
             this.btn_sair.Visible = false;
 
             //Posição dos Botões            
-            this.btn_editar.Location = new Point(0, 100);
-            this.btn_deletar.Location = new Point(0, 160);
-            this.btn_cancelar.Location = new Point(0, 220);
+            this.btn_editar.Location = new Point(MedidasGeraisDTO.posicaoHor01, MedidasGeraisDTO.posicaoVer);
+            this.btn_deletar.Location = new Point(MedidasGeraisDTO.posicaoHor02, MedidasGeraisDTO.posicaoVer);
+            this.btn_cancelar.Location = new Point(MedidasGeraisDTO.posicaoHor03, MedidasGeraisDTO.posicaoVer);
 
             this.txt_id.Enabled = false;
             this.cmb_tipoServico.Enabled = false;
             this.txt_qtd.Enabled = false;
             this.txt_descricao.Enabled = false;
-            this.cmb_descricao.Visible = false;
             this.txt_valorUnitario.Enabled = false;
             this.txt_valorTotal.Enabled = false;
 
@@ -469,7 +523,7 @@ namespace SistemaSegsal.Views
 
             List<ChamadoDTO> chm = chmBll.SelecionarChamado(chmDto);
 
-            string chamadoCliente = chm[0].ChamadoCliente;
+            //string chamadoCliente = chm[0].ChamadoCliente;
             string valorTotal = chm[0].ValorTotal.ToString("R$ #,##0.00");
         }
 
@@ -478,7 +532,7 @@ namespace SistemaSegsal.Views
             List<PropostaComercialServicoTipoDTO> tip = tipBll.PopularComboboxPropostaComercialServicoTipo();
 
             this.cmb_tipoServico.DataSource = tip;
-            this.cmb_tipoServico.DisplayMember = "tipoServico";
+            this.cmb_tipoServico.DisplayMember = "descricao";
             this.cmb_tipoServico.Text = "";
         }
 
@@ -506,7 +560,7 @@ namespace SistemaSegsal.Views
 
             this.cmb_chamados.DataSource = chm;
             this.cmb_chamados.DisplayMember = "codigo";
-            //this.cmb_chamados.Text = "";
+            this.cmb_chamados.Text = "";
         }
 
         private void ListarServico(string codigo)
@@ -533,6 +587,17 @@ namespace SistemaSegsal.Views
                 prox++;
             }
         }
+
+        private void AtualizarPropostaChamado()
+        {
+            string[] chamado = this.cmb_chamados.Text.Split('-');
+            chmDto.Proposta = this.txt_codigo.Text;
+            chmDto.Codigo = chamado[0];
+
+            chmBll.AtualizarPropostaChamado(chmDto);
+        }
+
+
 
         private void CancelarRegistro()
         {
@@ -583,7 +648,7 @@ namespace SistemaSegsal.Views
             this.Text = "Sistema de Gestão - SEGSAL Segurança Eletrônica - v 1.0";
             this.BackColor = Color.FromArgb(255, 255, 255);
 
-            this.EstadoInicial();
+            //this.EstadoInicial();
 
             //Designer do listview
             this.lvw_listaServico.BackColor = Color.FromArgb(255, 255, 192);
@@ -720,62 +785,43 @@ namespace SistemaSegsal.Views
         }
 
         private void cmb_tipoServico_SelectedValueChanged(object sender, EventArgs e)
-        {            
-            string tipo = this.cmb_tipoServico.Text;
+        {                 
+            //string tipo = this.cmb_tipoServico.Text;
 
-            switch (tipo)
-            {
-                case "Equipamento":
-                    this.cmb_descricao.Visible = true;
-                    this.btn_addServico.Visible = true;
-                    this.txt_descricao.Visible = false;
-                    break;
-                case "Material":
-                    this.cmb_descricao.Visible = true;
-                    this.btn_addServico.Visible = true;
-                    this.txt_descricao.Visible = false;
-                    break;
-                case "Chamados":
-                    this.cmb_descricao.Visible = true;
-                    this.btn_addServico.Visible = true;
-                    this.txt_descricao.Visible = false;
-                    this.PopularComboboxChamados();
-                    this.cmb_chamados.Text = "";
-                    break;
-                default:
-                    this.cmb_descricao.Visible = false;
-                    this.btn_addServico.Visible = false;
-                    this.txt_descricao.Visible = true;
-                    break;
-            }
-        }
-
-        private void cmb_descricao_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (this.cmb_descricao.Text == "SistemaSegsal.DTO.ChamadoDTO")
-            {
-                return;
-            }
-
-            else
-            {
-                //string tipoServico = this.cmb_tipoServico.Text;
-
-                //if (tipoServico == "Chamados")
-                //{
-                //    chmDto.Codigo = this.cmb_descricao.Text;
-                //    string codigo = this.cmb_descricao.Text;
-                //    //MessageBox.Show(codigo);
-                //    //Verificar se já está em alguma proposta
-
-                //    //Selecionar chamado
-                //    this.SelecionarChamado(codigo);
-                //    //Verificar se chamado tem chamadoCliente
-                //}
-            }
-
-            
-        }
+            //if(tipo == "")
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    switch (tipo)
+            //    {
+            //        case "Ordem de Serviço":
+            //            this.cmb_chamados.Visible = false;
+            //            this.txt_descricao.Visible = true;
+            //            this.txt_descricao.Location = new Point(160, 66);
+            //            this.txt_descricao.Size = new Size(580, 23);
+            //            this.txt_qtd.Text = "";
+            //            this.lbl_descricao.Text = "Serviço";
+            //            this.txt_valorUnitario.Text = "";
+            //            this.txt_valorTotal.Text = "";
+            //            this.lbl_mensagemChamado.Text = "";
+            //            break;
+            //        case "Chamado":
+            //            this.txt_descricao.Visible = false;
+            //            this.cmb_chamados.Visible = true;
+            //            this.cmb_chamados.Location = new Point(160, 66);
+            //            this.cmb_chamados.Size = new Size(580, 23);
+            //            this.PopularComboboxChamados();
+            //            this.txt_qtd.Text = 1.ToString();
+            //            this.lbl_descricao.Text = "Chamado";
+            //            this.txt_valorUnitario.Text = "";
+            //            this.txt_valorTotal.Text = "";
+            //            this.lbl_mensagemChamado.Text = "";
+            //            break;
+            //    }
+            //}            
+        }       
 
         private void cmb_chamados_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -786,20 +832,42 @@ namespace SistemaSegsal.Views
 
             else
             {
-                string tipoServico = this.cmb_tipoServico.Text;
+                string[] codigoChamado = this.cmb_chamados.Text.Split(' ');
+                chmDto.Codigo = codigoChamado[0];
 
-                if (tipoServico == "Chamados")
+                List<ChamadoDTO> chamado = chmBll.SelecionarChamado(chmDto);
+
+                this.txt_valorUnitario.Text = chamado[0].ValorTotal.ToString();
+                this.txt_valorTotal.Text = chamado[0].ValorTotal.ToString();
+
+                string proposta = chamado[0].Proposta; ;
+                string statusCh = chamado[0].Status;
+
+                if(proposta == "-")
                 {
-                    chmDto.Codigo = this.cmb_descricao.Text;
-                    string codigo = this.cmb_descricao.Text;
-                    //MessageBox.Show(codigo);
-                    //Verificar se já está em alguma proposta
-
-                    //Selecionar chamado
-                    this.SelecionarChamado(codigo);
-                    //Verificar se chamado tem chamadoCliente
+                    this.lbl_mensagemChamado.Text = "";
+                    return;
+                }
+                else
+                {
+                    this.lbl_mensagemChamado.Text = "Chamado já vinculado à Proposta Comercial " + proposta;
                 }
             }
+        }
+
+        private void cmb_chamados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_tipoServico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvw_listaServico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 using System.Windows.Forms;
 
 namespace SistemaSegsal.BLL
@@ -13,7 +13,7 @@ namespace SistemaSegsal.BLL
     class AtividadePrincipalBLL
     {
 		Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        OleDbCommand cmd = new OleDbCommand();
 
 		public List<AtividadePrincipalDTO> PopularComboboxAtividade()
 		{
@@ -21,7 +21,7 @@ namespace SistemaSegsal.BLL
 
             
             cmd.Connection = conexao.conectar();
-            MySqlDataReader leitor = cmd.ExecuteReader();
+            OleDbDataReader leitor = cmd.ExecuteReader();
             List<AtividadePrincipalDTO> atividade = new List<AtividadePrincipalDTO>();
 
             while (leitor.Read())
@@ -44,7 +44,7 @@ namespace SistemaSegsal.BLL
             try
             {
                 cmd.Connection = conexao.conectar();
-                MySqlDataReader leitor = cmd.ExecuteReader();
+                OleDbDataReader leitor = cmd.ExecuteReader();
 
                 leitor.Read();
 
@@ -54,7 +54,7 @@ namespace SistemaSegsal.BLL
                 cmd.Dispose();
 
             }
-            catch (MySqlException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show("Não foi possível se conectar ao banco de dados! - " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

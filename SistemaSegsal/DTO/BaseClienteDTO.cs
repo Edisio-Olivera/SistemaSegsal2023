@@ -10,7 +10,7 @@ namespace SistemaSegsal.DTO
     {
 		private Int32 _id;
 		private string _codigo;
-		private string _dataRegistro;
+		private DateTime _dataRegistro;
 		private string _cliente;
 		private string _nomeBase;
 		private string _cnpj;
@@ -27,7 +27,7 @@ namespace SistemaSegsal.DTO
 
         public int Id { get => _id; set => _id = value; }
         public string Codigo { get => _codigo; set => _codigo = value; }
-        public string DataRegistro { get => _dataRegistro; set => _dataRegistro = value; }
+        public DateTime DataRegistro { get => _dataRegistro; set => _dataRegistro = value; }
         public string Cliente { get => _cliente; set => _cliente = value; }
         public string NomeBase { get => _nomeBase; set => _nomeBase = value; }
         public string Cnpj { get => _cnpj; set => _cnpj = value; }

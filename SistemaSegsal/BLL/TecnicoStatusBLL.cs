@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class TecnicoStatusBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
+        string tabela = "tb_tecnico_status";
 
-		public List<TecnicoStatusDTO> PopularComboboxTecnicoStatus()
+        public List<TecnicoStatusDTO> PopularComboboxTecnicoStatus()
 		{
-			cmd.CommandText = "SELECT statusTecnico FROM tb_tecnico_status";
+			cmd.CommandText = "SELECT statusTecnico FROM " + tabela;
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<TecnicoStatusDTO> statusT = new List<TecnicoStatusDTO>();
 
 			while (leitor.Read())
@@ -39,20 +40,20 @@ namespace SistemaSegsal.BLL
 
 		public Int32 SelecionarIdTecnicoStatus(TecnicoStatusDTO st)
 		{
-			cmd.CommandText = "SELECT id FROM tb_tecnico_status " +
-				"WHERE statusTecnico = '" + st.Status + "'";
+			cmd.CommandText = "SELECT id FROM " + tabela + " " +
+				"WHERE status = '" + st.Status + "'";
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				st.Id = leitor.GetInt32(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SistemaSegsal.DTO;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class PropostaComercialBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
 		ClienteDTO cliDto = new ClienteDTO();
 		ClienteBLL cliBll = new ClienteBLL();
@@ -30,7 +30,9 @@ namespace SistemaSegsal.BLL
 		Int32 qtdIdPropostaComercial;
 		Int32 qtdPropostaComercialCliente;
 
-		public void CriarNovoPropostaComercial(PropostaComercialDTO pc)
+		string tabela = "tb_proposta_comercial";
+
+        public void CriarNovoPropostaComercial(PropostaComercialDTO pc)
 		{
 			this.ContarPropostasComerciais();
 
@@ -40,19 +42,19 @@ namespace SistemaSegsal.BLL
             }
             else
             {
-				cmd.CommandText = "SELECT MAX(id) AS MAIOR FROM tb_proposta_comercial";
+				cmd.CommandText = "SELECT MAX(id) AS MAIOR FROM " + tabela + " ";
 
 				try
 				{
 					cmd.Connection = conexao.conectar();
-					MySqlDataReader leitor = cmd.ExecuteReader();
+					OleDbDataReader leitor = cmd.ExecuteReader();
 
 					leitor.Read();
 					pc.Id = leitor.GetInt32(0);
 
 					conexao.desconectar();
 				}
-				catch (MySqlException ex)
+				catch (OleDbException ex)
 				{
 					MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
@@ -66,7 +68,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 				
 				leitor.Read();
 				qtdIdPropostaComercial = leitor.GetInt32(0);
@@ -74,7 +76,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -84,9 +86,11 @@ namespace SistemaSegsal.BLL
 
 		public void SalvarPropostaComercial(PropostaComercialDTO pc)
 		{
+			bcDto.Cliente = pc.Cliente;
 			bcDto.NomeBase = pc.BaseCliente;
 			bcBll.SelecionarCodigoBaseCliente(bcDto);
 
+			fpDto.CondicaoPgto = pc.CondicaoPgto;
 			fpDto.FormaPgto = pc.FormaPgto;
 			fpBll.SelecionarIdFormaPgto(fpDto);
 
@@ -114,7 +118,7 @@ namespace SistemaSegsal.BLL
 				pc.Observacao + "', '" +
 				bcDto.Codigo + "', " +
 				fpDto.Id + ", " +
-				pc.Valor + ", '" +
+				pc.Valor * 100 + ", '" +
 				pc.NotaFiscal + "', " +
 				staDto.Id + ")";
 
@@ -126,7 +130,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -135,13 +139,12 @@ namespace SistemaSegsal.BLL
 		public void EditarPropostaComercial(PropostaComercialDTO pc)
 		{
 			bcDto.NomeBase = pc.BaseCliente;
+			bcDto.Cliente = pc.Cliente;
 			bcBll.SelecionarCodigoBaseCliente(bcDto);
 
 			fpDto.FormaPgto = pc.FormaPgto;
+			fpDto.CondicaoPgto = pc.CondicaoPgto;
 			fpBll.SelecionarIdFormaPgto(fpDto);
-
-			//staDto.Status = pc.Status;
-			//staBll.SelecionarIdStatus(staDto);
 
 			cmd.CommandText = "UPDATE tb_proposta_comercial SET " +
 				"dataProposta = '" + pc.DataProposta + "', " +
@@ -160,7 +163,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -178,7 +181,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -187,29 +190,29 @@ namespace SistemaSegsal.BLL
 		public List<PropostaComercialDTO> SelecionarPropostaComercial(PropostaComercialDTO pc)
 		{
 			cmd.CommandText = "SELECT " +
-				"pc.id, " +
-				"pc.codigo, " +
-				"pc.dataProposta, " +
-				"pc.titulo, " +
-				"pc.descricao, " +
-				"pc.observacao, " +
-				"cl.nomeFantasia, " +
-				"bc.nomeBase, " +
-				"pc.valorTotal, " +
-				"cp.condicao, " +
-				"fp.forma, " +
-				"pc.notaFiscal, " +
-				"st.statusProposta " +
-				"FROM tb_proposta_comercial pc " +
-				"INNER JOIN tb_cliente_base bc ON pc.codBaseCliente = bc.codigo " +
-				"INNER JOIN tb_cliente cl ON bc.codCliente = cl.codigo " +
-				"INNER JOIN tb_forma_pgto fp ON pc.idFormaPgto = fp.id " +
-				"INNER JOIN tb_condicao_pgto cp ON fp.idCondicao = cp.id " +
-				"INNER JOIN tb_proposta_comercial_status st ON pc.idStatus = st.id " +
-				"WHERE pc.codigo = '" + pc.Codigo + "'";
+                "tb_proposta_comercial.id, " +
+                "tb_proposta_comercial.codigo, " +
+                "tb_proposta_comercial.dataProposta, " +
+                "tb_proposta_comercial.titulo, " +
+                "tb_proposta_comercial.descricao, " +
+                "tb_proposta_comercial.observacao, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_proposta_comercial.valorTotal, " +
+                "tb_condicao_pgto.condicao, " +
+                "tb_forma_pgto.forma, " +
+                "tb_proposta_comercial.notaFiscal, " +
+                "tb_proposta_comercial_status.status " +
+				"FROM (((((tb_proposta_comercial " +
+                "INNER JOIN tb_cliente_base ON tb_proposta_comercial.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_forma_pgto ON tb_proposta_comercial.idFormaPgto = tb_forma_pgto.id) " +
+                "INNER JOIN tb_condicao_pgto ON tb_forma_pgto.idCondicao = tb_condicao_pgto.id) " +
+                "INNER JOIN tb_proposta_comercial_status ON tb_proposta_comercial.idStatus = tb_proposta_comercial_status.id) " +
+                "WHERE tb_proposta_comercial.codigo = '" + pc.Codigo + "'";
 			
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<PropostaComercialDTO> proposta = new List<PropostaComercialDTO>(13);
 
@@ -219,7 +222,7 @@ namespace SistemaSegsal.BLL
 
 			proposta[0].Id = leitor.GetInt32(0);
 			proposta[0].Codigo = leitor.GetString(1);
-			proposta[0].DataProposta = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+			proposta[0].DataProposta = leitor.GetDateTime(2);
 			proposta[0].Titulo = leitor.GetString(3);
 			proposta[0].Descricao = leitor.GetString(4);
 			proposta[0].Observacao = leitor.GetString(5);
@@ -239,10 +242,10 @@ namespace SistemaSegsal.BLL
 
 		public List<PropostaComercialDTO> PopularComboboxPropostaComercial()
 		{
-			cmd.CommandText = "SELECT codigo FROM tb_proposta_comercial";
+			cmd.CommandText = "SELECT codigo FROM " + tabela + " ";
 
-			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+            cmd.Connection = conexao.conectar();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<PropostaComercialDTO> proposta = new List<PropostaComercialDTO>();
 
 			while (leitor.Read())
@@ -258,30 +261,52 @@ namespace SistemaSegsal.BLL
 			return proposta;
 		}
 
-		public List<PropostaComercialDTO> ListarPropostaComercialStatus(PropostaComercialDTO pc)
+        public List<PropostaComercialDTO> PopularComboboxPropostaComercialStatus()
+        {
+			cmd.CommandText = "SELECT codigo FROM " + tabela + " " +
+				"WHERE idStatus = 4 OR idStatus = 5";
+
+            cmd.Connection = conexao.conectar();
+            OleDbDataReader leitor = cmd.ExecuteReader();
+            List<PropostaComercialDTO> proposta = new List<PropostaComercialDTO>();
+
+            while (leitor.Read())
+            {
+                PropostaComercialDTO pro = new PropostaComercialDTO();
+                pro.Codigo = leitor.GetString(0);
+                proposta.Add(pro);
+            }
+
+            conexao.desconectar();
+            cmd.Dispose();
+
+            return proposta;
+        }
+
+        public List<PropostaComercialDTO> ListarPropostaComercialStatus(PropostaComercialDTO pc)
 		{
 			staDto.Status = pc.Status;
 			staBll.SelecionarIdStatus(staDto);
 
 			cmd.CommandText = "SELECT " +
-				"pc.id, " +
-				"pc.codigo, " +
-				"pc.dataProposta, " +
-				"pc.titulo, " +
-				"cl.nomeFantasia, " +
-				"cb.nomeBase, " +
-				"pc.valorTotal, " +
-				"pc.notaFiscal, " +
-				"st.statusProposta " +
-				"FROM tb_proposta_comercial pc " +
-				"INNER JOIN tb_cliente_base cb ON pc.codBaseCliente = cb.codigo " +
-				"INNER JOIN tb_cliente cl ON cb.codCliente = cl.codigo " +
-				"INNER JOIN tb_proposta_comercial_status st ON pc.idStatus = st.id " +
-				"WHERE pc.idStatus = " + staDto.Id + " " +
-				"ORDER BY pc.codigo DESC";
+                "tb_proposta_comercial.id, " +
+                "tb_proposta_comercial.codigo, " +
+                "tb_proposta_comercial.dataProposta, " +
+                "tb_proposta_comercial.titulo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_proposta_comercial.valorTotal, " +
+                "tb_proposta_comercial.notaFiscal, " +
+                "tb_proposta_comercial_status.status " +
+				"FROM (((tb_proposta_comercial " +
+                "INNER JOIN tb_cliente_base ON tb_proposta_comercial.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_proposta_comercial_status ON tb_proposta_comercial.idStatus = tb_proposta_comercial_status.id) " +
+                "WHERE tb_proposta_comercial.idStatus = " + staDto.Id + " " +
+                "ORDER BY tb_proposta_comercial.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<PropostaComercialDTO> proposta = new List<PropostaComercialDTO>(9);
 
@@ -291,7 +316,7 @@ namespace SistemaSegsal.BLL
 
 				pro.Id = leitor.GetInt32(0);
 				pro.Codigo = leitor.GetString(1);
-				pro.DataProposta = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+				pro.DataProposta = leitor.GetDateTime(2);
 				pro.Titulo = leitor.GetString(3);
 				pro.Cliente = leitor.GetString(4);
 				pro.BaseCliente = leitor.GetString(5);
@@ -311,23 +336,23 @@ namespace SistemaSegsal.BLL
 		public List<PropostaComercialDTO> ListarPropostaComercial()
 		{
 			cmd.CommandText = "SELECT " +
-				"pc.id, " +
-				"pc.codigo, " +
-				"pc.dataProposta, " +
-				"pc.titulo, " +
-				"cl.nomeFantasia, " +
-				"cb.nomeBase, " +
-				"pc.valorTotal, " +
-				"pc.notaFiscal, " +
-				"st.statusProposta " +
-				"FROM tb_proposta_comercial pc " +
-				"INNER JOIN tb_cliente_base cb ON pc.codBaseCliente = cb.codigo " +
-				"INNER JOIN tb_cliente cl ON cb.codCliente = cl.codigo " +
-				"INNER JOIN tb_proposta_comercial_status st ON pc.idStatus = st.id " +
-				"ORDER BY pc.codigo DESC";
+                "tb_proposta_comercial.id, " +
+                "tb_proposta_comercial.codigo, " +
+                "tb_proposta_comercial.dataProposta, " +
+                "tb_proposta_comercial.titulo, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_proposta_comercial.valorTotal, " +
+                "tb_proposta_comercial.notaFiscal, " +
+                "tb_proposta_comercial_status.status " +
+                "FROM (((tb_proposta_comercial " +
+                "INNER JOIN tb_cliente_base ON tb_proposta_comercial.codBaseCliente = tb_cliente_base.codigo) " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_proposta_comercial_status ON tb_proposta_comercial.idStatus = tb_proposta_comercial_status.id) " +
+                "ORDER BY tb_proposta_comercial.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<PropostaComercialDTO> proposta = new List<PropostaComercialDTO>(9);
 
@@ -337,7 +362,7 @@ namespace SistemaSegsal.BLL
 
 				pro.Id = leitor.GetInt32(0);
 				pro.Codigo = leitor.GetString(1);
-				pro.DataProposta = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+				pro.DataProposta = leitor.GetDateTime(2);
 				pro.Titulo = leitor.GetString(3);
 				pro.Cliente = leitor.GetString(4);
 				pro.BaseCliente = leitor.GetString(5);
@@ -371,7 +396,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -391,7 +416,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -408,7 +433,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdPropostaComercialCliente = leitor.GetInt32(0);
@@ -416,7 +441,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -438,10 +463,56 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
-	}
+
+		public void AtualizarStatusProposta(PropostaComercialDTO pc)
+        {
+			staDto.Status = pc.Status;
+			staBll.SelecionarIdStatus(staDto);
+
+			cmd.CommandText = "UPDATE " + tabela + " SET " +
+				"idStatus = " + staDto.Id + " " +
+				"WHERE codigo = '" + pc.Codigo + "'";
+
+			try
+			{
+				cmd.Connection = conexao.conectar();
+				cmd.ExecuteNonQuery();
+
+				conexao.desconectar();
+				cmd.Dispose();
+			}
+			catch (OleDbException ex)
+			{
+				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+        public void VincularNotaFiscalProposta(PropostaComercialDTO pc)
+        {
+            staDto.Status = pc.Status;
+            staBll.SelecionarIdStatus(staDto);
+
+            cmd.CommandText = "UPDATE " + tabela + " SET " +
+                "idStatus = " + staDto.Id + " " +
+                "WHERE codigo = '" + pc.Codigo + "'";
+
+            try
+            {
+                cmd.Connection = conexao.conectar();
+                cmd.ExecuteNonQuery();
+
+                conexao.desconectar();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
 }

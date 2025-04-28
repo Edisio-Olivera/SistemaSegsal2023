@@ -7,14 +7,14 @@ using SistemaSegsal.DTO;
 using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class OrdemServicoBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
 		OrdemServicoStatusDTO staDto = new OrdemServicoStatusDTO();
 		OrdemServicoStatusBLL staBll = new OrdemServicoStatusBLL();
@@ -42,14 +42,14 @@ namespace SistemaSegsal.BLL
 				try
 				{
 					cmd.Connection = conexao.conectar();
-					MySqlDataReader leitor = cmd.ExecuteReader();
+					OleDbDataReader leitor = cmd.ExecuteReader();
 
 					leitor.Read();
 					o.Id = leitor.GetInt32(0);
 
 					conexao.desconectar();
 				}
-				catch (MySqlException ex)
+				catch (OleDbException ex)
 				{
 					MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
@@ -63,7 +63,7 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				qtdIdOrdemServico = leitor.GetInt32(0);
@@ -71,7 +71,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -99,7 +99,8 @@ namespace SistemaSegsal.BLL
 				"descricao, " +
 				"observacao, " +
 				"codProposta, " +
-				"idStatusOS) " +
+				"progresso, " +
+				"idStatus) " +
 				"VALUES (" +
 				o.Id + ", '" +
 				o.Codigo + "', '" +
@@ -109,6 +110,7 @@ namespace SistemaSegsal.BLL
 				o.Descricao + "', '" +
 				o.Obsevacao + "', '" +
 				o.Proposta + "', " +
+				o.Progresso + ", " +
 				staDto.Id + ")";
 
 			try
@@ -119,7 +121,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -127,12 +129,6 @@ namespace SistemaSegsal.BLL
 
 		public void EditarOrdemServico(OrdemServicoDTO o)
 		{
-			cliDto.NomeFantasia = o.Cliente;
-			cliBll.SelecionarCodigoCliente(cliDto);
-
-			basDto.NomeBase = o.BaseCliente;
-			basBll.SelecionarCodigoBaseCliente(basDto);
-
 			staDto.Status = o.Status;
 			staBll.SelecionarIdOrdemServicoStatus(staDto);
 
@@ -140,7 +136,7 @@ namespace SistemaSegsal.BLL
 				"titulo = '" + o.Titulo + "', " +
 				"descricao = '" + o.Descricao + "', " +
 				"observacao = '" + o.Obsevacao + "', " +
-				"idStatusOS = " + staDto.Id + " " +
+				"idStatus = " + staDto.Id + " " +
 				"WHERE codigo = '" + o.Codigo + "'";
 
 			try
@@ -151,7 +147,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -170,7 +166,7 @@ namespace SistemaSegsal.BLL
 				conexao.desconectar();
 				cmd.Dispose();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -179,26 +175,27 @@ namespace SistemaSegsal.BLL
 		public List<OrdemServicoDTO> SelecionarOrdemServico(OrdemServicoDTO o)
 		{
 			cmd.CommandText = "SELECT " +
-				"o.id, " +
-				"o.codigo, " +
-				"o.dataRegistro, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"o.titulo, " +
-				"o.descricao, " +
-				"o.observacao, " +
-				"o.codProposta, " +
-				"s.statusOS " +
-				"FROM tb_ordem_servico o " +
-				"INNER JOIN tb_cliente_base b ON o.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"INNER JOIN tb_ordem_servico_status s ON o.idStatusOS = s.id " +
-				"WHERE o.codigo = '" + o.Codigo + "'";
+                "tb_ordem_servico.id, " +
+                "tb_ordem_servico.codigo, " +
+                "tb_ordem_servico.dataRegistro, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_ordem_servico.titulo, " +
+                "tb_ordem_servico.descricao, " +
+                "tb_ordem_servico.observacao, " +
+                "tb_ordem_servico.codProposta, " +
+                "tb_ordem_servico.progresso, " +
+                "tb_ordem_servico_status.status " +
+				"FROM tb_ordem_servico " +
+                "INNER JOIN tb_cliente_base ON tb_ordem_servico.codBaseCliente = tb_cliente_base.codigo " +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo " +
+                "INNER JOIN tb_ordem_servico_status s ON tb_ordem_servico.idStatus = tb_ordem_servico_status.id " +
+                "WHERE tb_ordem_servico.codigo = '" + o.Codigo + "'";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
-			List<OrdemServicoDTO> ordem = new List<OrdemServicoDTO>(10);
+			List<OrdemServicoDTO> ordem = new List<OrdemServicoDTO>(11);
 
 			leitor.Read();
 
@@ -206,14 +203,15 @@ namespace SistemaSegsal.BLL
 
 			ordem[0].Id = leitor.GetInt32(0);
 			ordem[0].Codigo = leitor.GetString(1);
-			ordem[0].DataRegistro = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+			ordem[0].DataRegistro = leitor.GetDateTime(2);
 			ordem[0].Cliente = leitor.GetString(3);
 			ordem[0].BaseCliente = leitor.GetString(4);
 			ordem[0].Titulo = leitor.GetString(5);
 			ordem[0].Descricao = leitor.GetString(6);
 			ordem[0].Obsevacao = leitor.GetString(7);
 			ordem[0].Proposta = leitor.GetString(8);
-			ordem[0].Status = leitor.GetString(9);
+            ordem[0].Progresso = leitor.GetInt32(9);
+            ordem[0].Status = leitor.GetString(10);
 
 			conexao.desconectar();
 			cmd.Dispose();
@@ -229,14 +227,14 @@ namespace SistemaSegsal.BLL
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				o.Codigo = leitor.GetString(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -249,7 +247,7 @@ namespace SistemaSegsal.BLL
 			cmd.CommandText = "SELECT titulo FROM tb_ordem_servico";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<OrdemServicoDTO> ordem = new List<OrdemServicoDTO>();
 
 			while (leitor.Read())
@@ -271,25 +269,24 @@ namespace SistemaSegsal.BLL
 			staBll.SelecionarIdOrdemServicoStatus(staDto);
 
 			cmd.CommandText = "SELECT " +
-				"o.id, " +
-				"o.codigo, " +
-				"o.dataRegistro, " +
-				"c.nomeFantasia, " +
-				"b.nomeBase, " +
-				"o.titulo, " +
-				"o.descricao, " +
-				"o.observacao, " +
-				"o.codProposta, " +
-				"s.statusOS " +
-				"FROM tb_ordem_servico o " +
-				"INNER JOIN tb_cliente_base b ON o.codBaseCliente = b.codigo " +
-				"INNER JOIN tb_cliente c ON b.codCliente = c.codigo " +
-				"INNER JOIN tb_ordem_servico_status s ON o.idStatusOS = s.id " +
-				"WHERE s.statusOS = " + staDto.Id + " " +
-				"ORDER BY o.codigo ASC";
+                "tb_ordem_servico.id, " +
+                "tb_ordem_servico.codigo, " +
+                "tb_ordem_servico.dataRegistro, " +
+                "tb_cliente.nomeFantasia, " +
+                "tb_cliente_base.nomeBase, " +
+                "tb_ordem_servico.titulo, " +                
+                "tb_ordem_servico.codProposta, " +
+                "tb_ordem_servico.progresso, " +
+                "tb_ordem_servico_status.status " +
+                "FROM (((tb_ordem_servico " +
+                "INNER JOIN	tb_cliente_base ON tb_ordem_servico.codBaseCliente = tb_cliente_base.codigo)" +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_ordem_servico_status ON tb_ordem_servico.idStatus = tb_ordem_servico_status.id) " +
+                "WHERE tb_ordem_servico.status = " + staDto.Id + " " +
+                "ORDER BY tb_ordem_servico.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<OrdemServicoDTO> ordem = new List<OrdemServicoDTO>();
 
@@ -299,14 +296,15 @@ namespace SistemaSegsal.BLL
 
 				ord.Id = leitor.GetInt32(0);
 				ord.Codigo = leitor.GetString(1);
-				ord.DataRegistro = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+				ord.DataRegistro = leitor.GetDateTime(2);
 				ord.Cliente = leitor.GetString(3);
 				ord.BaseCliente = leitor.GetString(4);
 				ord.Titulo = leitor.GetString(5);
 				ord.Descricao = leitor.GetString(6);
 				ord.Obsevacao = leitor.GetString(7);
 				ord.Proposta = leitor.GetString(8);
-				ord.Status = leitor.GetString(9);
+				ord.Progresso = leitor.GetInt32(9);
+				ord.Status = leitor.GetString(10);
 
 				ordem.Add(ord);
 			}
@@ -320,21 +318,25 @@ namespace SistemaSegsal.BLL
 		public List<OrdemServicoDTO> ListarOrdemServico()
 		{
 			cmd.CommandText = "SELECT " +
-				"c.id, " +
-				"c.codigo, " +
-				"t.tipoCliente, " +
-				"c.dataRegistro, " +
-				"c.razaoSocial, " +
-				"c.nomeFantasia, " +
-				"c.logomarca, " +
-				"s.statusCliente " +
-				"FROM tb_cliente c " +
-				"INNER JOIN tb_cliente_tipo t ON c.idTipoCliente = t.id " +
-				"INNER JOIN tb_cliente_status s ON c.idStatus = s.id " +
-				"ORDER BY c.codigo ASC";
+				"tb_ordem_servico.id, " +
+                "tb_ordem_servico.codigo, " +
+                "tb_ordem_servico.dataRegistro, " +
+				"tb_cliente.nomeFantasia, " +
+				"tb_cliente_base.nomeBase, " +
+                "tb_ordem_servico.titulo, " +
+                "tb_ordem_servico.descricao, " +
+                "tb_ordem_servico.observacao, " +
+                "tb_ordem_servico.progresso, " +
+                "tb_ordem_servico.codProposta, " +
+				"tb_ordem_servico_status.status " +
+				"FROM (((tb_ordem_servico " +
+				"INNER JOIN	tb_cliente_base ON tb_ordem_servico.codBaseCliente = tb_cliente_base.codigo)" +
+                "INNER JOIN tb_cliente ON tb_cliente_base.codCliente = tb_cliente.codigo) " +
+                "INNER JOIN tb_ordem_servico_status ON tb_ordem_servico.idStatus = tb_ordem_servico_status.id) " +
+                "ORDER BY tb_ordem_servico.codigo DESC";
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 
 			List<OrdemServicoDTO> ordem = new List<OrdemServicoDTO>();
 
@@ -344,14 +346,15 @@ namespace SistemaSegsal.BLL
 
 				ord.Id = leitor.GetInt32(0);
 				ord.Codigo = leitor.GetString(1);
-				ord.DataRegistro = leitor.GetDateTime(2).ToString("dd/MM/yyyy");
+				ord.DataRegistro = leitor.GetDateTime(2);
 				ord.Cliente = leitor.GetString(3);
 				ord.BaseCliente = leitor.GetString(4);
 				ord.Titulo = leitor.GetString(5);
 				ord.Descricao = leitor.GetString(6);
 				ord.Obsevacao = leitor.GetString(7);
-				ord.Proposta = leitor.GetString(8);
-				ord.Status = leitor.GetString(9);
+				ord.Progresso = leitor.GetInt32(8);
+				ord.Proposta = leitor.GetString(9);
+				ord.Status = leitor.GetString(10);
 
 				ordem.Add(ord);
 			}
@@ -361,5 +364,25 @@ namespace SistemaSegsal.BLL
 
 			return ordem;
 		}
-	}
+
+        public void AtualizarProgressoOrdemServico(OrdemServicoDTO o)
+        {
+            cmd.CommandText = "UPDATE tb_ordem_servico SET " +
+                "progresso = " + o.Progresso + " " +
+                "WHERE codigo = '" + o.Codigo + "'";
+
+            try
+            {
+                cmd.Connection = conexao.conectar();
+                cmd.ExecuteNonQuery();
+
+                conexao.desconectar();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
 }

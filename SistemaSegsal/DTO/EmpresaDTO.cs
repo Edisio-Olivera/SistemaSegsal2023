@@ -12,7 +12,7 @@ namespace SistemaSegsal.DTO
 		private string _razaoSocial;
 		private string _nomeFantasia;
 		private string _porte;
-		private string _dataAbertura;
+		private DateTime _dataAbertura;
 		private string _cnpj;
 		private string _inscricaoEstadual;
 		private string _naturezaJuridica;
@@ -38,7 +38,7 @@ namespace SistemaSegsal.DTO
         public string RazaoSocial { get => _razaoSocial; set => _razaoSocial = value; }
         public string NomeFantasia { get => _nomeFantasia; set => _nomeFantasia = value; }
         public string Porte { get => _porte; set => _porte = value; }
-        public string DataAbertura { get => _dataAbertura; set => _dataAbertura = value; }
+        public DateTime DataAbertura { get => _dataAbertura; set => _dataAbertura = value; }
         public string Cnpj { get => _cnpj; set => _cnpj = value; }
         public string InscricaoEstadual { get => _inscricaoEstadual; set => _inscricaoEstadual = value; }
         public string NaturezaJuridica { get => _naturezaJuridica; set => _naturezaJuridica = value; }

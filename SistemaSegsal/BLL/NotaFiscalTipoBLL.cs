@@ -4,24 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaSegsal.DTO;
-using SistemaSegsal.BLL;
 using SistemaSegsal.DAO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace SistemaSegsal.BLL
 {
     class NotaFiscalTipoBLL
     {
 		Conexao conexao = new Conexao();
-		MySqlCommand cmd = new MySqlCommand();
+		OleDbCommand cmd = new OleDbCommand();
 
-		public List<NotaFiscalTipoDTO> PopularComboboxNotaFiscalTipo()
+		string tabela = "tb_nota_fiscal_tipo";
+
+
+        public List<NotaFiscalTipoDTO> PopularComboboxNotaFiscalTipo()
 		{
-			cmd.CommandText = "SELECT tipoNotaFiscal FROM tb_nota_fiscal_tipo";
+			cmd.CommandText = "SELECT tipo FROM " + tabela;
 
 			cmd.Connection = conexao.conectar();
-			MySqlDataReader leitor = cmd.ExecuteReader();
+			OleDbDataReader leitor = cmd.ExecuteReader();
 			List<NotaFiscalTipoDTO> tipo = new List<NotaFiscalTipoDTO>();
 
 			while (leitor.Read())
@@ -39,20 +41,20 @@ namespace SistemaSegsal.BLL
 
 		public Int32 SelecionarIdNotaFiscalTipo(NotaFiscalTipoDTO tp)
 		{
-			cmd.CommandText = "SELECT id FROM tb_nota_fiscal_tipo " +
-				"WHERE tipoNotaFiscal = '" + tp.TipoNotaFiscal + "'";
+			cmd.CommandText = "SELECT id FROM " + tabela + " " +
+				"WHERE tipo = '" + tp.TipoNotaFiscal + "'";
 
 			try
 			{
 				cmd.Connection = conexao.conectar();
-				MySqlDataReader leitor = cmd.ExecuteReader();
+				OleDbDataReader leitor = cmd.ExecuteReader();
 
 				leitor.Read();
 				tp.Id = leitor.GetInt32(0);
 
 				conexao.desconectar();
 			}
-			catch (MySqlException ex)
+			catch (OleDbException ex)
 			{
 				MessageBox.Show("Erro ao conectar ao banco de Dados! " + ex, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}

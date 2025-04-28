@@ -110,7 +110,7 @@ namespace SistemaSegsal.Views
                 chmDto.Codigo = this.cmb_chamado.Text;
                 List<ChamadoDTO> chm = chmBll.SelecionarChamado(chmDto);
 
-                this.txt_chamadoCliente.Text = chm[0].ChamadoCliente;
+
                 this.txt_valorTotal.Text = chm[0].ValorTotal.ToString();
 
                 string tipoServico = this.cmb_tipoServico.Text;
